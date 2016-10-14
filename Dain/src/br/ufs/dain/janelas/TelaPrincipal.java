@@ -19,7 +19,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class TelaPrincipal extends JFrame {
-
+	
 	/**
 	 * 
 	 */
@@ -38,6 +38,7 @@ public class TelaPrincipal extends JFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					
 				}
 			}
 		});
@@ -48,7 +49,7 @@ public class TelaPrincipal extends JFrame {
 	 */
 	public TelaPrincipal() {
 
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\PROEST\\Documents\\Eclipse Neon\\eclipse\\workspaces\\Dain\\img\\logoDain.jpg")); //aqui tem q setar diferente
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\Dain\\img\\logoDain.jpg")); //aqui tem q setar diferente
 
 		setTitle("Divis\u00E3o de A\u00E7\u00F5es Inclusivas - Dain");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -113,7 +114,7 @@ public class TelaPrincipal extends JFrame {
 
 		short contador = 0;
 
-		// 119 é o número de linhas * colunas
+		// 119 é o número de (linhas * colunas) + colunas
 		for (int i = 0; i < 119; i++) {
 
 			if (i < colunas.length) {
@@ -132,21 +133,19 @@ public class TelaPrincipal extends JFrame {
 				panel.add(button);
 				button.setFocusPainted(false);
 				button.setContentAreaFilled(false);
+				int numeroCelula = i;
 
 				// função para chamar nova tela ao clicar em botão
 				button.addActionListener(new ActionListener() {
 
 					@Override
-					public void actionPerformed(ActionEvent e) {
+					public void actionPerformed(ActionEvent event) {
 
 						//System.err.println("Hey!");
-						new HorarioAcompanhamento().setVisible(true);
-
+						new TelaHorarioAcompanhamento(numeroCelula).setVisible(true);
 					}
 				});
 			}
-
 		}
 	}
-
 }
