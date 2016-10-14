@@ -5,13 +5,11 @@ public class Administrador extends Pessoa {
 	private String login;
 	private String senha;
 	
-	
-	public Administrador(String nome, String telefone, String email, String sexo, String login, String senha) {
-		super(nome, telefone, email, sexo);
+	public Administrador(String nome, String telefone, String email, String login, String senha) {
+		super(nome, telefone, email);
 		this.login = login;
 		this.senha = senha;
 	}
-
 
 	public String getLogin() {
 		return login;
@@ -30,9 +28,6 @@ public class Administrador extends Pessoa {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-	
-	
-	
+	}	
 	
 }

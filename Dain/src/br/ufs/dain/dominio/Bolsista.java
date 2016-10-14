@@ -6,9 +6,9 @@ public class Bolsista extends Aluno {
 	
 	private short tipoAtividade;
 
-	public Bolsista(String nome, String telefone, String email, String sexo, String curso, String matricula,
+	public Bolsista(String telefone, String email, String nome, String curso, String matricula, String sexo,
 			ArrayList<Aluno> acompanhantes, ArrayList<String> horarios, short tipoAtividade) {
-		super(nome, telefone, email, sexo, curso, matricula, acompanhantes, horarios);
+		super(telefone, email, nome, curso, matricula, sexo, acompanhantes, horarios);
 		this.tipoAtividade = tipoAtividade;
 	}
 
@@ -19,6 +19,5 @@ public class Bolsista extends Aluno {
 	public void setTipoAtividade(short tipoAtividade) {
 		this.tipoAtividade = tipoAtividade;
 	}
-	
-	
+
 }

@@ -2,21 +2,17 @@ package br.ufs.dain.dominio;
 
 public abstract class Pessoa {
 
-	
 	private String telefone;
 	private String email;
-	private String sexo;
 	private String nome;
 	
-	public Pessoa(String nome, String telefone, String email, String sexo) {
+	public Pessoa(String telefone, String email, String nome) {
 		super();
-		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
-		this.sexo = sexo;
+		this.nome = nome;
 	}
-	
-	
+
 	public String getTelefone() {
 		return telefone;
 	}
@@ -33,14 +29,6 @@ public abstract class Pessoa {
 		this.email = email;
 	}
 
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -48,9 +36,5 @@ public abstract class Pessoa {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	
-	
-	
 	
 }
