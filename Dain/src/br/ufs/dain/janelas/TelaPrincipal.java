@@ -114,8 +114,8 @@ public class TelaPrincipal extends JFrame {
 
 		short contador = 0;
 
-		// 119 é o número de (linhas * colunas) + colunas
-		for (int i = 0; i < 119; i++) {
+		// 119 é o número de (horarios * colunas) + colunas
+		for (int i = 0; i < (horarios.length * colunas.length) + colunas.length; i++) {
 
 			if (i < colunas.length) {
 				JLabel label = new JLabel(colunas[i]);
@@ -133,8 +133,11 @@ public class TelaPrincipal extends JFrame {
 				panel.add(button);
 				button.setFocusPainted(false);
 				button.setContentAreaFilled(false);
-				int numeroCelula = i;
 
+				int numeroCelula = i % colunas.length;
+				String diaCorrespondente = colunas[numeroCelula];
+				String horaCorrespondente = horarios[contador - 1];
+				
 				// função para chamar nova tela ao clicar em botão
 				button.addActionListener(new ActionListener() {
 
@@ -142,7 +145,12 @@ public class TelaPrincipal extends JFrame {
 					public void actionPerformed(ActionEvent event) {
 
 						//System.err.println("Hey!");
-						new TelaHorarioAcompanhamento(numeroCelula).setVisible(true);
+							
+						TelaHorarioAcompanhamento tela = new TelaHorarioAcompanhamento(diaCorrespondente, horaCorrespondente);
+						tela.setVisible(true);
+						tela.toFront();
+						
+						
 					}
 				});
 			}
