@@ -18,7 +18,6 @@ import javax.swing.JMenu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTabbedPane;
-import java.awt.ComponentOrientation;
 
 public class TelaPrincipal extends JFrame {
 
@@ -159,11 +158,6 @@ public class TelaPrincipal extends JFrame {
 							tabbedPane.addTab(diaCorrespondente + ", " + horaCorrespondente, null,
 									new TelaHorarioAcompanhamento(diaCorrespondente, horaCorrespondente).getContentPane(), null);
 						}
-						//						TelaHorarioAcompanhamento tela = new TelaHorarioAcompanhamento(diaCorrespondente, horaCorrespondente);
-						//						tela.setVisible(true);
-						//						tela.toFront();
-
-
 					}
 				});
 			}
