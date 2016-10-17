@@ -1,14 +1,13 @@
 package br.ufs.dain.janelas;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.Toolkit;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.GridLayout;
 
 public class TelaHorarioAcompanhamento extends JFrame {
 
@@ -49,23 +48,34 @@ public class TelaHorarioAcompanhamento extends JFrame {
 //	         firePropertyChange("",false,true);
 //	    }
 
-		String diaSemana = verificaPosFixoFeira(diaCorrespondente);
+		diaCorrespondente = atribuiPosFixoFeira(diaCorrespondente);
 		
 		setLocationRelativeTo(null);
-		setTitle(diaSemana + ", " + horaCorrespondente);
+		//setTitle(diaCorrespondente + ", " + horaCorrespondente);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 436, 523);
+		setBounds(100, 100, 620, 359);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lblNewLabel, BorderLayout.CENTER);
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.NORTH);
+		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JLabel lblNewLabel = new JLabel(diaCorrespondente);
+		panel.add(lblNewLabel);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		
+		JLabel lblNewLabel_1 = new JLabel(horaCorrespondente);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.TRAILING);
+		panel.add(lblNewLabel_1);
 	}
 
-	private String verificaPosFixoFeira (String dia) {
+	private String atribuiPosFixoFeira (String dia) {
 		
 		if (dia != "Sábado")
 			return dia + "-feira";

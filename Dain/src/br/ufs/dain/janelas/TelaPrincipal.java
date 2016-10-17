@@ -17,14 +17,17 @@ import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTabbedPane;
+import java.awt.ComponentOrientation;
 
 public class TelaPrincipal extends JFrame {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	JTabbedPane tabbedPane;
 
 	/**
 	 * Launch the application.
@@ -38,7 +41,7 @@ public class TelaPrincipal extends JFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-					
+
 				}
 			}
 		});
@@ -53,8 +56,8 @@ public class TelaPrincipal extends JFrame {
 
 		setTitle("Divis\u00E3o de A\u00E7\u00F5es Inclusivas - Dain");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 500);
-		
+		setBounds(100, 100, 684, 433);
+
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
@@ -92,9 +95,13 @@ public class TelaPrincipal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		contentPane.add(tabbedPane, BorderLayout.CENTER);
 
 		JPanel panelCentro = new JPanel();
-		contentPane.add(panelCentro, BorderLayout.CENTER);
+		tabbedPane.addTab("Tabela Principal", null, panelCentro, null);
 		panelCentro.setLayout(new GridLayout(17, 7, 2, 2));
 
 		/*
@@ -137,7 +144,7 @@ public class TelaPrincipal extends JFrame {
 				int numeroCelula = i % colunas.length;
 				String diaCorrespondente = colunas[numeroCelula];
 				String horaCorrespondente = horarios[contador - 1];
-				
+
 				// função para chamar nova tela ao clicar em botão
 				button.addActionListener(new ActionListener() {
 
@@ -145,12 +152,18 @@ public class TelaPrincipal extends JFrame {
 					public void actionPerformed(ActionEvent event) {
 
 						//System.err.println("Hey!");
-							
-						TelaHorarioAcompanhamento tela = new TelaHorarioAcompanhamento(diaCorrespondente, horaCorrespondente);
-						tela.setVisible(true);
-						tela.toFront();
-						
-						
+						TelaHorarioAcompanhamento telaHA = new TelaHorarioAcompanhamento(diaCorrespondente, horaCorrespondente);
+						if (telaHA.isActive() && !telaHA.hasFocus()) {
+							telaHA.toFront();
+						} else {
+							tabbedPane.addTab(diaCorrespondente + ", " + horaCorrespondente, null,
+									new TelaHorarioAcompanhamento(diaCorrespondente, horaCorrespondente).getContentPane(), null);
+						}
+						//						TelaHorarioAcompanhamento tela = new TelaHorarioAcompanhamento(diaCorrespondente, horaCorrespondente);
+						//						tela.setVisible(true);
+						//						tela.toFront();
+
+
 					}
 				});
 			}
