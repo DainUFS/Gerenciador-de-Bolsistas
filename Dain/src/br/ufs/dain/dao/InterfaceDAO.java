@@ -12,7 +12,6 @@ public interface InterfaceDAO {
 	
 	public Deficiente getDeficienteNome(String nome);
 	
-	
 	public void cadastraBolsista(Bolsista B);
 	
 	public Deficiente getBolsistaMatricula(String matricula);
