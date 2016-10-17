@@ -5,7 +5,7 @@ Bundle-SymbolicName: Dain
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: Dain.jar,
  .
-Export-Package: br.ufs.dain.conexaoBD,
+Export-Package: br.ufs.dain.bandodados,
  br.ufs.dain.dao,
  br.ufs.dain.dominio,
  br.ufs.dain.janelas
