@@ -2,14 +2,19 @@ package br.ufs.dain.janelas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.Toolkit;
 import javax.swing.JMenuBar;
@@ -18,6 +23,7 @@ import javax.swing.JMenu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 
 public class TelaPrincipal extends JFrame {
 
@@ -35,6 +41,7 @@ public class TelaPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					TelaPrincipal frame = new TelaPrincipal();
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
@@ -94,7 +101,7 @@ public class TelaPrincipal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
+
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
@@ -155,11 +162,13 @@ public class TelaPrincipal extends JFrame {
 						if (telaHA.isActive() && !telaHA.hasFocus()) {
 							telaHA.toFront();
 						} else {
-							tabbedPane.addTab(diaCorrespondente + ", " + horaCorrespondente, null,
-									new TelaHorarioAcompanhamento(diaCorrespondente, horaCorrespondente).getContentPane(), null);
+
+							new TelaHorarioAcompanhamento(diaCorrespondente, horaCorrespondente).createAndShowGUI(tabbedPane);
+
 						}
 					}
 				});
+
 			}
 		}
 	}

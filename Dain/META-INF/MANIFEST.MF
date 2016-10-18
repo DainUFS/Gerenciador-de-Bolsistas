@@ -4,7 +4,9 @@ Bundle-Name: Dain
 Bundle-SymbolicName: Dain
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: Dain.jar,
- .
+ .,
+ forms-1.3.0.jar,
+ miglayout15-swing.jar
 Export-Package: br.ufs.dain.bancodados,
  br.ufs.dain.dao,
  br.ufs.dain.dominio,
