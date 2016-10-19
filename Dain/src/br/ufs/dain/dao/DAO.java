@@ -1,5 +1,7 @@
 package br.ufs.dain.dao;
 
+import java.sql.SQLException;
+
 import br.ufs.dain.bancodados.Persistencia;
 import br.ufs.dain.dominio.Administrador;
 import br.ufs.dain.dominio.Bolsista;
@@ -7,12 +9,15 @@ import br.ufs.dain.dominio.Deficiente;
 
 public class DAO implements InterfaceDAO {
 
-	Persistencia P = new Persistencia();
+	Persistencia p = new Persistencia();
 	
 	@Override
-	public void cadastraDeficiente(Deficiente D) {
-		// TODO Auto-generated method stub
-		
+	public void cadastraDeficiente(Deficiente d, String matricAdm) {
+		try {
+			p.armazenarDeficiente(d, matricAdm);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -28,8 +33,12 @@ public class DAO implements InterfaceDAO {
 	}
 
 	@Override
-	public void cadastraBolsista(Bolsista B) {
-		// TODO Auto-generated method stub
+	public void cadastraBolsista(Bolsista b, String matricAdm) {
+		try {
+			p.armazenarBolsista(b, matricAdm);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -46,8 +55,12 @@ public class DAO implements InterfaceDAO {
 	}
 
 	@Override
-	public void cadastrarAdm(Administrador A) {
-		// TODO Auto-generated method stub
+	public void cadastrarAdm(Administrador a) {
+		try {
+			p.aramazenarAdm(a);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

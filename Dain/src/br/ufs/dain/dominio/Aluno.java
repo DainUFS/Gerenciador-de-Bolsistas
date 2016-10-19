@@ -8,16 +8,14 @@ public class Aluno extends Pessoa {
 	private String matricula;
 	private String sexo;
 	private Horario horario;
-	private ArrayList<Aluno> acompanhantes = new ArrayList<>();
 	
 	public Aluno(String telefone, String email, String nome, String curso, String matricula, String sexo,
-			Horario horario, ArrayList<Aluno> acompanhantes) {
+			Horario horario) {
 		super(telefone, email, nome);
 		this.curso = curso;
 		this.matricula = matricula;
 		this.sexo = sexo;
 		this.horario = horario;
-		this.acompanhantes = acompanhantes;
 	}
 
 	public String getCurso() {
@@ -52,11 +50,4 @@ public class Aluno extends Pessoa {
 		this.horario = horario;
 	}
 
-	public ArrayList<Aluno> getAcompanhantes() {
-		return acompanhantes;
-	}
-
-	public void setAcompanhantes(ArrayList<Aluno> acompanhantes) {
-		this.acompanhantes = acompanhantes;
-	}
 }
