@@ -107,8 +107,8 @@ public class Persistencia {
 		//Deficiente d = new Deficiente("09876543", "@souSangrento", "Tarantino", 
 			//	"Pulp Fiction", "20122012", "M", null, "sangue");
 		//per.armazenarDeficiente(d);
-		//Administrador a = new Administrador("Tim Burton", "1234567", "@burton", "Depp", "johnny");
-		//per.aramazenarAdm(a);
+		Administrador a = new Administrador("123456", "Leonardo", "@leo", "32569874", "789456");
+		per.aramazenarAdm(a);
 		//Bolsista b = new Bolsista("99999ggvnn9", "@alfred", "Alfred Hitchcook", "Cinema", "211053337882", "M", 
 			//	null, 1);
 		//per.armazenarBolsista(b);
