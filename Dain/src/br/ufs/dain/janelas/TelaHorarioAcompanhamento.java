@@ -1,6 +1,7 @@
 package br.ufs.dain.janelas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -8,7 +9,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,12 +21,16 @@ public class TelaHorarioAcompanhamento extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
+	private String dia;
+	private String hora;
+
 	/**
 	 * Create the frame.
 	 */
 	public TelaHorarioAcompanhamento (String diaCorrespondente, String horaCorrespondente) {
 
-		diaCorrespondente = atribuiPosFixoFeira(diaCorrespondente);
+		this.dia = diaCorrespondente;
+		this.hora = horaCorrespondente;
 
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -59,37 +63,48 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		return dia;
 	}
 
-	public void createAndShowGUI(JTabbedPane tabbedPane) {
+	public void abrirAba (JTabbedPane tabbedPane) {
 
-		JPanel panel = new JPanel();
+		contentPane.setOpaque(false);
+		tabbedPane.add(contentPane);
+		tabbedPane.setTabComponentAt(tabbedPane.indexOfComponent(contentPane),
+				getTitlePanel(tabbedPane, contentPane, atribuiPosFixoFeira(dia) + ", " + hora));
 
-		panel.setOpaque(false);
-		tabbedPane.add(panel);
-		tabbedPane.setTabComponentAt(tabbedPane.indexOfComponent(panel), getTitlePanel(tabbedPane, panel, ", "));
-		
-		//return panel;
 	}
 
-	private static JPanel getTitlePanel(final JTabbedPane tabbedPane, final JPanel panel, String title) {
+	private static JPanel getTitlePanel(final JTabbedPane tabbedPane, final JPanel panel, String titulo) {
 
-		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-		titlePanel.setOpaque(false);
-		JLabel titleLbl = new JLabel(title);
+		JPanel tituloPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		tituloPanel.setOpaque(false);
+		JLabel titleLbl = new JLabel(titulo);
 		titleLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
-		titlePanel.add(titleLbl);
-		JButton closeButton = new JButton("x");
+		tituloPanel.add(titleLbl);
 
-		closeButton.addMouseListener(new MouseAdapter()
+		JLabel closeLabel = new JLabel(" x ");
+		
+		closeLabel.setFont(new Font("Arial", Font.BOLD, 14));
+		closeLabel.setVerticalAlignment(SwingConstants.NORTH);
+		closeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+		closeLabel.addMouseListener(new MouseAdapter()
 		{
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
 				tabbedPane.remove(panel);
 			}
+			@Override
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        closeLabel.setForeground(Color.RED);
+		    }
+			@Override
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		        closeLabel.setForeground(Color.BLACK);
+		    }
 		});
-		titlePanel.add(closeButton);
+		tituloPanel.add(closeLabel);
 
-		return titlePanel;
+		return tituloPanel;
 	}
-
+	
 }

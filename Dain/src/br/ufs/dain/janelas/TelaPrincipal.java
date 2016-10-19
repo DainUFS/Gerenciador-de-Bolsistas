@@ -2,7 +2,6 @@ package br.ufs.dain.janelas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,7 +13,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.Toolkit;
 import javax.swing.JMenuBar;
@@ -23,7 +21,6 @@ import javax.swing.JMenu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
 
 public class TelaPrincipal extends JFrame {
 
@@ -41,7 +38,7 @@ public class TelaPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					TelaPrincipal frame = new TelaPrincipal();
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
@@ -142,10 +139,11 @@ public class TelaPrincipal extends JFrame {
 				contador++;
 			}
 			else {
+				
 				JButton button = new JButton(String.valueOf(i));
 				panel.add(button);
 				button.setFocusPainted(false);
-				button.setContentAreaFilled(false);
+				//button.setContentAreaFilled(false);
 
 				int numeroCelula = i % colunas.length;
 				String diaCorrespondente = colunas[numeroCelula];
@@ -163,7 +161,7 @@ public class TelaPrincipal extends JFrame {
 							telaHA.toFront();
 						} else {
 
-							new TelaHorarioAcompanhamento(diaCorrespondente, horaCorrespondente).createAndShowGUI(tabbedPane);
+							new TelaHorarioAcompanhamento(diaCorrespondente, horaCorrespondente).abrirAba(tabbedPane);
 
 						}
 					}
