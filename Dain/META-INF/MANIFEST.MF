@@ -11,3 +11,4 @@ Export-Package: br.ufs.dain.bancodados,
  br.ufs.dain.dao,
  br.ufs.dain.dominio,
  br.ufs.dain.janelas
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

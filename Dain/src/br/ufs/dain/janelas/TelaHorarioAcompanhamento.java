@@ -34,7 +34,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 620, 359);
+		setBounds(100, 100, 734, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -44,12 +44,12 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		contentPane.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 
-		JLabel lblNewLabel = new JLabel(diaCorrespondente);
+		JLabel lblNewLabel = new JLabel(atribuiPosFixoFeira(dia));
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
 
-		JLabel lblNewLabel_1 = new JLabel(horaCorrespondente);
+		JLabel lblNewLabel_1 = new JLabel(hora);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.TRAILING);

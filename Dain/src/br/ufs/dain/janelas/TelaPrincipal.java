@@ -2,25 +2,26 @@ package br.ufs.dain.janelas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import java.awt.Toolkit;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JMenu;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JTabbedPane;
 
 public class TelaPrincipal extends JFrame {
 
@@ -41,6 +42,7 @@ public class TelaPrincipal extends JFrame {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					TelaPrincipal frame = new TelaPrincipal();
 					frame.setLocationRelativeTo(null);
+					//frame.pack();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,7 +61,7 @@ public class TelaPrincipal extends JFrame {
 
 		setTitle("Divis\u00E3o de A\u00E7\u00F5es Inclusivas - Dain");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 684, 433);
+		setBounds(100, 100, 812, 578);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -94,6 +96,9 @@ public class TelaPrincipal extends JFrame {
 
 		JMenu mnItem_2 = new JMenu("item 3");
 		menuBar.add(mnItem_2);
+
+		//
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -104,13 +109,28 @@ public class TelaPrincipal extends JFrame {
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 
 		JPanel panelCentro = new JPanel();
-		tabbedPane.addTab("Tabela Principal", null, panelCentro, null);
 		panelCentro.setLayout(new GridLayout(17, 7, 2, 2));
-
-		/*
-		 * organiza os ítens que mostra os horários
-		 * e também os botões que chamam as novas telas
-		 */
+		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.SOUTH);
+		
+		JScrollPane scrollPane_1 = new JScrollPane(panel);
+		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JButton btnNewButton = new JButton("New button");
+		panel.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		panel.add(btnNewButton_1);
+		contentPane.add(scrollPane_1, BorderLayout.WEST);
+		
+		JScrollPane scrollPane = new JScrollPane(panelCentro);
+		tabbedPane.addTab("Tabela Principal", null, scrollPane, null);
+		
+		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, tabbedPane, scrollPane_1);
+		splitPane.setResizeWeight(0.8);
+		contentPane.add(splitPane, BorderLayout.CENTER);
+		
 		organizaTabela(panelCentro);
 	}
 
@@ -123,18 +143,18 @@ public class TelaPrincipal extends JFrame {
 		String [] colunas = {"Horário", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"};
 
 		short contador = 0;
-
+		
 		// 119 é o número de (horarios * colunas) + colunas
 		for (int i = 0; i < (horarios.length * colunas.length) + colunas.length; i++) {
 
 			if (i < colunas.length) {
 				JLabel label = new JLabel(colunas[i]);
-				if (i != 0)
-					label.setHorizontalAlignment(SwingConstants.CENTER);
+				label.setHorizontalAlignment(SwingConstants.CENTER);
 				panel.add(label);
 			}
 			else if (i % (colunas.length) == 0) {
 				JLabel horas = new JLabel(horarios[contador]);
+				horas.setHorizontalAlignment(SwingConstants.CENTER);
 				panel.add(horas);
 				contador++;
 			}
@@ -144,7 +164,12 @@ public class TelaPrincipal extends JFrame {
 				panel.add(button);
 				button.setFocusPainted(false);
 				//button.setContentAreaFilled(false);
-
+				
+				if (i == 100)
+					button.setText("<html><body>Murilo  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Almeida<br>"
+											 + "Formiga &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Negão<br>"
+											 + "Yuri    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Zezão</body></html>");
+				
 				int numeroCelula = i % colunas.length;
 				String diaCorrespondente = colunas[numeroCelula];
 				String horaCorrespondente = horarios[contador - 1];
