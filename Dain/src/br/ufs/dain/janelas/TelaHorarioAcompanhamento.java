@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
 
 public class TelaHorarioAcompanhamento extends JFrame {
 
@@ -28,6 +29,8 @@ public class TelaHorarioAcompanhamento extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaHorarioAcompanhamento (String diaCorrespondente, String horaCorrespondente) {
+		
+		setTitle(atribuiPosFixoFeira(dia) + ", " + hora);
 
 		this.dia = diaCorrespondente;
 		this.hora = horaCorrespondente;
@@ -36,13 +39,17 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 734, 500);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-
+		
 		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JScrollPane scrollPane = new JScrollPane(panel);
+		contentPane.add(scrollPane, BorderLayout.SOUTH);
+
+		contentPane.add(scrollPane, BorderLayout.CENTER);
 
 		JLabel lblNewLabel = new JLabel(atribuiPosFixoFeira(dia));
 		panel.add(lblNewLabel);

@@ -22,6 +22,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JTree;
+import javax.swing.JList;
 
 public class TelaPrincipal extends JFrame {
 
@@ -96,11 +98,23 @@ public class TelaPrincipal extends JFrame {
 
 		JMenu mnItem_2 = new JMenu("item 3");
 		menuBar.add(mnItem_2);
+		
+		JMenu mnNewMenu_1 = new JMenu("New menu");
+		menuBar.add(mnNewMenu_1);
+		
+		JMenu mnNewMenu_2 = new JMenu("New menu");
+		menuBar.add(mnNewMenu_2);
+		
+		JMenu mnNewMenu_3 = new JMenu("New menu");
+		menuBar.add(mnNewMenu_3);
+		
+		JMenu mnNewMenu_4 = new JMenu("New menu");
+		menuBar.add(mnNewMenu_4);
 
 		//
 
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(2, 2, 2, 2));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
@@ -116,6 +130,11 @@ public class TelaPrincipal extends JFrame {
 		
 		JScrollPane scrollPane_1 = new JScrollPane(panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JTree tree = new JTree();
+		panel.add(tree);
+		
+	;
 		
 		JButton btnNewButton = new JButton("New button");
 		panel.add(btnNewButton);
@@ -160,30 +179,29 @@ public class TelaPrincipal extends JFrame {
 			}
 			else {
 				
-				JButton button = new JButton(String.valueOf(i));
-				panel.add(button);
-				button.setFocusPainted(false);
-				//button.setContentAreaFilled(false);
-				
-				if (i == 100)
-					button.setText("<html><body>Murilo  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Almeida<br>"
-											 + "Formiga &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Negão<br>"
-											 + "Yuri    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Zezão</body></html>");
-				
 				int numeroCelula = i % colunas.length;
 				String diaCorrespondente = colunas[numeroCelula];
 				String horaCorrespondente = horarios[contador - 1];
+				
+				JButton button = new JButton(String.valueOf(i));
+				panel.add(button);
+				button.setFocusPainted(false);
+				button.setToolTipText(diaCorrespondente + ", " + horaCorrespondente);
+				//button.setContentAreaFilled(false);
+				
+				if (i == 100)
+					button.setText("<html><body><font style=\"color:red\">Murilo</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Almeida<br>"
+											 + "<font style=\"color:green\">Formiga</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Negão<br>"
+											 + "<font style=\"color:blue\">Yuri</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zezão</body></html>");
 
 				// função para chamar nova tela ao clicar em botão
 				button.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent event) {
-
-						//System.err.println("Hey!");
-						TelaHorarioAcompanhamento telaHA = new TelaHorarioAcompanhamento(diaCorrespondente, horaCorrespondente);
-						if (telaHA.isActive() && !telaHA.hasFocus()) {
-							telaHA.toFront();
+						
+						if (false) {
+						
 						} else {
 
 							new TelaHorarioAcompanhamento(diaCorrespondente, horaCorrespondente).abrirAba(tabbedPane);
