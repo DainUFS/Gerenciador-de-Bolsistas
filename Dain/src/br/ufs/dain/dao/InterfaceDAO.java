@@ -3,6 +3,7 @@ package br.ufs.dain.dao;
 import br.ufs.dain.dominio.Administrador;
 import br.ufs.dain.dominio.Bolsista;
 import br.ufs.dain.dominio.Deficiente;
+import br.ufs.dain.dominio.Login;
 
 public interface InterfaceDAO {
 
@@ -14,13 +15,12 @@ public interface InterfaceDAO {
 	
 	public void cadastraBolsista(Bolsista d, String matricAdm);
 	
-	public Deficiente getBolsistaMatricula(String matricula);
+	public Bolsista getBolsistaMatricula(String matricula);
 	
-	public Deficiente getBolsistaNome(String nome);
-	
+	public Bolsista getBolsistaNome(String nome);
 	
 	public void cadastrarAdm(Administrador a);
 	
-	
+	public boolean validarLogin(Login login);
 	
 }

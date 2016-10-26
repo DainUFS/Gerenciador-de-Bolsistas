@@ -17,7 +17,7 @@ public class Bolsista extends Aluno {
 		return tipoAtividade;
 	}
 
-	public void setTipoAtividade(short tipoAtividade) {
+	public void setTipoAtividade(int tipoAtividade) {
 		this.tipoAtividade = tipoAtividade;
 	}
 }
