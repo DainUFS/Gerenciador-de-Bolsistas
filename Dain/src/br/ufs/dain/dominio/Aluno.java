@@ -2,7 +2,7 @@ package br.ufs.dain.dominio;
 
 import java.util.ArrayList;
 
-public class Aluno extends Pessoa {
+public abstract class Aluno extends Pessoa {
 
 	private String curso;
 	private String matricula;

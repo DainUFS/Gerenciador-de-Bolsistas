@@ -20,10 +20,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTree;
-import javax.swing.JList;
 
 public class TelaPrincipal extends JFrame {
 
@@ -200,7 +198,7 @@ public class TelaPrincipal extends JFrame {
 					public void actionPerformed(ActionEvent event) {
 
 						if (false) {
-
+								System.out.println("Nada, Nada, Nada, Nada!");
 						} else {
 
 							new TelaHorarioAcompanhamento(diaCorrespondente, horaCorrespondente).abrirAba(tabbedPane);

@@ -15,6 +15,8 @@ import br.ufs.dain.dao.DAO;
 import br.ufs.dain.dominio.Login;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Dialog.ModalExclusionType;
+import javax.swing.border.TitledBorder;
 
 public class TelaLogin extends JFrame {
 
@@ -25,6 +27,10 @@ public class TelaLogin extends JFrame {
 	Login login;
 	boolean bool;
 	String s1, s2;
+	private JPanel panel;
+	private JPanel panel_1;
+	private JLabel label;
+	private JLabel lblEsqueceuSuaSenha;
 	//
 	/**
 	 * Launch the application.
@@ -47,28 +53,48 @@ public class TelaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaLogin() {
+		setTitle("Entrar no Sistema");
+		setResizable(false);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 400, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(3, 2, 0, 0));
 		
+		panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Informa\u00E7\u00F5es da Conta", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		contentPane.add(panel);
+		panel.setLayout(new GridLayout(2, 2, 0, 0));
+		
 		JLabel lblNewLabel = new JLabel("Usu\u00E1rio");
-		contentPane.add(lblNewLabel);
+		panel.add(lblNewLabel);
 		
 		textField_user = new JTextField();
-		contentPane.add(textField_user);
+		panel.add(textField_user);
 		textField_user.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Senha");
-		contentPane.add(lblNewLabel_1);
+		panel.add(lblNewLabel_1);
 		
 		textField_pass = new JTextField();
-		contentPane.add(textField_pass);
+		panel.add(textField_pass);
 		textField_pass.setColumns(10);
 		
+		panel_1 = new JPanel();
+		panel_1.setBorder(new EmptyBorder(10, 10, 10, 10));
+		contentPane.add(panel_1);
+		panel_1.setLayout(new GridLayout(3, 1, 0, 0));
+		
+		label = new JLabel("");
+		panel_1.add(label);
+		
 		JButton btnNewButton = new JButton("New button");
+		panel_1.add(btnNewButton);
+		
+		lblEsqueceuSuaSenha = new JLabel("Esqueceu sua senha?");
+		panel_1.add(lblEsqueceuSuaSenha);
 		
 		
 		btnNewButton.addMouseListener(new MouseAdapter() {
@@ -87,12 +113,6 @@ public class TelaLogin extends JFrame {
 			
 			}	
 		});
-
-		
-		
-		
-		
-		contentPane.add(btnNewButton);
 		
 	}
 
