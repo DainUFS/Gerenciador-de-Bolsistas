@@ -16,6 +16,7 @@ import br.ufs.dain.dao.DAO;
 import br.ufs.dain.dominio.Login;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 public class TelaLogin extends JFrame {
 
@@ -61,9 +62,9 @@ public class TelaLogin extends JFrame {
 		setResizable(false);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 320, 350);
+		setBounds(100, 100, 531, 350);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(3, 2, 0, 0));
 		

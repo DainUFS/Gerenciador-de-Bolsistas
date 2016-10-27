@@ -22,6 +22,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTree;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JSeparator;
 
 public class TelaPrincipal extends JFrame {
 
@@ -65,7 +66,7 @@ public class TelaPrincipal extends JFrame {
 
 		setTitle("Divis\u00E3o de A\u00E7\u00F5es Inclusivas - Dain");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 604, 378);
+		setBounds(100, 100, 674, 433);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -79,26 +80,42 @@ public class TelaPrincipal extends JFrame {
 		JMenu mnItem_1 = new JMenu("Cadastrar");
 		mnItem_1.setMnemonic('C');
 		menuBar.add(mnItem_1);
-
-		JMenu mnNovoAluno = new JMenu("Novo Aluno");
-		mnItem_1.add(mnNovoAluno);
-
+		
 		JMenuItem mntmBolsista = new JMenuItem("Bolsista");
-		mntmBolsista.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent event) {
+		mntmBolsista.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				TelaNovoBolsista tnv = new TelaNovoBolsista();
 				tnv.setLocationRelativeTo(null);
 				tnv.setVisible(true);
 			}
 		});
-		mnNovoAluno.add(mntmBolsista);
-
-		JMenuItem mntmDeficinte = new JMenuItem("Defici\u00EAnte");
-		mnNovoAluno.add(mntmDeficinte);
-
+		mnItem_1.add(mntmBolsista);
+		
+		JMenuItem mntmDeficiente = new JMenuItem("Deficiente");
+		mntmDeficiente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaNovoDeficiente tnd = new TelaNovoDeficiente();
+				tnd.setLocationRelativeTo(null);
+				tnd.setVisible(true);
+			}
+		});
+		mnItem_1.add(mntmDeficiente);
+		
 		JMenuItem mntmAdministrador = new JMenuItem("Administrador");
+		mntmAdministrador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaNovoAdm tna = new TelaNovoAdm();
+				tna.setLocationRelativeTo(null);
+				tna.setVisible(true);
+			}
+		});
 		mnItem_1.add(mntmAdministrador);
+		
+		JSeparator separator = new JSeparator();
+		mnItem_1.add(separator);
+		
+		JMenuItem mntmHorrios = new JMenuItem("Hor\u00E1rios");
+		mnItem_1.add(mntmHorrios);
 
 		JMenu mnItem_2 = new JMenu("Editar");
 		menuBar.add(mnItem_2);
@@ -124,6 +141,7 @@ public class TelaPrincipal extends JFrame {
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 
 		JPanel panelCentro = new JPanel();
+		panelCentro.setBorder(new EmptyBorder(0, 0, 10, 20));
 		panelCentro.setLayout(new GridLayout(17, 7, 2, 2));
 
 		JPanel panel = new JPanel();

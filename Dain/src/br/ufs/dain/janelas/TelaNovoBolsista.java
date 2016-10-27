@@ -14,6 +14,9 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -50,7 +53,7 @@ public class TelaNovoBolsista extends JDialog {
 	 */
 	public TelaNovoBolsista() {
 		setResizable(false);
-		setTitle("Adicionar ou Editar Bolsista");
+		setTitle("Adicionar Bolsista");
 		setBounds(100, 100, 450, 400);
 		BorderLayout borderLayout = new BorderLayout();
 		getContentPane().setLayout(borderLayout);
@@ -152,9 +155,8 @@ public class TelaNovoBolsista extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
-				cancelButton.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mousePressed(MouseEvent arg0) {
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
 						dispose();
 					}
 				});
