@@ -19,6 +19,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.CardLayout;
+import javax.swing.BoxLayout;
+import javax.swing.border.TitledBorder;
 
 public class TelaNovoBolsista extends JDialog {
 
@@ -30,9 +33,9 @@ public class TelaNovoBolsista extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
 	private JTextField textField_1;
+	private JTextField textField_4;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	private JTextField textField_4;
 
 	/**
 	 * Launch the application.
@@ -54,7 +57,7 @@ public class TelaNovoBolsista extends JDialog {
 	public TelaNovoBolsista() {
 		setResizable(false);
 		setTitle("Adicionar Bolsista");
-		setBounds(100, 100, 450, 400);
+		setBounds(100, 100, 370, 470);
 		BorderLayout borderLayout = new BorderLayout();
 		getContentPane().setLayout(borderLayout);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -68,12 +71,14 @@ public class TelaNovoBolsista extends JDialog {
 		}
 		{
 			JPanel panel = new JPanel();
+			panel.setBorder(new EmptyBorder(0, 2, 8, 2));
 			getContentPane().add(panel, BorderLayout.CENTER);
-			panel.setLayout(new BorderLayout(0, 0));
+			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 			{
 				JPanel panel_1 = new JPanel();
-				panel.add(panel_1, BorderLayout.CENTER);
-				panel_1.setLayout(new GridLayout(5, 2, 10, 10));
+				panel_1.setBorder(new TitledBorder(null, "Informa\u00E7\u00F5es pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				panel.add(panel_1);
+				panel_1.setLayout(new GridLayout(7, 1, 0, 0));
 				{
 					JLabel label = new JLabel("Nome:");
 					panel_1.add(label);
@@ -94,6 +99,42 @@ public class TelaNovoBolsista extends JDialog {
 					panel_1.add(textField_1);
 				}
 				{
+					JLabel label = new JLabel("Curso:");
+					panel_1.add(label);
+				}
+				{
+					textField_4 = new JTextField();
+					textField_4.setColumns(10);
+					panel_1.add(textField_4);
+				}
+				JPanel panel_1_1 = new JPanel();
+				panel_1.add(panel_1_1);
+				panel_1_1.setLayout(new GridLayout(0, 3, 0, 0));
+				{
+					JLabel lblSexo = new JLabel("Sexo:");
+					panel_1_1.add(lblSexo);
+				}
+
+				{
+					ButtonGroup buttonGroup = new ButtonGroup();
+
+
+					JRadioButton rdbtnMasculino = new JRadioButton("Masculino");
+					panel_1_1.add(rdbtnMasculino);
+
+					JRadioButton rdbtnFeminino = new JRadioButton("Feminino");
+					panel_1_1.add(rdbtnFeminino);
+
+					buttonGroup.add(rdbtnMasculino);
+					buttonGroup.add(rdbtnFeminino);
+				}
+			}
+			{
+				JPanel panel_1 = new JPanel();
+				panel_1.setBorder(new TitledBorder(null, "Contatos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				panel.add(panel_1);
+				panel_1.setLayout(new GridLayout(4, 1, 0, 1));
+				{
 					JLabel label = new JLabel("Telefone:");
 					panel_1.add(label);
 				}
@@ -110,35 +151,6 @@ public class TelaNovoBolsista extends JDialog {
 					textField_3 = new JTextField();
 					textField_3.setColumns(10);
 					panel_1.add(textField_3);
-				}
-				{
-					JLabel label = new JLabel("Curso:");
-					panel_1.add(label);
-				}
-				{
-					textField_4 = new JTextField();
-					textField_4.setColumns(10);
-					panel_1.add(textField_4);
-				}
-			}
-			{
-				JPanel panel_1 = new JPanel();
-				panel.add(panel_1, BorderLayout.SOUTH);
-				{
-					JLabel lblSexo = new JLabel("Sexo:");
-					panel_1.add(lblSexo);
-				}
-				{
-					ButtonGroup buttonGroup = new ButtonGroup();
-
-					JRadioButton rdbtnMasculino = new JRadioButton("Masculino");
-					panel_1.add(rdbtnMasculino);
-
-					JRadioButton rdbtnFeminino = new JRadioButton("Feminino");
-					panel_1.add(rdbtnFeminino);
-
-					buttonGroup.add(rdbtnMasculino);
-					buttonGroup.add(rdbtnFeminino);
 				}
 			}
 		}
