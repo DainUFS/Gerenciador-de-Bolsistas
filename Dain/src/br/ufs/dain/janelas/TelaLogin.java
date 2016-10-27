@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
@@ -15,11 +16,14 @@ import br.ufs.dain.dao.DAO;
 import br.ufs.dain.dominio.Login;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Dialog.ModalExclusionType;
-import javax.swing.border.TitledBorder;
 
 public class TelaLogin extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private JPanel contentPane;
 	private JTextField textField_user;
 	private JTextField textField_pass;
@@ -29,7 +33,6 @@ public class TelaLogin extends JFrame {
 	String s1, s2;
 	private JPanel panel;
 	private JPanel panel_1;
-	private JLabel label;
 	private JLabel lblEsqueceuSuaSenha;
 	//
 	/**
@@ -42,6 +45,7 @@ public class TelaLogin extends JFrame {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					TelaLogin frame = new TelaLogin();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -57,18 +61,19 @@ public class TelaLogin extends JFrame {
 		setResizable(false);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 400, 350);
+		setBounds(100, 100, 320, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(3, 2, 0, 0));
 		
 		panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Informa\u00E7\u00F5es da Conta", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new EmptyBorder(0, 0, 0, 0));
 		contentPane.add(panel);
-		panel.setLayout(new GridLayout(2, 2, 0, 0));
+		panel.setLayout(new GridLayout(2, 2, 0, 5));
 		
 		JLabel lblNewLabel = new JLabel("Usu\u00E1rio");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblNewLabel);
 		
 		textField_user = new JTextField();
@@ -76,6 +81,7 @@ public class TelaLogin extends JFrame {
 		textField_user.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Senha");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblNewLabel_1);
 		
 		textField_pass = new JTextField();
@@ -87,13 +93,11 @@ public class TelaLogin extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(new GridLayout(3, 1, 0, 0));
 		
-		label = new JLabel("");
-		panel_1.add(label);
-		
 		JButton btnNewButton = new JButton("New button");
 		panel_1.add(btnNewButton);
 		
 		lblEsqueceuSuaSenha = new JLabel("Esqueceu sua senha?");
+		lblEsqueceuSuaSenha.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(lblEsqueceuSuaSenha);
 		
 		
@@ -106,6 +110,7 @@ public class TelaLogin extends JFrame {
 				bool = dao.validarLogin(login);
 				if (bool == true) {
 					System.out.println("ENTROU!");
+					dispose();
 					new TelaPrincipal().setVisible(true);
 				} else {
 					System.out.println("NÃO ENTROU!");

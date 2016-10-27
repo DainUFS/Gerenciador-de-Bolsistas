@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaNovoBolsista extends JDialog {
 
@@ -150,6 +152,12 @@ public class TelaNovoBolsista extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mousePressed(MouseEvent arg0) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancelar");
 				buttonPane.add(cancelButton);
 			}

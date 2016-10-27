@@ -19,9 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTree;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTree;
 
 public class TelaPrincipal extends JFrame {
 
@@ -43,6 +43,7 @@ public class TelaPrincipal extends JFrame {
 					frame.setLocationRelativeTo(null);
 					// frame.pack();
 					frame.setVisible(true);
+					frame.setExtendedState(MAXIMIZED_BOTH);
 				} catch (Exception e) {
 					e.printStackTrace();
 
@@ -64,7 +65,7 @@ public class TelaPrincipal extends JFrame {
 
 		setTitle("Divis\u00E3o de A\u00E7\u00F5es Inclusivas - Dain");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 812, 578);
+		setBounds(100, 100, 604, 378);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -86,7 +87,9 @@ public class TelaPrincipal extends JFrame {
 		mntmBolsista.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent event) {
-				new TelaNovoBolsista().setVisible(true);
+				TelaNovoBolsista tnv = new TelaNovoBolsista();
+				tnv.setLocationRelativeTo(null);
+				tnv.setVisible(true);
 			}
 		});
 		mnNovoAluno.add(mntmBolsista);
@@ -97,19 +100,16 @@ public class TelaPrincipal extends JFrame {
 		JMenuItem mntmAdministrador = new JMenuItem("Administrador");
 		mnItem_1.add(mntmAdministrador);
 
-		JMenu mnItem_2 = new JMenu("item 3");
+		JMenu mnItem_2 = new JMenu("Editar");
 		menuBar.add(mnItem_2);
 
-		JMenu mnNewMenu_1 = new JMenu("New menu");
-		menuBar.add(mnNewMenu_1);
-
-		JMenu mnNewMenu_2 = new JMenu("New menu");
+		JMenu mnNewMenu_2 = new JMenu("Sistema");
 		menuBar.add(mnNewMenu_2);
 
-		JMenu mnNewMenu_3 = new JMenu("New menu");
+		JMenu mnNewMenu_3 = new JMenu("Conta");
 		menuBar.add(mnNewMenu_3);
 
-		JMenu mnNewMenu_4 = new JMenu("New menu");
+		JMenu mnNewMenu_4 = new JMenu("Ajuda");
 		menuBar.add(mnNewMenu_4);
 
 		//
