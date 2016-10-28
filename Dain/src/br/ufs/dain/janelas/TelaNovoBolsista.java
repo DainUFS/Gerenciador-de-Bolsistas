@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 import java.awt.CardLayout;
 import javax.swing.BoxLayout;
 import javax.swing.border.TitledBorder;
+import java.awt.Toolkit;
 
 public class TelaNovoBolsista extends JDialog {
 
@@ -55,6 +56,7 @@ public class TelaNovoBolsista extends JDialog {
 	 * Create the dialog.
 	 */
 	public TelaNovoBolsista() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_bolsista.png"));
 		setResizable(false);
 		setTitle("Adicionar Bolsista");
 		setBounds(100, 100, 370, 470);
@@ -71,7 +73,7 @@ public class TelaNovoBolsista extends JDialog {
 		}
 		{
 			JPanel panel = new JPanel();
-			panel.setBorder(new EmptyBorder(0, 2, 8, 2));
+			panel.setBorder(new EmptyBorder(0, 4, 8, 4));
 			getContentPane().add(panel, BorderLayout.CENTER);
 			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 			{

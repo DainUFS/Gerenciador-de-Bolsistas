@@ -19,6 +19,7 @@ import javax.swing.border.TitledBorder;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class TelaNovoDeficiente extends JDialog {
 
@@ -51,6 +52,7 @@ public class TelaNovoDeficiente extends JDialog {
 	 * Create the dialog.
 	 */
 	public TelaNovoDeficiente() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_deficiente.png"));
 		setResizable(false);
 		setTitle("Adicionar Deficiente");
 		setBounds(100, 100, 370, 470);

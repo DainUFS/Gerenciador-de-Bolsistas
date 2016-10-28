@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class TelaNovoAdm extends JDialog {
 
@@ -33,6 +34,7 @@ public class TelaNovoAdm extends JDialog {
 	 * Create the dialog.
 	 */
 	public TelaNovoAdm() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_adm.png"));
 		setResizable(false);
 		setTitle("Adicionar Administrador");
 		setBounds(100, 100, 450, 300);
