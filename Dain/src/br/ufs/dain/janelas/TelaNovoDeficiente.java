@@ -1,6 +1,7 @@
 package br.ufs.dain.janelas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
@@ -34,6 +36,7 @@ public class TelaNovoDeficiente extends JDialog {
 	private JTextField textField_4;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	private JTextField textField_5;
 
 	/**
 	 * Launch the application.
@@ -55,125 +58,131 @@ public class TelaNovoDeficiente extends JDialog {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_deficiente.png"));
 		setResizable(false);
 		setTitle("Adicionar Deficiente");
-		setBounds(100, 100, 370, 470);
+		setBounds(100, 100, 350, 500);
 		BorderLayout borderLayout = new BorderLayout();
 		getContentPane().setLayout(borderLayout);
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.NORTH);
-		contentPanel.setLayout(new GridLayout(2, 1, 0, 0));
-		{
-			JLabel lblCadastreUmNovo = new JLabel("Cadastre um novo deficiente");
-			lblCadastreUmNovo.setHorizontalAlignment(SwingConstants.CENTER);
-			lblCadastreUmNovo.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			contentPanel.add(lblCadastreUmNovo);
-		}
+		contentPanel.setBorder(new EmptyBorder(5, 5, 10, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
-			panel.setBorder(new EmptyBorder(0, 2, 8, 2));
-			getContentPane().add(panel, BorderLayout.CENTER);
-			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+			panel.setBorder(new EmptyBorder(0, 0, 0, 0));
+			contentPanel.add(panel, BorderLayout.NORTH);
 			{
-				JPanel panel_1 = new JPanel();
-				panel_1.setBorder(new TitledBorder(null, "Informa\u00E7\u00F5es pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				panel.add(panel_1);
-				panel_1.setLayout(new GridLayout(7, 1, 0, 0));
-				{
-					JLabel label = new JLabel("Nome:");
-					panel_1.add(label);
-				}
-				{
-					textField = new JTextField();
-					textField.setToolTipText("Digite o nome do novo bolsista");
-					textField.setColumns(30);
-					panel_1.add(textField);
-				}
-				{
-					JLabel label = new JLabel("Matr\u00EDcula:");
-					panel_1.add(label);
-				}
-				{
-					textField_1 = new JTextField();
-					textField_1.setColumns(15);
-					panel_1.add(textField_1);
-				}
-				{
-					JLabel label = new JLabel("Curso:");
-					panel_1.add(label);
-				}
-				{
-					textField_4 = new JTextField();
-					textField_4.setColumns(10);
-					panel_1.add(textField_4);
-				}
-				JPanel panel_1_1 = new JPanel();
-				panel_1.add(panel_1_1);
-				panel_1_1.setLayout(new GridLayout(0, 3, 0, 0));
-				{
-					JLabel lblSexo = new JLabel("Sexo:");
-					panel_1_1.add(lblSexo);
-				}
-
-				{
-					ButtonGroup buttonGroup = new ButtonGroup();
-
-
-					JRadioButton rdbtnMasculino = new JRadioButton("Masculino");
-					panel_1_1.add(rdbtnMasculino);
-
-					JRadioButton rdbtnFeminino = new JRadioButton("Feminino");
-					panel_1_1.add(rdbtnFeminino);
-
-					buttonGroup.add(rdbtnMasculino);
-					buttonGroup.add(rdbtnFeminino);
-				}
+				JLabel lblCadastreUmNovo = new JLabel("Cadastre um novo deficiente");
+				panel.add(lblCadastreUmNovo);
+				lblCadastreUmNovo.setHorizontalAlignment(SwingConstants.CENTER);
+				lblCadastreUmNovo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			}
+		}
+		JPanel panel = new JPanel();
+		contentPanel.add(panel, BorderLayout.CENTER);
+		panel.setBorder(new EmptyBorder(8, 0, 0, 0));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		JPanel panel_1_2 = new JPanel();
+		panel_1_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informa\u00E7\u00F5es pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.add(panel_1_2);
+		panel_1_2.setLayout(new GridLayout(9, 1, 0, 0));
+		{
+			JLabel label = new JLabel("Nome:");
+			panel_1_2.add(label);
+		}
+		{
+			textField = new JTextField();
+			textField.setToolTipText("Digite o nome do novo bolsista");
+			textField.setColumns(30);
+			panel_1_2.add(textField);
+		}
+		{
+			JLabel label = new JLabel("Matr\u00EDcula:");
+			panel_1_2.add(label);
+		}
+		{
+			textField_1 = new JTextField();
+			textField_1.setColumns(15);
+			panel_1_2.add(textField_1);
+		}
+		{
+			JLabel label = new JLabel("Curso:");
+			panel_1_2.add(label);
+		}
+		{
+			textField_4 = new JTextField();
+			textField_4.setColumns(10);
+			panel_1_2.add(textField_4);
+		}
+		JPanel panel_1_1 = new JPanel();
+		panel_1_2.add(panel_1_1);
+		panel_1_1.setLayout(new GridLayout(0, 3, 0, 0));
+		{
+			JLabel lblSexo = new JLabel("Sexo:");
+			panel_1_1.add(lblSexo);
+		}
+		{
+			ButtonGroup buttonGroup = new ButtonGroup();
+			{
+				JRadioButton rdbtnMasculino = new JRadioButton("Masculino");
+				panel_1_1.add(rdbtnMasculino);
+				buttonGroup.add(rdbtnMasculino);
 			}
 			{
-				JPanel panel_1 = new JPanel();
-				panel_1.setBorder(new TitledBorder(null, "Contatos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				panel.add(panel_1);
-				panel_1.setLayout(new GridLayout(4, 1, 0, 1));
-				{
-					JLabel label = new JLabel("Telefone:");
-					panel_1.add(label);
-				}
-				{
-					textField_2 = new JTextField();
-					textField_2.setColumns(10);
-					panel_1.add(textField_2);
-				}
-				{
-					JLabel label = new JLabel("E-mail:");
-					panel_1.add(label);
-				}
-				{
-					textField_3 = new JTextField();
-					textField_3.setColumns(10);
-					panel_1.add(textField_3);
-				}
+				JRadioButton rdbtnFeminino = new JRadioButton("Feminino");
+				panel_1_1.add(rdbtnFeminino);
+				buttonGroup.add(rdbtnFeminino);
 			}
 		}
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-
+			JLabel lblTipoDeDeficincia = new JLabel("Tipo de defici\u00EAncia:");
+			panel_1_2.add(lblTipoDeDeficincia);
+		}
+		{
+			textField_5 = new JTextField();
+			panel_1_2.add(textField_5);
+			textField_5.setColumns(10);
+		}
+		{
+			JPanel panel_1 = new JPanel();
+			panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Contatos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel.add(panel_1);
+			panel_1.setLayout(new GridLayout(4, 1, 0, 1));
 			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				JLabel label = new JLabel("Telefone:");
+				panel_1.add(label);
 			}
 			{
-				JButton cancelButton = new JButton("Cancelar");
-				cancelButton.addActionListener(new ActionListener() {
+				textField_2 = new JTextField();
+				textField_2.setColumns(10);
+				panel_1.add(textField_2);
+			}
+			{
+				JLabel label = new JLabel("E-mail:");
+				panel_1.add(label);
+			}
+			{
+				textField_3 = new JTextField();
+				textField_3.setColumns(10);
+				panel_1.add(textField_3);
+			}
+		}
+		{
+			JPanel panel_1 = new JPanel();
+			getContentPane().add(panel_1, BorderLayout.SOUTH);
+			panel_1.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			{
+				JButton button = new JButton("OK");
+				button.setActionCommand("OK");
+				panel_1.add(button);
+			}
+			{
+				JButton button = new JButton("Cancelar");
+				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
 					}
 				});
-				cancelButton.setActionCommand("Cancelar");
-				buttonPane.add(cancelButton);
+				button.setActionCommand("Cancelar");
+				panel_1.add(button);
 			}
 		}
 	}
-
 }

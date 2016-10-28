@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,6 +23,7 @@ import javax.swing.JTree;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JSeparator;
+import javax.swing.ImageIcon;
 
 public class TelaPrincipal extends JFrame {
 
@@ -80,6 +83,8 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnItem_1);
 		
 		JMenuItem mntmBolsista = new JMenuItem("Bolsista");
+		mntmBolsista.setIcon(new ImageIcon("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_bolsista.png"));
+		mntmBolsista.setMnemonic('B');
 		mntmBolsista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaNovoBolsista tnv = new TelaNovoBolsista();
@@ -90,6 +95,8 @@ public class TelaPrincipal extends JFrame {
 		mnItem_1.add(mntmBolsista);
 		
 		JMenuItem mntmDeficiente = new JMenuItem("Deficiente");
+		mntmDeficiente.setIcon(new ImageIcon("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_deficiente.png"));
+		mntmDeficiente.setMnemonic('D');
 		mntmDeficiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaNovoDeficiente tnd = new TelaNovoDeficiente();
@@ -100,6 +107,8 @@ public class TelaPrincipal extends JFrame {
 		mnItem_1.add(mntmDeficiente);
 		
 		JMenuItem mntmAdministrador = new JMenuItem("Administrador");
+		mntmAdministrador.setIcon(new ImageIcon("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_adm.png"));
+		mntmAdministrador.setMnemonic('A');
 		mntmAdministrador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaNovoAdm tna = new TelaNovoAdm();

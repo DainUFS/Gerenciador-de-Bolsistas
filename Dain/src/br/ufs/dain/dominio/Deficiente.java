@@ -1,12 +1,10 @@
 package br.ufs.dain.dominio;
 
-import java.util.ArrayList;
-
 public class Deficiente extends Aluno {
 	
 	private String tipoDeficiencia;
 
-	public Deficiente(String telefone, String email, String nome, String curso, String matricula, String sexo,
+	public Deficiente (String telefone, String email, String nome, String curso, String matricula, String sexo,
 			Horario horario, String tipoDeficiencia) {
 		super(telefone, email, nome, curso, matricula, sexo, horario);
 		this.tipoDeficiencia = tipoDeficiencia;
@@ -19,5 +17,4 @@ public class Deficiente extends Aluno {
 	public void setTipoDeficiencia(String tipoDeficiencia) {
 		this.tipoDeficiencia = tipoDeficiencia;
 	}
-
 }
