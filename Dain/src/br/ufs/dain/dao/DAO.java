@@ -6,6 +6,7 @@ import br.ufs.dain.bancodados.Persistencia;
 import br.ufs.dain.dominio.Administrador;
 import br.ufs.dain.dominio.Bolsista;
 import br.ufs.dain.dominio.Deficiente;
+import br.ufs.dain.dominio.Horario;
 import br.ufs.dain.dominio.Login;
 
 public class DAO implements InterfaceDAO {
@@ -13,12 +14,14 @@ public class DAO implements InterfaceDAO {
 	Persistencia p = new Persistencia();
 
 	@Override
-	public void cadastraDeficiente(Deficiente d, String matricAdm) {
+	public boolean cadastraDeficiente(Deficiente d, String matricAdm) {
 		try {
 			p.armazenarDeficiente(d, matricAdm);
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 
 	@Override
@@ -44,12 +47,14 @@ public class DAO implements InterfaceDAO {
 	}
 
 	@Override
-	public void cadastraBolsista(Bolsista b, String matricAdm) {
+	public boolean cadastraBolsista(Bolsista b, String matricAdm) {
 		try {
 			p.armazenarBolsista(b, matricAdm);
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return false;
 
 	}
 
@@ -77,13 +82,14 @@ public class DAO implements InterfaceDAO {
 	}
 
 	@Override
-	public void cadastrarAdm(Administrador a) {
+	public boolean cadastrarAdm(Administrador a) {
 		try {
 			p.aramazenarAdm(a);
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		return false;
 	}
 
 	@Override
@@ -100,10 +106,42 @@ public class DAO implements InterfaceDAO {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean cadastrHorarioDef(Horario h, String matric) {
+		// TODO Auto-generated method stub
+		try {
+			p.aramazenarHorarioDef(h, matric);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
+	@Override
+	public boolean cadastrHorarioBol(Horario h, String matric) {
+		try {
+			p.aramazenarHorarioBol(h, matric);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 	public static void main(String[] args) {
 		DAO dao = new DAO();
-		Login login = new Login("21", "21");
-		System.out.println(dao.validarLogin(login));
+		//Login login = new Login("21", "21");
+		//System.out.println(dao.validarLogin(login));
+		Horario h = new Horario("12h-16h", "08h-16h", "12h-16h", "12h-16h", "12h-16h", "12h-16h");
+		//Deficiente d = new Deficiente("987455452", "@kubrick", "Stanley Kubrick", "Iluminado", "odisseia2001", "M", h, "louco");
+		//System.out.println(dao.cadastraDeficiente(d, "32509874"));
+		//System.out.println(dao.cadastrHorarioDef(h, "odisseia2001"));
+		//System.out.println(dao.cadastrHorarioBol(h, "211053337882"));
+		
 	}
+
+	
 }

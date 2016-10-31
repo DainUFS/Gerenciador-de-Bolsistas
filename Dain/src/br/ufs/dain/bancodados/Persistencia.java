@@ -95,7 +95,7 @@ public class Persistencia {
 		conn.close();
 	}
 
-	public void aramazenarHorario(Horario h) throws SQLException {
+	public int aramazenarHorario(Horario h) throws SQLException {
 
 		conn = conexao.getConexaoMySQL();
 
@@ -117,6 +117,8 @@ public class Persistencia {
 		System.out.println("Gravado!");
 
 		conn.close();
+		
+		return buscarIdHorario(h);
 
 	}
 
@@ -148,7 +150,53 @@ public class Persistencia {
 
 		return id;
 	}
+	
+	public void aramazenarHorarioDef(Horario h, String matric) throws SQLException{
+		int id = buscarIdHorario(h);
+		if(id == -1){
+			id = aramazenarHorario(h);
+		}
+		
+		conn = conexao.getConexaoMySQL();
+		
+		String sql = "UPDATE t_deficiente SET d_fk_horario = ? WHERE d_matricula = ?";		
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+		
+		stmt.setInt(1, id);
+		stmt.setString(2, matric);
+		
+		stmt.execute();
+		stmt.close();
 
+		System.out.println("Gravado!");
+
+		conn.close();
+	}
+		
+	public void aramazenarHorarioBol(Horario h, String matric) throws SQLException{
+		int id = buscarIdHorario(h);
+		if(id == -1){
+			id = aramazenarHorario(h);
+		}
+		
+		conn = conexao.getConexaoMySQL();
+		
+		String sql = "UPDATE t_bolsista SET b_fk_horario = ? WHERE b_matricula = ?";		
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+		
+		stmt.setInt(1, id);
+		stmt.setString(2, matric);
+		
+		stmt.execute();
+		stmt.close();
+
+		System.out.println("Gravado!");
+
+		conn.close();
+	}
+	
 	public Horario buscarHorario(int id) throws SQLException {
 
 		conn = conexao.getConexaoMySQL();
@@ -306,6 +354,11 @@ public class Persistencia {
 
 	}
 
+	
+	
+	
+	
+	
 	public static void main(String[] args) throws SQLException {
 		Persistencia per = new Persistencia();
 		Login l = new Login("22", "21");
