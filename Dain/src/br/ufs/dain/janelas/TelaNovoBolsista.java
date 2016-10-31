@@ -25,7 +25,6 @@ import javax.swing.border.TitledBorder;
 import br.ufs.dain.dao.DAO;
 import br.ufs.dain.dominio.Administrador;
 import br.ufs.dain.dominio.Bolsista;
-import br.ufs.dain.dominio.Horario;
 
 public class TelaNovoBolsista extends JDialog {
 
@@ -180,12 +179,13 @@ public class TelaNovoBolsista extends JDialog {
 						else if (rdbtnFeminino.isSelected())
 							sexoSelecionado = "F";
 						
-						Bolsista bolsista = new Bolsista (textField_telefone.getText().toString(),
+						Bolsista bolsista = new Bolsista (textField_nome.getText().toString(),
+								textField_telefone.getText().toString(),
 								textField_email.getText().toString(),
-								textField_nome.getText().toString(),
 								textField_curso.getText().toString(),
 								textField_matricula.getText().toString(),
-								sexoSelecionado, null);
+								sexoSelecionado,
+								null);
 						
 						new DAO().cadastraBolsista(bolsista, adm.getMatricula());
 					}

@@ -1,13 +1,10 @@
 package br.ufs.dain.janelas;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,15 +18,16 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTree;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JSeparator;
 import javax.swing.ImageIcon;
-import javax.swing.tree.DefaultTreeModel;
 
+import br.ufs.dain.dao.DAO;
 import br.ufs.dain.dominio.Administrador;
-
+import java.awt.Dimension;
+import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultMutableTreeNode;
+
 
 public class TelaPrincipal extends JFrame {
 
@@ -65,16 +63,17 @@ public class TelaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaPrincipal(Administrador adm) {
+		setMinimumSize(new Dimension(500, 400));
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\Dain\\img\\logoDain.jpg")); // aqui
 																							// tem
 																							// q
 																							// setar
 																							// diferente
-
+		setExtendedState(MAXIMIZED_BOTH);
 		setTitle("Divis\u00E3o de A\u00E7\u00F5es Inclusivas - Dain");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 674, 433);
+		setBounds(100, 100, 700, 346);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -106,7 +105,7 @@ public class TelaPrincipal extends JFrame {
 		mntmDeficiente.setMnemonic('D');
 		mntmDeficiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				TelaNovoDeficiente tnd = new TelaNovoDeficiente();
+				TelaNovoDeficiente tnd = new TelaNovoDeficiente(adm);
 				tnd.setLocationRelativeTo(null);
 				tnd.setVisible(true);
 			}
@@ -250,11 +249,11 @@ public class TelaPrincipal extends JFrame {
 	}
 	
 	private void expandAllNodes (JTree tree, int startingIndex, int rowCount) {
-	    for(int i=startingIndex;i<rowCount;++i){
+	    for(int i = startingIndex; i < rowCount; ++i){
 	        tree.expandRow(i);
 	    }
 
-	    if(tree.getRowCount()!=rowCount){
+	    if(tree.getRowCount() != rowCount){
 	        expandAllNodes(tree, rowCount, tree.getRowCount());
 	    }
 	}
