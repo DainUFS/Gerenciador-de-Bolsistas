@@ -23,7 +23,7 @@ public class Persistencia {
 		conn = conexao.getConexaoMySQL();
 
 		String sql = "INSERT INTO t_bolsista (b_matricula, b_nome, b_telefone, b_email, "
-				+ "b_curso, b_sexo, b_atividade, b_fk_adm, b_fk_horario) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "b_curso, b_sexo, b_fk_adm, b_fk_horario) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
@@ -33,9 +33,8 @@ public class Persistencia {
 		stmt.setString(4, b.getEmail());
 		stmt.setString(5, b.getCurso());
 		stmt.setString(6, b.getSexo());
-		stmt.setInt(7, b.getTipoAtividade());
-		stmt.setString(8, matricAdm);
-		stmt.setObject(9, null);
+		stmt.setString(7, matricAdm);
+		stmt.setObject(8, null);
 
 		stmt.execute();
 		stmt.close();
@@ -353,16 +352,46 @@ public class Persistencia {
 		return senha;
 
 	}
+	
+	public Administrador buscarAdm(String matric, String senha) throws SQLException{
+		
+		conn = conexao.getConexaoMySQL();
+		
+		String sql = "SELECT * FROM t_adm "
+				+ "WHERE a_matricula = ? and a_senha = ?";
+		
+		Administrador adm = null;
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
+		stmt.setString(1, matric);
+		stmt.setString(2, senha);
+		
+		ResultSet rs = (ResultSet) stmt.executeQuery();
+
+		while (rs.next()) {
+			adm = new Administrador(rs.getString("a_nome"), 
+					rs.getString("a_telefone"),
+					rs.getString("a_email"), 
+					matric, 
+					senha);
+		}
+		
+		conn.close();
 	
-	
-	
-	
+		return adm;
+	}
 	
 	public static void main(String[] args) throws SQLException {
 		Persistencia per = new Persistencia();
-		Login l = new Login("22", "21");
-		System.out.println(per.buscarSenhaAdm(l.getLogin()));
+		//Login l = new Login("22", "21");
+		//System.out.println(per.buscarSenhaAdm(l.getLogin()));
+		Administrador a = per.buscarAdm("21", "21");
+		System.out.println(a.getNome());
+		System.out.println(a.getTelefone());
+		System.out.println(a.getEmail());
+		System.out.println(a.getLogin());
+		System.out.println(a.getSenha());
 	}
 
 }

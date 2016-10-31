@@ -46,21 +46,22 @@ public class TelaNovoBolsista extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			TelaNovoBolsista dialog = new TelaNovoBolsista();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			TelaNovoBolsista dialog = new TelaNovoBolsista();
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public TelaNovoBolsista() {
+	public TelaNovoBolsista(String matriculaAdm) {
+		
 		setModal(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_bolsista.png"));
 		setResizable(false);
@@ -183,11 +184,9 @@ public class TelaNovoBolsista extends JDialog {
 								textField_nome.getText().toString(),
 								textField_curso.getText().toString(),
 								textField_matricula.getText().toString(),
-								sexoSelecionado,
-								new Horario(null, null, null, null, null, null),
-								0);
-						DAO dao = new DAO();
-						dao.cadastraBolsista(bolsista, "12345");
+								sexoSelecionado, null);
+						
+						new DAO().cadastraBolsista(bolsista, matriculaAdm);
 					}
 				});
 				button.setActionCommand("OK");

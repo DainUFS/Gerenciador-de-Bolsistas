@@ -17,6 +17,9 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import br.ufs.dain.dao.DAO;
+import br.ufs.dain.dominio.Administrador;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
@@ -31,12 +34,12 @@ public class TelaNovoAdm extends JDialog {
 	
 	private final JPanel contentPanel = new JPanel();
 	
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
+	private JTextField textField_nome;
+	private JTextField textField_matricula;
+	private JTextField textField_telefone;
+	private JTextField textField_email;
+	private JPasswordField passwordField_senha;
+	private JPasswordField passwordField_senhaNovamente;
 
 	/**
 	 * Launch the application.
@@ -90,19 +93,19 @@ public class TelaNovoAdm extends JDialog {
 			panel_1_2.add(label);
 		}
 		{
-			textField = new JTextField();
-			textField.setToolTipText("");
-			textField.setColumns(30);
-			panel_1_2.add(textField);
+			textField_nome = new JTextField();
+			textField_nome.setToolTipText("");
+			textField_nome.setColumns(30);
+			panel_1_2.add(textField_nome);
 		}
 		{
 			JLabel label = new JLabel("Matr\u00EDcula:");
 			panel_1_2.add(label);
 		}
 		{
-			textField_1 = new JTextField();
-			textField_1.setColumns(15);
-			panel_1_2.add(textField_1);
+			textField_matricula = new JTextField();
+			textField_matricula.setColumns(15);
+			panel_1_2.add(textField_matricula);
 		}
 		{
 			JPanel panel_1 = new JPanel();
@@ -114,16 +117,16 @@ public class TelaNovoAdm extends JDialog {
 				panel_1.add(lblSenha);
 			}
 			{
-				passwordField = new JPasswordField();
-				panel_1.add(passwordField);
+				passwordField_senha = new JPasswordField();
+				panel_1.add(passwordField_senha);
 			}
 			{
 				JLabel lblDigiteNovamente = new JLabel("Digite novamente:");
 				panel_1.add(lblDigiteNovamente);
 			}
 			{
-				passwordField_1 = new JPasswordField();
-				panel_1.add(passwordField_1);
+				passwordField_senhaNovamente = new JPasswordField();
+				panel_1.add(passwordField_senhaNovamente);
 			}
 		}
 		{
@@ -136,18 +139,18 @@ public class TelaNovoAdm extends JDialog {
 				panel_1.add(label);
 			}
 			{
-				textField_2 = new JTextField();
-				textField_2.setColumns(10);
-				panel_1.add(textField_2);
+				textField_telefone = new JTextField();
+				textField_telefone.setColumns(10);
+				panel_1.add(textField_telefone);
 			}
 			{
 				JLabel label = new JLabel("E-mail:");
 				panel_1.add(label);
 			}
 			{
-				textField_3 = new JTextField();
-				textField_3.setColumns(10);
-				panel_1.add(textField_3);
+				textField_email = new JTextField();
+				textField_email.setColumns(10);
+				panel_1.add(textField_email);
 			}
 		}
 		{
@@ -156,6 +159,19 @@ public class TelaNovoAdm extends JDialog {
 			panel_1.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			{
 				JButton button = new JButton("OK");
+				button.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						
+						Administrador adm = new Administrador(textField_nome.getText().toString(),
+								textField_telefone.getText().toString(),
+								textField_email.getText().toString(),
+								textField_matricula.getText().toString(),
+								passwordField_senha.getText().toString());
+						
+						new DAO().cadastrarAdm(adm);
+						
+					}
+				});
 				button.setActionCommand("OK");
 				panel_1.add(button);
 			}

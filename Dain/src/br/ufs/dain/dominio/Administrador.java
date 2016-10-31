@@ -2,22 +2,22 @@ package br.ufs.dain.dominio;
 
 public class Administrador extends Pessoa {
 	
-	private String login;
+	private String matricula;
 	private String senha;
 	
 	public Administrador(String nome, String telefone, String email, String login, String senha) {
 		super(nome, telefone, email);
-		this.login = login;
+		this.matricula = login;
 		this.senha = senha;
 	}
 	
 	public String getLogin() {
-		return login;
+		return matricula;
 	}
 
 
 	public void setLogin(String login) {
-		this.login = login;
+		this.matricula = login;
 	}
 
 

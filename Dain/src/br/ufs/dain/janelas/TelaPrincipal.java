@@ -40,28 +40,28 @@ public class TelaPrincipal extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-					TelaPrincipal frame = new TelaPrincipal();
-					frame.setLocationRelativeTo(null);
-					// frame.pack();
-					frame.setVisible(true);
-					frame.setExtendedState(MAXIMIZED_BOTH);
-				} catch (Exception e) {
-					e.printStackTrace();
-
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//					TelaPrincipal frame = new TelaPrincipal();
+//					frame.setLocationRelativeTo(null);
+//					// frame.pack();
+//					frame.setVisible(true);
+//					frame.setExtendedState(MAXIMIZED_BOTH);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaPrincipal() {
+	public TelaPrincipal(String matriculaAdm) {
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\Dain\\img\\logoDain.jpg")); // aqui
 																							// tem
@@ -91,7 +91,7 @@ public class TelaPrincipal extends JFrame {
 		mntmBolsista.setMnemonic('B');
 		mntmBolsista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				TelaNovoBolsista tnv = new TelaNovoBolsista();
+				TelaNovoBolsista tnv = new TelaNovoBolsista(matriculaAdm);
 				tnv.setLocationRelativeTo(null);
 				tnv.setVisible(true);
 			}
@@ -172,6 +172,9 @@ public class TelaPrincipal extends JFrame {
 		
 		JTree tree = new JTree();
 		panel.add(tree);
+		
+		JLabel label_adm = new JLabel(matriculaAdm);
+		panel.add(label_adm);
 		contentPane.add(scrollPane_1, BorderLayout.WEST);
 
 		JScrollPane scrollPane = new JScrollPane(panelCentro);

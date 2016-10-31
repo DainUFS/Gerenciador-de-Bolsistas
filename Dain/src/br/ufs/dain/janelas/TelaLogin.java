@@ -13,10 +13,10 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import br.ufs.dain.dao.DAO;
+import br.ufs.dain.dominio.Administrador;
 import br.ufs.dain.dominio.Login;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.ImageIcon;
 
 public class TelaLogin extends JFrame {
 
@@ -112,7 +112,8 @@ public class TelaLogin extends JFrame {
 				if (bool == true) {
 					System.out.println("ENTROU!");
 					dispose();
-					new TelaPrincipal().setVisible(true);
+					//new Administrador(s1, telefone, email, login, senha)
+					new TelaPrincipal(textField_user.getText().toString()).setVisible(true);
 				} else {
 					System.out.println("NÃO ENTROU!");
 				}
