@@ -55,6 +55,7 @@ public class TelaNovoDeficiente extends JDialog {
 	 * Create the dialog.
 	 */
 	public TelaNovoDeficiente() {
+		setModal(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_deficiente.png"));
 		setResizable(false);
 		setTitle("Adicionar Deficiente");
@@ -89,7 +90,7 @@ public class TelaNovoDeficiente extends JDialog {
 		}
 		{
 			textField = new JTextField();
-			textField.setToolTipText("Digite o nome do novo bolsista");
+			textField.setToolTipText("");
 			textField.setColumns(30);
 			panel_1_2.add(textField);
 		}

@@ -21,9 +21,12 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTree;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JSeparator;
 import javax.swing.ImageIcon;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 public class TelaPrincipal extends JFrame {
 
@@ -41,6 +44,7 @@ public class TelaPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					TelaPrincipal frame = new TelaPrincipal();
 					frame.setLocationRelativeTo(null);
 					// frame.pack();
@@ -132,9 +136,18 @@ public class TelaPrincipal extends JFrame {
 
 		JMenu mnNewMenu_3 = new JMenu("Conta");
 		menuBar.add(mnNewMenu_3);
+		
+		JMenuItem mntmDetalhes = new JMenuItem("Detalhes");
+		mnNewMenu_3.add(mntmDetalhes);
+		
+		JMenuItem mntmSair = new JMenuItem("Sair");
+		mnNewMenu_3.add(mntmSair);
 
 		JMenu mnNewMenu_4 = new JMenu("Ajuda");
 		menuBar.add(mnNewMenu_4);
+		
+		JMenuItem mntmSobre = new JMenuItem("Sobre");
+		mnNewMenu_4.add(mntmSobre);
 
 		//
 
@@ -156,15 +169,9 @@ public class TelaPrincipal extends JFrame {
 
 		JScrollPane scrollPane_1 = new JScrollPane(panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
-
+		
 		JTree tree = new JTree();
 		panel.add(tree);
-
-		JButton btnNewButton = new JButton("New button");
-		panel.add(btnNewButton);
-
-		JButton btnNewButton_1 = new JButton("New button");
-		panel.add(btnNewButton_1);
 		contentPane.add(scrollPane_1, BorderLayout.WEST);
 
 		JScrollPane scrollPane = new JScrollPane(panelCentro);
@@ -234,5 +241,15 @@ public class TelaPrincipal extends JFrame {
 
 			}
 		}
+	}
+	
+	private void expandAllNodes (JTree tree, int startingIndex, int rowCount) {
+	    for(int i=startingIndex;i<rowCount;++i){
+	        tree.expandRow(i);
+	    }
+
+	    if(tree.getRowCount()!=rowCount){
+	        expandAllNodes(tree, rowCount, tree.getRowCount());
+	    }
 	}
 }

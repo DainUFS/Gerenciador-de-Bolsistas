@@ -61,6 +61,7 @@ public class TelaNovoBolsista extends JDialog {
 	 * Create the dialog.
 	 */
 	public TelaNovoBolsista() {
+		setModal(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_bolsista.png"));
 		setResizable(false);
 		setTitle("Adicionar Bolsista");

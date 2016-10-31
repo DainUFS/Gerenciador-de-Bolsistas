@@ -55,6 +55,7 @@ public class TelaNovoAdm extends JDialog {
 	 * Create the dialog.
 	 */
 	public TelaNovoAdm() {
+		setModal(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_adm.png"));
 		setResizable(false);
 		setTitle("Adicionar Administrador");
@@ -90,7 +91,7 @@ public class TelaNovoAdm extends JDialog {
 		}
 		{
 			textField = new JTextField();
-			textField.setToolTipText("Digite o nome do novo bolsista");
+			textField.setToolTipText("");
 			textField.setColumns(30);
 			panel_1_2.add(textField);
 		}
