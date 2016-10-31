@@ -53,7 +53,7 @@ public class Persistencia {
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
-		stmt.setString(1, a.getLogin());
+		stmt.setString(1, a.getMatricula());
 		stmt.setString(2, a.getNome());
 		stmt.setString(3, a.getEmail());
 		stmt.setString(4, a.getTelefone());
@@ -386,12 +386,12 @@ public class Persistencia {
 		Persistencia per = new Persistencia();
 		//Login l = new Login("22", "21");
 		//System.out.println(per.buscarSenhaAdm(l.getLogin()));
-		Administrador a = per.buscarAdm("21", "21");
-		System.out.println(a.getNome());
-		System.out.println(a.getTelefone());
-		System.out.println(a.getEmail());
-		System.out.println(a.getLogin());
-		System.out.println(a.getSenha());
+		//Administrador a = per.buscarAdm("21", "21");
+		//System.out.println(a.getNome());
+		//System.out.println(a.getTelefone());
+		//System.out.println(a.getEmail());
+		//System.out.println(a.getLogin());
+		//System.out.println(a.getSenha());
 	}
 
 }

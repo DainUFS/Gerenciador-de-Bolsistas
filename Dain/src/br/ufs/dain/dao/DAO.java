@@ -131,17 +131,33 @@ public class DAO implements InterfaceDAO {
 		}
 		return false;
 	}
+	
+	
+	@Override
+	public Administrador buscarAdm(String matric, String senha) {
+		try {
+			return p.buscarAdm(matric, senha);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
 	public static void main(String[] args) {
 		DAO dao = new DAO();
 		//Login login = new Login("21", "21");
 		//System.out.println(dao.validarLogin(login));
-		Horario h = new Horario("12h-16h", "08h-16h", "12h-16h", "12h-16h", "12h-16h", "12h-16h");
+		//Horario h = new Horario("12h-16h", "08h-16h", "12h-16h", "12h-16h", "12h-16h", "12h-16h");
 		//Deficiente d = new Deficiente("987455452", "@kubrick", "Stanley Kubrick", "Iluminado", "odisseia2001", "M", h, "louco");
 		//System.out.println(dao.cadastraDeficiente(d, "32509874"));
 		//System.out.println(dao.cadastrHorarioDef(h, "odisseia2001"));
 		//System.out.println(dao.cadastrHorarioBol(h, "211053337882"));
 		
+		System.out.println(dao.buscarAdm("12345", "12345").getNome());
 	}
 
+	
 	
 }

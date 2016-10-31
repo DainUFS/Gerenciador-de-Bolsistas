@@ -6,11 +6,11 @@ public abstract class Pessoa {
 	private String email;
 	private String nome;
 	
-	public Pessoa(String telefone, String email, String nome) {
+	public Pessoa(String nome, String telefone, String email) {
 		super();
+		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
-		this.nome = nome;
 	}
 
 	public String getTelefone() {

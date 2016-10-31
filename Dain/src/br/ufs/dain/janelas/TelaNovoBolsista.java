@@ -23,6 +23,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import br.ufs.dain.dao.DAO;
+import br.ufs.dain.dominio.Administrador;
 import br.ufs.dain.dominio.Bolsista;
 import br.ufs.dain.dominio.Horario;
 
@@ -60,7 +61,7 @@ public class TelaNovoBolsista extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public TelaNovoBolsista(String matriculaAdm) {
+	public TelaNovoBolsista(Administrador adm) {
 		
 		setModal(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_bolsista.png"));
@@ -186,7 +187,7 @@ public class TelaNovoBolsista extends JDialog {
 								textField_matricula.getText().toString(),
 								sexoSelecionado, null);
 						
-						new DAO().cadastraBolsista(bolsista, matriculaAdm);
+						new DAO().cadastraBolsista(bolsista, adm.getMatricula());
 					}
 				});
 				button.setActionCommand("OK");

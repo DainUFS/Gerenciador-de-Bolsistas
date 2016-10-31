@@ -58,6 +58,7 @@ public class TelaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaLogin() {
+		
 		setTitle("Entrar no Sistema");
 		setResizable(false);
 		
@@ -112,8 +113,10 @@ public class TelaLogin extends JFrame {
 				if (bool == true) {
 					System.out.println("ENTROU!");
 					dispose();
-					//new Administrador(s1, telefone, email, login, senha)
-					new TelaPrincipal(textField_user.getText().toString()).setVisible(true);
+					
+					Administrador adm = new DAO().buscarAdm(s1, s2);
+					
+					new TelaPrincipal(adm).setVisible(true);
 				} else {
 					System.out.println("NÃO ENTROU!");
 				}

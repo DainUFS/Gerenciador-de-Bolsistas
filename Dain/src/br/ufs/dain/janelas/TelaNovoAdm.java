@@ -58,6 +58,7 @@ public class TelaNovoAdm extends JDialog {
 	 * Create the dialog.
 	 */
 	public TelaNovoAdm() {
+		
 		setModal(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_adm.png"));
 		setResizable(false);

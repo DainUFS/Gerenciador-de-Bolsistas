@@ -30,4 +30,6 @@ public interface InterfaceDAO {
 	
 	public boolean validarLogin(Login login);
 	
+	public Administrador buscarAdm(String matric, String senha);
+	
 }

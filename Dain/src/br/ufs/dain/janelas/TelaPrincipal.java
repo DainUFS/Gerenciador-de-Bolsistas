@@ -26,6 +26,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JSeparator;
 import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultTreeModel;
+
+import br.ufs.dain.dominio.Administrador;
+
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class TelaPrincipal extends JFrame {
@@ -61,7 +64,7 @@ public class TelaPrincipal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaPrincipal(String matriculaAdm) {
+	public TelaPrincipal(Administrador adm) {
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\Dain\\img\\logoDain.jpg")); // aqui
 																							// tem
@@ -91,7 +94,7 @@ public class TelaPrincipal extends JFrame {
 		mntmBolsista.setMnemonic('B');
 		mntmBolsista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				TelaNovoBolsista tnv = new TelaNovoBolsista(matriculaAdm);
+				TelaNovoBolsista tnv = new TelaNovoBolsista(adm);
 				tnv.setLocationRelativeTo(null);
 				tnv.setVisible(true);
 			}
@@ -173,7 +176,7 @@ public class TelaPrincipal extends JFrame {
 		JTree tree = new JTree();
 		panel.add(tree);
 		
-		JLabel label_adm = new JLabel(matriculaAdm);
+		JLabel label_adm = new JLabel(adm.getNome());
 		panel.add(label_adm);
 		contentPane.add(scrollPane_1, BorderLayout.WEST);
 
