@@ -89,7 +89,7 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnItem_1);
 		
 		JMenuItem mntmBolsista = new JMenuItem("Bolsista");
-		mntmBolsista.setIcon(new ImageIcon("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_bolsista.png"));
+		mntmBolsista.setIcon(new ImageIcon(getClass().getResource("/br/ufs/dain/img/icone_bolsista.png")));
 		mntmBolsista.setMnemonic('B');
 		mntmBolsista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -101,7 +101,7 @@ public class TelaPrincipal extends JFrame {
 		mnItem_1.add(mntmBolsista);
 		
 		JMenuItem mntmDeficiente = new JMenuItem("Deficiente");
-		mntmDeficiente.setIcon(new ImageIcon("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_deficiente.png"));
+		mntmDeficiente.setIcon(new ImageIcon(getClass().getResource("/br/ufs/dain/img/icone_deficiente.png")));
 		mntmDeficiente.setMnemonic('D');
 		mntmDeficiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -113,7 +113,7 @@ public class TelaPrincipal extends JFrame {
 		mnItem_1.add(mntmDeficiente);
 		
 		JMenuItem mntmAdministrador = new JMenuItem("Administrador");
-		mntmAdministrador.setIcon(new ImageIcon("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_adm.png"));
+		mntmAdministrador.setIcon(new ImageIcon(getClass().getResource("/br/ufs/dain/img/icone_adm.png")));
 		mntmAdministrador.setMnemonic('A');
 		mntmAdministrador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
