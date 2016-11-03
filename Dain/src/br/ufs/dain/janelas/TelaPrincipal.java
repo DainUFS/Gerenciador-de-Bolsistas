@@ -89,7 +89,7 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnItem_1);
 		
 		JMenuItem mntmBolsista = new JMenuItem("Bolsista");
-		mntmBolsista.setIcon(new ImageIcon(getClass().getResource("/br/ufs/dain/img/icone_bolsista.png")));
+		mntmBolsista.setIcon(new ImageIcon(getClass().getResource("/br/ufs/dain/resources/icone_bolsista.png")));
 		mntmBolsista.setMnemonic('B');
 		mntmBolsista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -101,7 +101,7 @@ public class TelaPrincipal extends JFrame {
 		mnItem_1.add(mntmBolsista);
 		
 		JMenuItem mntmDeficiente = new JMenuItem("Deficiente");
-		mntmDeficiente.setIcon(new ImageIcon(getClass().getResource("/br/ufs/dain/img/icone_deficiente.png")));
+		mntmDeficiente.setIcon(new ImageIcon(getClass().getResource("/br/ufs/dain/resources/icone_deficiente.png")));
 		mntmDeficiente.setMnemonic('D');
 		mntmDeficiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -113,7 +113,7 @@ public class TelaPrincipal extends JFrame {
 		mnItem_1.add(mntmDeficiente);
 		
 		JMenuItem mntmAdministrador = new JMenuItem("Administrador");
-		mntmAdministrador.setIcon(new ImageIcon(getClass().getResource("/br/ufs/dain/img/icone_adm.png")));
+		mntmAdministrador.setIcon(new ImageIcon(getClass().getResource("/br/ufs/dain/resources/icone_adm.png")));
 		mntmAdministrador.setMnemonic('A');
 		mntmAdministrador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -173,6 +173,32 @@ public class TelaPrincipal extends JFrame {
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JTree tree = new JTree();
+		tree.setModel(new DefaultTreeModel(
+			new DefaultMutableTreeNode("JTree") {
+				{
+					DefaultMutableTreeNode node_1;
+					node_1 = new DefaultMutableTreeNode("Administradores");
+						node_1.add(new DefaultMutableTreeNode("blue"));
+						node_1.add(new DefaultMutableTreeNode("violet"));
+						node_1.add(new DefaultMutableTreeNode("red"));
+						node_1.add(new DefaultMutableTreeNode("yellow"));
+					add(node_1);
+					node_1 = new DefaultMutableTreeNode("Bolsistas");
+						node_1.add(new DefaultMutableTreeNode("basketball"));
+						node_1.add(new DefaultMutableTreeNode("soccer"));
+						node_1.add(new DefaultMutableTreeNode("football"));
+						node_1.add(new DefaultMutableTreeNode("hockey"));
+					add(node_1);
+					node_1 = new DefaultMutableTreeNode("Deficientes");
+						node_1.add(new DefaultMutableTreeNode("hot dogs"));
+						node_1.add(new DefaultMutableTreeNode("pizza"));
+						node_1.add(new DefaultMutableTreeNode("ravioli"));
+						node_1.add(new DefaultMutableTreeNode("bananas"));
+					add(node_1);
+				}
+			}
+		));
+		tree.setRootVisible(false);
 		panel.add(tree);
 		
 		JLabel label_adm = new JLabel(adm.getNome());
