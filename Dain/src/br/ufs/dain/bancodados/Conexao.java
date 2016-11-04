@@ -80,10 +80,4 @@ public class Conexao {
 	    return Conexao.getConexaoMySQL();
 	 
 	 }
-	
-	 public static void main(String[] args) {
-		java.sql.Connection c;
-		Conexao con = new Conexao();
-		c = con.getConexaoMySQL();
-	}
 }

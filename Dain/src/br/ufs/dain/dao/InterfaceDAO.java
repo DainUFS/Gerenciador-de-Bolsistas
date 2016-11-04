@@ -32,4 +32,5 @@ public interface InterfaceDAO {
 	
 	public Administrador buscarAdm(String matric, String senha);
 	
+	
 }
