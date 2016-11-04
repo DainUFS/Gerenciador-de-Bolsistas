@@ -3,7 +3,7 @@ package br.ufs.dain.gerenciador;
 import java.sql.Connection;
 import java.sql.Statement;
 
-import br.ufs.dain.bancodados.Conexao;
+import br.ufs.dain.conexao.Conexao;
 
 public class GerenciadorLogin {
 	

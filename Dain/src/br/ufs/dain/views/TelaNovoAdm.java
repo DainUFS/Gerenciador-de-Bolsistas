@@ -1,21 +1,16 @@
-package br.ufs.dain.janelas;
+package br.ufs.dain.views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -23,49 +18,52 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import br.ufs.dain.dao.DAO;
-import br.ufs.dain.dominio.Administrador;
-import br.ufs.dain.dominio.Deficiente;
+import br.ufs.dain.modelo.Administrador;
 
-public class TelaNovoDeficiente extends JDialog {
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
+import javax.swing.JPasswordField;
+
+public class TelaNovoAdm extends JDialog {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	private final JPanel contentPanel = new JPanel();
+	
 	private JTextField textField_nome;
 	private JTextField textField_matricula;
-	private JTextField textField_curso;
 	private JTextField textField_telefone;
 	private JTextField textField_email;
-	private JTextField textField_tipoDeficiencia;
-	
-	private JRadioButton rdbtnMasculino;
-	private JRadioButton rdbtnFeminino;
+	private JPasswordField passwordField_senha;
+	private JPasswordField passwordField_senhaNovamente;
 
 	/**
 	 * Launch the application.
 	 */
-	//	public static void main(String[] args) {
-	//		try {
-	//			TelaNovoDeficiente dialog = new TelaNovoDeficiente();
-	//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-	//			dialog.setVisible(true);
-	//		} catch (Exception e) {
-	//			e.printStackTrace();
-	//		}
-	//	}
+	public static void main(String[] args) {
+		try {
+			TelaNovoAdm dialog = new TelaNovoAdm();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public TelaNovoDeficiente(Administrador adm) {
+	public TelaNovoAdm() {
+		
 		setModal(true);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_deficiente.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_adm.png"));
 		setResizable(false);
-		setTitle("Adicionar Deficiente");
-		setBounds(100, 100, 350, 500);
+		setTitle("Adicionar Administrador");
+		setBounds(100, 100, 350, 490);
 		BorderLayout borderLayout = new BorderLayout();
 		getContentPane().setLayout(borderLayout);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 10, 5));
@@ -76,7 +74,8 @@ public class TelaNovoDeficiente extends JDialog {
 			panel.setBorder(new EmptyBorder(0, 0, 0, 0));
 			contentPanel.add(panel, BorderLayout.NORTH);
 			{
-				JLabel lblCadastreUmNovo = new JLabel("Cadastre um novo deficiente");
+				JLabel lblCadastreUmNovo = new JLabel("Cadastre um novo administrador");
+				lblCadastreUmNovo.setIcon(null);
 				panel.add(lblCadastreUmNovo);
 				lblCadastreUmNovo.setHorizontalAlignment(SwingConstants.CENTER);
 				lblCadastreUmNovo.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -89,7 +88,7 @@ public class TelaNovoDeficiente extends JDialog {
 		JPanel panel_1_2 = new JPanel();
 		panel_1_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informa\u00E7\u00F5es pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.add(panel_1_2);
-		panel_1_2.setLayout(new GridLayout(9, 1, 0, 0));
+		panel_1_2.setLayout(new GridLayout(4, 1, 0, 0));
 		{
 			JLabel label = new JLabel("Nome:");
 			panel_1_2.add(label);
@@ -110,42 +109,26 @@ public class TelaNovoDeficiente extends JDialog {
 			panel_1_2.add(textField_matricula);
 		}
 		{
-			JLabel label = new JLabel("Curso:");
-			panel_1_2.add(label);
-		}
-		{
-			textField_curso = new JTextField();
-			textField_curso.setColumns(10);
-			panel_1_2.add(textField_curso);
-		}
-		JPanel panel_1_1 = new JPanel();
-		panel_1_2.add(panel_1_1);
-		panel_1_1.setLayout(new GridLayout(0, 3, 0, 0));
-		{
-			JLabel lblSexo = new JLabel("Sexo:");
-			panel_1_1.add(lblSexo);
-		}
-		{
-			ButtonGroup buttonGroup = new ButtonGroup();
+			JPanel panel_1 = new JPanel();
+			panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Acesso ao sistema", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel.add(panel_1);
+			panel_1.setLayout(new GridLayout(4, 1, 0, 0));
 			{
-				rdbtnMasculino = new JRadioButton("Masculino");
-				panel_1_1.add(rdbtnMasculino);
-				buttonGroup.add(rdbtnMasculino);
+				JLabel lblSenha = new JLabel("Senha:");
+				panel_1.add(lblSenha);
 			}
 			{
-				rdbtnFeminino = new JRadioButton("Feminino");
-				panel_1_1.add(rdbtnFeminino);
-				buttonGroup.add(rdbtnFeminino);
+				passwordField_senha = new JPasswordField();
+				panel_1.add(passwordField_senha);
 			}
-		}
-		{
-			JLabel lblTipoDeDeficincia = new JLabel("Tipo de defici\u00EAncia:");
-			panel_1_2.add(lblTipoDeDeficincia);
-		}
-		{
-			textField_tipoDeficiencia = new JTextField();
-			panel_1_2.add(textField_tipoDeficiencia);
-			textField_tipoDeficiencia.setColumns(10);
+			{
+				JLabel lblDigiteNovamente = new JLabel("Digite novamente:");
+				panel_1.add(lblDigiteNovamente);
+			}
+			{
+				passwordField_senhaNovamente = new JPasswordField();
+				panel_1.add(passwordField_senhaNovamente);
+			}
 		}
 		{
 			JPanel panel_1 = new JPanel();
@@ -178,25 +161,16 @@ public class TelaNovoDeficiente extends JDialog {
 			{
 				JButton button = new JButton("OK");
 				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-
-						String sexoSelecionado = null;
-
-						if (rdbtnMasculino.isSelected())
-							sexoSelecionado = "M";
-						else if (rdbtnFeminino.isSelected())
-							sexoSelecionado = "F";
+					public void actionPerformed(ActionEvent arg0) {
 						
-						Deficiente d = new Deficiente(textField_nome.getText().toString(),
+						Administrador adm = new Administrador(textField_nome.getText().toString(),
 								textField_telefone.getText().toString(),
 								textField_email.getText().toString(),
-								textField_curso.getText().toString(),
 								textField_matricula.getText().toString(),
-								sexoSelecionado,
-								null,
-								textField_tipoDeficiencia.getText().toString());
+								passwordField_senha.getText().toString());
 						
-						new DAO().cadastraDeficiente(d, adm.getMatricula());
+						new DAO().cadastrarAdm(adm);
+						
 					}
 				});
 				button.setActionCommand("OK");
@@ -214,4 +188,5 @@ public class TelaNovoDeficiente extends JDialog {
 			}
 		}
 	}
+
 }

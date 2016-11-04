@@ -1,4 +1,4 @@
-package br.ufs.dain.dominio;
+package br.ufs.dain.modelo;
 
 public class Nota {
 	

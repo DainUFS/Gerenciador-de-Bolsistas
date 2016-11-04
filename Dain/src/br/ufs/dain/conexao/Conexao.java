@@ -1,4 +1,4 @@
-package br.ufs.dain.bancodados;
+package br.ufs.dain.conexao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

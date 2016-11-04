@@ -7,8 +7,8 @@ Bundle-ClassPath: Dain.jar,
  .,
  forms-1.3.0.jar,
  miglayout15-swing.jar
-Export-Package: br.ufs.dain.bancodados,
+Export-Package: br.ufs.dain.conexao,
  br.ufs.dain.dao,
- br.ufs.dain.dominio,
- br.ufs.dain.janelas
+ br.ufs.dain.modelo,
+ br.ufs.dain.views
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

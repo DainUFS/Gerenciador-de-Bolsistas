@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import br.ufs.dain.bancodados.Conexao;
-import br.ufs.dain.dominio.Administrador;
+import br.ufs.dain.conexao.Conexao;
+import br.ufs.dain.modelo.Administrador;
 
 public class GerenciadorAdministrador {
 	Conexao conexao = new Conexao();

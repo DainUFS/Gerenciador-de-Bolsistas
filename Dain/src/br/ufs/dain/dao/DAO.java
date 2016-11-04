@@ -2,17 +2,17 @@ package br.ufs.dain.dao;
 
 import java.sql.SQLException;
 
-import br.ufs.dain.dominio.Administrador;
-import br.ufs.dain.dominio.Bolsista;
-import br.ufs.dain.dominio.Deficiente;
-import br.ufs.dain.dominio.Horario;
-import br.ufs.dain.dominio.Login;
 import br.ufs.dain.gerenciador.GerenciadorAdministrador;
 import br.ufs.dain.gerenciador.GerenciadorBolsista;
 import br.ufs.dain.gerenciador.GerenciadorDeficiente;
 import br.ufs.dain.gerenciador.GerenciadorHorario;
 import br.ufs.dain.gerenciador.GerenciadorLogin;
 import br.ufs.dain.gerenciador.GerenciadorNota;
+import br.ufs.dain.modelo.Administrador;
+import br.ufs.dain.modelo.Bolsista;
+import br.ufs.dain.modelo.Deficiente;
+import br.ufs.dain.modelo.Horario;
+import br.ufs.dain.modelo.Login;
 
 public class DAO implements InterfaceDAO {
 	

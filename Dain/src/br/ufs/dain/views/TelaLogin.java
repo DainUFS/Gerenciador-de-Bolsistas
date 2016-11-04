@@ -1,4 +1,4 @@
-package br.ufs.dain.janelas;
+package br.ufs.dain.views;
 
 import java.awt.EventQueue;
 import java.awt.GridLayout;
@@ -13,8 +13,9 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import br.ufs.dain.dao.DAO;
-import br.ufs.dain.dominio.Administrador;
-import br.ufs.dain.dominio.Login;
+import br.ufs.dain.modelo.Administrador;
+import br.ufs.dain.modelo.Login;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

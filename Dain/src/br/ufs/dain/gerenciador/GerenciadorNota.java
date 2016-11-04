@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import br.ufs.dain.bancodados.Conexao;
-import br.ufs.dain.dominio.Administrador;
-import br.ufs.dain.dominio.Nota;
+import br.ufs.dain.conexao.Conexao;
+import br.ufs.dain.modelo.Administrador;
+import br.ufs.dain.modelo.Nota;
 
 public class GerenciadorNota {
 
