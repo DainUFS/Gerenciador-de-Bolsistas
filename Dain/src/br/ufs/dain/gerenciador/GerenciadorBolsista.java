@@ -5,6 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import br.ufs.dain.conexao.Conexao;
 import br.ufs.dain.modelo.Bolsista;
@@ -93,5 +97,31 @@ public class GerenciadorBolsista {
 
 		return bolsista;
 	}
+	
+	public ArrayList<Bolsista> listarBolsistas() throws SQLException {
 
+		conn = conexao.getConexaoMySQL();
+		
+		ArrayList<Bolsista> listaBolsistas = new ArrayList<>();
+		Bolsista bolsista;
+		
+		String sql = "SELECT * FROM t_bolsista";
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+
+		ResultSet rs = (ResultSet) stmt.executeQuery();
+		
+		while (rs.next()) {
+			bolsista = new Bolsista(rs.getString("b_telefone"), rs.getString("b_email"), rs.getString("b_nome"),
+					rs.getString("b_curso"), rs.getString("b_matricula"), rs.getString("b_sexo"), 
+					gHor.buscarHorario(rs.getInt("b_fk_horario")),
+					rs.getInt("b_atividade"));
+			listaBolsistas.add(bolsista);
+		}
+				
+		conn.close();
+
+		return listaBolsistas;
+	}
+	
 }

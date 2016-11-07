@@ -128,8 +128,11 @@ public class TelaPrincipal extends JFrame {
 		JSeparator separator = new JSeparator();
 		mnItem_1.add(separator);
 		
-		JMenuItem mntmHorrios = new JMenuItem("Hor\u00E1rios");
+		JMenuItem mntmHorrios = new JMenuItem("Hor\u00E1rio dos Deficiente");
 		mnItem_1.add(mntmHorrios);
+		
+		JMenuItem mntmHorrioDoBolsista = new JMenuItem("Hor\u00E1rio do Bolsista");
+		mnItem_1.add(mntmHorrioDoBolsista);
 
 		JMenu mnItem_2 = new JMenu("Editar");
 		menuBar.add(mnItem_2);
@@ -178,35 +181,6 @@ public class TelaPrincipal extends JFrame {
 		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JScrollPane scrollPane_1 = new JScrollPane(panel);
-		
-		JTree tree = new JTree();
-		tree.setModel(new DefaultTreeModel(
-			new DefaultMutableTreeNode("JTree") {
-				{
-					DefaultMutableTreeNode node_1;
-					node_1 = new DefaultMutableTreeNode("Administradores");
-						node_1.add(new DefaultMutableTreeNode("blue"));
-						node_1.add(new DefaultMutableTreeNode("violet"));
-						node_1.add(new DefaultMutableTreeNode("red"));
-						node_1.add(new DefaultMutableTreeNode("yellow"));
-					add(node_1);
-					node_1 = new DefaultMutableTreeNode("Bolsistas");
-						node_1.add(new DefaultMutableTreeNode("basketball"));
-						node_1.add(new DefaultMutableTreeNode("soccer"));
-						node_1.add(new DefaultMutableTreeNode("football"));
-						node_1.add(new DefaultMutableTreeNode("hockey"));
-					add(node_1);
-					node_1 = new DefaultMutableTreeNode("Deficiente");
-						node_1.add(new DefaultMutableTreeNode("hot dogs"));
-						node_1.add(new DefaultMutableTreeNode("pizza"));
-						node_1.add(new DefaultMutableTreeNode("ravioli"));
-						node_1.add(new DefaultMutableTreeNode("bananas"));
-					add(node_1);
-				}
-			}
-		));
-		tree.setRootVisible(false);
-		panel.add(tree);
 		JScrollPane scrollPane_2 = new JScrollPane(panel_1);
 		//
 		

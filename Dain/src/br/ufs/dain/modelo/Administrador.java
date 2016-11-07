@@ -5,8 +5,8 @@ public class Administrador extends Pessoa {
 	private String matricula;
 	private String senha;
 	
-	public Administrador(String nome, String telefone, String email, String matricula, String senha) {
-		super(nome, telefone, email);
+	public Administrador(String telefone, String email, String nome, String matricula, String senha) {
+		super(telefone, email, nome);
 		this.matricula = matricula;
 		this.senha = senha;
 	}

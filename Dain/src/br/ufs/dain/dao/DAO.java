@@ -1,6 +1,7 @@
 package br.ufs.dain.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import br.ufs.dain.gerenciador.GerenciadorAdministrador;
 import br.ufs.dain.gerenciador.GerenciadorBolsista;
@@ -47,12 +48,12 @@ public class DAO implements InterfaceDAO {
 
 	@Override
 	public Deficiente getDeficienteNome(String nome) {
-		try {
-			gBol.buscarBolsistaNome(nome);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			gDef.buscarDeficienteNome(nome);
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return null;
 	}
 
@@ -131,7 +132,7 @@ public class DAO implements InterfaceDAO {
 	}
 	
 	@Override
-	public boolean cadastrHorarioBol(Horario h, String matric) {
+	public boolean cadastrHorarioBolsista(Horario h, String matric) {
 		try {
 			gHor.aramazenarHorarioBol(h, matric);
 			return true;
@@ -152,6 +153,23 @@ public class DAO implements InterfaceDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public ArrayList<Bolsista> buscarBolsistas() {
+		
+		try {
+			return gBol.listarBolsistas();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(new DAO().buscarBolsistas().get(4).getNome());
 	}
 
 	

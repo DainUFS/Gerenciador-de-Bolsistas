@@ -1,5 +1,7 @@
 package br.ufs.dain.dao;
 
+import java.util.ArrayList;
+
 import br.ufs.dain.modelo.Administrador;
 import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Deficiente;
@@ -23,7 +25,9 @@ public interface InterfaceDAO {
 	
 	public Bolsista getBolsistaNome(String nome);
 	
-	public boolean cadastrHorarioBol(Horario h, String matric);
+	public boolean cadastrHorarioBolsista(Horario h, String matric);
+	
+	public ArrayList<Bolsista> buscarBolsistas ();
 	
 
 	public boolean cadastrarAdm(Administrador a);

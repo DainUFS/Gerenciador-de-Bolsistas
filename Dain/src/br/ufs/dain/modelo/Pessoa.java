@@ -2,11 +2,11 @@ package br.ufs.dain.modelo;
 
 public abstract class Pessoa {
 
-	private String nome;
 	private String telefone;
 	private String email;
+	private String nome;
 	
-	public Pessoa(String nome, String telefone, String email) {
+	public Pessoa(String telefone, String email, String nome) {
 		super();
 		this.nome = nome;
 		this.telefone = telefone;
@@ -24,5 +24,16 @@ public abstract class Pessoa {
 	public String getEmail() {
 		return email;
 	}
-	
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }

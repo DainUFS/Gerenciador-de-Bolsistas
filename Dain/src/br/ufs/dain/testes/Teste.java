@@ -13,6 +13,10 @@ public class Teste {
 	DAO dao = new DAO();
 	
 	public static void main(String[] args) {
+		
+		String str1 = "murilo";
+		String str2 = "icaro";
+		
 			
 			
 		

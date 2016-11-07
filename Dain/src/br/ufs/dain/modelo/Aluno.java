@@ -7,8 +7,8 @@ public abstract class Aluno extends Pessoa {
 	private String sexo;
 	private Horario horario;
 	
-	public Aluno(String nome, String telefone, String email, String curso, String matricula, String sexo, Horario horario) {
-		super(nome, telefone, email);
+	public Aluno(String telefone, String email, String nome, String curso, String matricula, String sexo, Horario horario) {
+		super(telefone, email, nome);
 		this.curso = curso;
 		this.matricula = matricula;
 		this.sexo = sexo;
@@ -31,4 +31,19 @@ public abstract class Aluno extends Pessoa {
 		return horario;
 	}
 
+	public void setCurso(String curso) {
+		this.curso = curso;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
+	public void setHorario(Horario horario) {
+		this.horario = horario;
+	}
 }
