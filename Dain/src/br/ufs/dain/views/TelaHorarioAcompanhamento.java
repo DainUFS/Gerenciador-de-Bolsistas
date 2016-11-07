@@ -19,6 +19,8 @@ import javax.swing.JScrollPane;
 import javax.swing.BoxLayout;
 import javax.swing.JList;
 import javax.swing.JButton;
+import javax.swing.AbstractListModel;
+import javax.swing.ListSelectionModel;
 
 public class TelaHorarioAcompanhamento extends JFrame {
 
@@ -42,11 +44,12 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 734, 500);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+		contentPane.setBorder(null);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
 		JPanel panel = new JPanel();
+		panel.setBorder(new EmptyBorder(5, 10, 5, 10));
 		
 		JScrollPane scrollPane = new JScrollPane(panel);
 		contentPane.add(scrollPane, BorderLayout.SOUTH);
@@ -79,9 +82,12 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		panel_3.setLayout(new GridLayout(1, 2, 10, 10));
 		
 		JList list = new JList();
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
 		panel_3.add(list);
 		
 		JList list_1 = new JList();
+		list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		panel_3.add(list_1);
 		
 		JPanel panel_4 = new JPanel();

@@ -1,11 +1,14 @@
 package br.ufs.dain.views;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,20 +17,17 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTree;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JSeparator;
-import javax.swing.ImageIcon;
-
-import br.ufs.dain.dao.DAO;
-import br.ufs.dain.modelo.Administrador;
-
-import java.awt.Dimension;
-import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+
+import br.ufs.dain.modelo.Administrador;
 
 
 public class TelaPrincipal extends JFrame {
@@ -47,7 +47,7 @@ public class TelaPrincipal extends JFrame {
 //			public void run() {
 //				try {
 //					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//					TelaPrincipal frame = new TelaPrincipal();
+//					TelaPrincipal frame = new TelaPrincipal(new Administrador("Zezinho", "12345", "@joao.com", "54321", "123"));
 //					frame.setLocationRelativeTo(null);
 //					// frame.pack();
 //					frame.setVisible(true);
@@ -89,7 +89,7 @@ public class TelaPrincipal extends JFrame {
 		mnItem_1.setMnemonic('C');
 		menuBar.add(mnItem_1);
 		
-		JMenuItem mntmBolsista = new JMenuItem("Bolsista");
+		JMenuItem mntmBolsista = new JMenuItem("Novo Bolsista");
 		mntmBolsista.setIcon(new ImageIcon(getClass().getResource("/br/ufs/dain/resources/icone_bolsista.png")));
 		mntmBolsista.setMnemonic('B');
 		mntmBolsista.addActionListener(new ActionListener() {
@@ -101,7 +101,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		mnItem_1.add(mntmBolsista);
 		
-		JMenuItem mntmDeficiente = new JMenuItem("Deficiente");
+		JMenuItem mntmDeficiente = new JMenuItem("Novo Deficiente");
 		mntmDeficiente.setIcon(new ImageIcon(getClass().getResource("/br/ufs/dain/resources/icone_deficiente.png")));
 		mntmDeficiente.setMnemonic('D');
 		mntmDeficiente.addActionListener(new ActionListener() {
@@ -113,7 +113,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		mnItem_1.add(mntmDeficiente);
 		
-		JMenuItem mntmAdministrador = new JMenuItem("Administrador");
+		JMenuItem mntmAdministrador = new JMenuItem("Novo Administrador");
 		mntmAdministrador.setIcon(new ImageIcon(getClass().getResource("/br/ufs/dain/resources/icone_adm.png")));
 		mntmAdministrador.setMnemonic('A');
 		mntmAdministrador.addActionListener(new ActionListener() {
@@ -128,11 +128,11 @@ public class TelaPrincipal extends JFrame {
 		JSeparator separator = new JSeparator();
 		mnItem_1.add(separator);
 		
-		JMenuItem mntmHorrios = new JMenuItem("Hor\u00E1rios");
+		JMenuItem mntmHorrios = new JMenuItem("Hor\u00E1rio de Deficiente");
 		mnItem_1.add(mntmHorrios);
-
-		JMenu mnItem_2 = new JMenu("Editar");
-		menuBar.add(mnItem_2);
+		
+		JMenuItem mntmExceoParaBolsista = new JMenuItem("Exce\u00E7\u00E3o para Bolsista");
+		mnItem_1.add(mntmExceoParaBolsista);
 
 		JMenu mnNewMenu_2 = new JMenu("Sistema");
 		menuBar.add(mnNewMenu_2);
@@ -155,7 +155,7 @@ public class TelaPrincipal extends JFrame {
 		//
 
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(2, 2, 2, 2));
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
@@ -179,34 +179,6 @@ public class TelaPrincipal extends JFrame {
 		
 		JScrollPane scrollPane_1 = new JScrollPane(panel);
 		
-		JTree tree = new JTree();
-		tree.setModel(new DefaultTreeModel(
-			new DefaultMutableTreeNode("JTree") {
-				{
-					DefaultMutableTreeNode node_1;
-					node_1 = new DefaultMutableTreeNode("Administradores");
-						node_1.add(new DefaultMutableTreeNode("blue"));
-						node_1.add(new DefaultMutableTreeNode("violet"));
-						node_1.add(new DefaultMutableTreeNode("red"));
-						node_1.add(new DefaultMutableTreeNode("yellow"));
-					add(node_1);
-					node_1 = new DefaultMutableTreeNode("Bolsistas");
-						node_1.add(new DefaultMutableTreeNode("basketball"));
-						node_1.add(new DefaultMutableTreeNode("soccer"));
-						node_1.add(new DefaultMutableTreeNode("football"));
-						node_1.add(new DefaultMutableTreeNode("hockey"));
-					add(node_1);
-					node_1 = new DefaultMutableTreeNode("Deficiente");
-						node_1.add(new DefaultMutableTreeNode("hot dogs"));
-						node_1.add(new DefaultMutableTreeNode("pizza"));
-						node_1.add(new DefaultMutableTreeNode("ravioli"));
-						node_1.add(new DefaultMutableTreeNode("bananas"));
-					add(node_1);
-				}
-			}
-		));
-		tree.setRootVisible(false);
-		panel.add(tree);
 		JScrollPane scrollPane_2 = new JScrollPane(panel_1);
 		//
 		
