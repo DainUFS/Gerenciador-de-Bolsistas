@@ -168,9 +168,20 @@ public class DAO implements InterfaceDAO {
 		return null;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(new DAO().buscarBolsistas().get(4).getNome());
+
+	@Override
+	public Horario buscarHorarioBolsista(String matricula) {
+		try {
+			return gBol.buscarHorarioBolsista(matricula);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	
+	public static void main(String[] args) {
+		System.out.println(new DAO().buscarHorarioBolsista("6543").getSegunda());
+	}
 }

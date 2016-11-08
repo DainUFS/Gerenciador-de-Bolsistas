@@ -12,6 +12,7 @@ import java.util.Collections;
 
 import br.ufs.dain.conexao.Conexao;
 import br.ufs.dain.modelo.Bolsista;
+import br.ufs.dain.modelo.Horario;
 
 public class GerenciadorBolsista {
 	
@@ -123,5 +124,26 @@ public class GerenciadorBolsista {
 
 		return listaBolsistas;
 	}
+	
+	public Horario buscarHorarioBolsista(String matricula) throws SQLException{
+		int idHor = 0;
+		
+		conn = conexao.getConexaoMySQL();
+		
+		String sql = "SELECT b_fk_horario FROM t_bolsista WHERE b_matricula = ?";
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+
+		stmt.setString(1, matricula);
+
+		ResultSet rs = (ResultSet) stmt.executeQuery();
+		
+		while (rs.next()) {
+			idHor = rs.getInt("b_fk_horario");
+		}
+		
+		return gHor.buscarHorario(idHor);
+	}
+
 	
 }

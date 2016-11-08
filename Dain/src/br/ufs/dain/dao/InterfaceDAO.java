@@ -29,6 +29,8 @@ public interface InterfaceDAO {
 	
 	public ArrayList<Bolsista> buscarBolsistas ();
 	
+	public Horario buscarHorarioBolsista(String matricula);
+	
 
 	public boolean cadastrarAdm(Administrador a);
 	
