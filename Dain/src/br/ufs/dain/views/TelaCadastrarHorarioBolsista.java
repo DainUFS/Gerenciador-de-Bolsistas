@@ -25,22 +25,27 @@ import javax.swing.event.ListSelectionListener;
 import br.ufs.dain.dao.DAO;
 import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Horario;
-import javax.swing.JInternalFrame;
 
 public class TelaCadastrarHorarioBolsista extends JFrame {
 
 	private JPanel contentPane;
 
 	Horario horario;
-	Bolsista bolsista;
 
-	String seg = "", ter = "", qua = "", qui = "", sex = "", sab = "";
 	String nome;
 	String matricula;
+	String seg = "", ter = "", qua = "", qui = "", sex = "", sab = "";
 
-	/**
-	 * Launch the application.
-	 */
+	String[] horarios = { "07:00h - 08:00h", "08:00h - 09:00h", "09:00h - 10:00h", "10:00h - 11:00h",
+			"11:00h - 12:00h", "12:00h - 13:00h", "13:00h - 14:00h", "14:00h - 15:00h", "15:00h - 16:00h",
+			"16:00h - 17:00h", "17:00h - 18:00h", "18:00h - 19:00h", "19:00h - 20:00h", "20:00h - 21:00h",
+			"21:00h - 22:00h", "22:00h - 23:00h" };
+
+	String[] colunas = { "Horário", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" };
+
+	JCheckBox[] arrayCheckBox = new JCheckBox[96];
+
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -54,10 +59,6 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
 
 	public TelaCadastrarHorarioBolsista() {
 
@@ -73,10 +74,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		panel.setBorder(new EmptyBorder(5, 10, 5, 5));
 		panel.setLayout(new GridLayout(17, 7, 0, 0));
 		contentPane.add(panel, BorderLayout.CENTER);
-		
-		JInternalFrame internalFrame = new JInternalFrame("New JInternalFrame");
-		panel.add(internalFrame);
-		internalFrame.setVisible(true);
+		preenchePainel(panel);
 
 		JList list = new JList();
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -87,12 +85,8 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
 				if (!arg0.getValueIsAdjusting()) {
-					
-					
-					matricula = listaBolsista.get(list.getSelectedIndex()).getMatricula();
-					
-					
-
+					String matric = listaBolsista.get(list.getSelectedIndex()).getMatricula();
+					setaPainel(matric);
 				}
 			}
 		});
@@ -108,7 +102,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		contentPane.add(panel_1, BorderLayout.WEST);
 
 		panel_1.add(list);
-		//list.setSelectedIndex(0);
+		list.setSelectedIndex(1);
 
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.SOUTH);
@@ -123,99 +117,154 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 
 		JScrollPane scrollPane = new JScrollPane(panel_1);
 		contentPane.add(scrollPane, BorderLayout.WEST);
-		
-		//organizaHorario(panel);
+
 	}
 
-//	private JPanel organizaHorario(String matricula) {
-//
-//		JPanel panel = new JPanel();
-//		panel.setBorder(new EmptyBorder(5, 10, 5, 5));
-//		panel.setLayout(new GridLayout(17, 7, 0, 0));
-//		
-//		String[] horarios = { "07:00h - 08:00h", "08:00h - 09:00h", "09:00h - 10:00h", "10:00h - 11:00h",
-//				"11:00h - 12:00h", "12:00h - 13:00h", "13:00h - 14:00h", "14:00h - 15:00h", "15:00h - 16:00h",
-//				"16:00h - 17:00h", "17:00h - 18:00h", "18:00h - 19:00h", "19:00h - 20:00h", "20:00h - 21:00h",
-//				"21:00h - 22:00h", "22:00h - 23:00h" };
-//		String[] colunas = { "Horário", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" };
-//
-//		//if(panel.countComponents() > 0)
-//		//	System.out.println("....");
-//			
-//			
-//		short contador = 0;
-//
-//		// 119 é o número de (horarios * colunas) + colunas
-//		for (int i = 0; i < (horarios.length * colunas.length) + colunas.length; i++) {
-//
-//			if (i < colunas.length) {
-//				JLabel label = new JLabel(colunas[i]);
-//				label.setHorizontalAlignment(SwingConstants.CENTER);
-//				panel.add(label);
-//			} else if (i % (colunas.length) == 0) {
-//				JLabel horas = new JLabel(horarios[contador]);
-//				horas.setHorizontalAlignment(SwingConstants.CENTER);
-//				panel.add(horas);
-//				contador++;
-//			} else {
-//
-//				int numeroCelula = i % colunas.length;
-//				String diaCorrespondente = colunas[numeroCelula];
-//				String horaCorrespondente = horarios[contador - 1];
-//
-//				JCheckBox checkBox = new JCheckBox();
-//
-//				Horario horarioBolsista = new DAO().buscarHorarioBolsista(matricula);
-//				horarioBolsista.getSegunda();
-//
-//				// System.out.println(matricula);
-//				// System.out.println(horarioBolsista.getSegunda().contains(horarios[contador
-//				// - 1]));
-//
-//				// System.out.println(horarioBolsista.getSegunda() +
-//				// numeroCelula);
-//				if (horarioBolsista.getSegunda().contains(horarios[contador - 1])
-//						&& diaCorrespondente.equals(colunas[1]))
-//					checkBox.setSelected(true);
-//
-//				checkBox.setHorizontalAlignment(SwingConstants.CENTER);
-//				checkBox.addActionListener(new ActionListener() {
-//					public void actionPerformed(ActionEvent e) {
-//						if (checkBox.isSelected()) {
-//							if (diaCorrespondente.equals(colunas[1])) {
-//								seg = horaCorrespondente + "|" + seg;
-//								System.out.println(seg);
-//							}
-//							if (diaCorrespondente.equals(colunas[2]))
-//								ter = horaCorrespondente + "|" + ter;
-//							if (diaCorrespondente.equals(colunas[3]))
-//								qua = horaCorrespondente + "|" + qua;
-//							if (diaCorrespondente.equals(colunas[4]))
-//								qui = horaCorrespondente + "|" + qui;
-//							if (diaCorrespondente.equals(colunas[5]))
-//								sex = horaCorrespondente + "|" + sex;
-//							if (diaCorrespondente.equals(colunas[6]))
-//								sab = horaCorrespondente + "|" + sab;
-//						} else {
-//							if (diaCorrespondente.equals(colunas[1]))
-//								seg = seg.replace(horaCorrespondente + "|", "");
-//							if (diaCorrespondente.equals(colunas[2]))
-//								ter = ter.replace(horaCorrespondente + "|", "");
-//							if (diaCorrespondente.equals(colunas[3]))
-//								qua = qua.replace(horaCorrespondente + "|", "");
-//							if (diaCorrespondente.equals(colunas[4]))
-//								qui = qui.replace(horaCorrespondente + "|", "");
-//							if (diaCorrespondente.equals(colunas[5]))
-//								sex = sex.replace(horaCorrespondente + "|", "");
-//							if (diaCorrespondente.equals(colunas[6]))
-//								sab = sab.replace(horaCorrespondente + "|", "");
-//						}
-//						horario = new Horario(seg, ter, qua, qui, sex, sab);
-//					}
-//				});
-//				panel.add(checkBox);
-//			}
-//		}
-//		return panel;
-//	}
+	private void preenchePainel (JPanel panel) {
+
+		int contador1 = 0;
+		int contador2 = 0;
+
+		// 119 é o número de (horarios * colunas) + colunas
+		for (int i = 0; i < (horarios.length * colunas.length) + colunas.length; i++) {
+
+			if (i < colunas.length) {
+
+				JLabel label = new JLabel(colunas[i]);
+				label.setHorizontalAlignment(SwingConstants.CENTER);
+				panel.add(label);
+			}
+			else if (i % (colunas.length) == 0) {
+
+				JLabel horas = new JLabel(horarios[contador1]);
+				horas.setHorizontalAlignment(SwingConstants.CENTER);
+				panel.add(horas);
+				contador1++;
+
+			}
+			else {
+
+				int numeroCelula = i % colunas.length;
+				String diaCorrespondente = colunas[numeroCelula];
+				String horaCorrespondente = horarios[contador1 - 1];
+
+				arrayCheckBox[contador2] = new JCheckBox();
+				arrayCheckBox[contador2].setHorizontalAlignment(SwingConstants.CENTER);
+				arrayCheckBox[contador2].addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						setaCliqueCheckBox();
+					}
+				});
+
+				panel.add(arrayCheckBox[contador2]);
+				contador2++;
+			}
+		}
+	}
+
+	private void setaCliqueCheckBox () {
+
+		int contador = 0;
+
+		for (int i = 0; i < arrayCheckBox.length; i++) {
+
+			if (arrayCheckBox[i].isSelected())
+				
+				if (i % 6 == 0)
+					seg = horarios[contador] + "|" + seg;
+				
+		//	else
+			//	System.out.println(i + ": NÃO");
+		
+		}
+	}
+
+	private void setaPainel (String matric) {
+
+		int contador = 0;
+
+		Horario horario = new DAO().buscarHorarioBolsista(matric);
+		String segunda = horario.getSegunda();
+		String terca = horario.getTerca();
+		String quarta = horario.getQuarta();
+		String quinta = horario.getQuinta();
+		String sexta = horario.getSexta();
+		String sabado = horario.getSabado();
+
+		//System.out.println(horarios[0] + "\n" + segunda);
+
+		for (int i = 0; i < arrayCheckBox.length; i++) {
+			if (i % 6 == 0)
+				if (segunda.contains(horarios[contador]))
+					arrayCheckBox[i].setSelected(true);
+				else
+					arrayCheckBox[i].setSelected(false);
+
+			else if (i % 6 == 1)
+				if (terca.contains(horarios[contador]))
+					arrayCheckBox[i].setSelected(true);
+				else
+					arrayCheckBox[i].setSelected(false);
+
+			else if (i % 6 == 2)
+				if (quarta.contains(horarios[contador]))
+					arrayCheckBox[i].setSelected(true);
+				else
+					arrayCheckBox[i].setSelected(false);
+
+			else if (i % 6 == 3)
+				if (quinta.contains(horarios[contador]))
+					arrayCheckBox[i].setSelected(true);
+				else
+					arrayCheckBox[i].setSelected(false);
+
+			else if (i % 6 == 4)
+				if (sexta.contains(horarios[contador]))
+					arrayCheckBox[i].setSelected(true);
+				else
+					arrayCheckBox[i].setSelected(false);
+
+			else {
+				if (sabado.contains(horarios[contador]))
+					arrayCheckBox[i].setSelected(true);
+				else
+					arrayCheckBox[i].setSelected(false);
+				contador++;
+			}
+		}
+	}
 }
+
+
+//	if (arrayCheckBox[1].isSelected()) {
+//		if (diaCorrespondente.equals(colunas[1])) {
+//			seg = horaCorrespondente + "|" + seg;
+//			System.out.println(seg);
+//		}
+//		if (diaCorrespondente.equals(colunas[2]))
+//			ter = horaCorrespondente + "|" + ter;
+//		if (diaCorrespondente.equals(colunas[3]))
+//			qua = horaCorrespondente + "|" + qua;
+//		if (diaCorrespondente.equals(colunas[4]))
+//			qui = horaCorrespondente + "|" + qui;
+//		if (diaCorrespondente.equals(colunas[5]))
+//			sex = horaCorrespondente + "|" + sex;
+//		if (diaCorrespondente.equals(colunas[6]))
+//			sab = horaCorrespondente + "|" + sab;
+//	} else {
+//		if (diaCorrespondente.equals(colunas[1]))
+//			seg = seg.replace(horaCorrespondente + "|", "");
+//		if (diaCorrespondente.equals(colunas[2]))
+//			ter = ter.replace(horaCorrespondente + "|", "");
+//		if (diaCorrespondente.equals(colunas[3]))
+//			qua = qua.replace(horaCorrespondente + "|", "");
+//		if (diaCorrespondente.equals(colunas[4]))
+//			qui = qui.replace(horaCorrespondente + "|", "");
+//		if (diaCorrespondente.equals(colunas[5]))
+//			sex = sex.replace(horaCorrespondente + "|", "");
+//		if (diaCorrespondente.equals(colunas[6]))
+//			sab = sab.replace(horaCorrespondente + "|", "");
+//	}
+//	new Horario(seg, ter, qua, qui, sex, sab);
+//}
