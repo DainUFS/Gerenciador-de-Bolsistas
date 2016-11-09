@@ -25,6 +25,7 @@ import javax.swing.event.ListSelectionListener;
 import br.ufs.dain.dao.DAO;
 import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Horario;
+import javax.swing.ScrollPaneConstants;
 
 public class TelaCadastrarHorarioBolsista extends JFrame {
 
@@ -102,7 +103,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		contentPane.add(panel_1, BorderLayout.WEST);
 
 		panel_1.add(list);
-		list.setSelectedIndex(1);
+		list.setSelectedIndex(0);
 
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.SOUTH);
@@ -110,12 +111,15 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new DAO().cadastrHorarioBolsista(horario, matricula);
+				//new DAO().cadastrHorarioBolsista(horario, matricula);
+				System.out.println("Segunda: " + seg + "\nTerça: " + ter + "\nQuarta: " + qua
+						+ "\nQuinta: " + qui + "\nSsexta: " + sex + "\nSábado: " + sab);
 			}
 		});
 		panel_2.add(btnSalvar);
 
 		JScrollPane scrollPane = new JScrollPane(panel_1);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		contentPane.add(scrollPane, BorderLayout.WEST);
 
 	}
@@ -169,14 +173,52 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 
 		for (int i = 0; i < arrayCheckBox.length; i++) {
 
-			if (arrayCheckBox[i].isSelected())
+			//if (arrayCheckBox[i].isSelected())
 				
-				if (i % 6 == 0)
-					seg = horarios[contador] + "|" + seg;
-				
-		//	else
-			//	System.out.println(i + ": NÃO");
-		
+				if (i % 6 == 0) {
+					if (arrayCheckBox[i].isSelected())
+						seg = horarios[contador] + "|" + seg;
+					else
+						seg = seg.replace(horarios[contador] + "|", "");
+				//	System.out.println(/*i + " :: " + horarios[contador]*/seg);
+				}
+				//	System.out.println(contador + ": Seg\n" + horarios[contador]);
+				else if (i % 6 == 1) {
+					if (arrayCheckBox[i].isSelected())
+						ter = horarios[contador] + "|" + ter;
+					else
+						ter = ter.replace(horarios[contador] + "|", "");
+				}
+				//	System.out.println(contador + ": Ter\n" + horarios[contador]);
+				else if (i % 6 == 2) {
+					if (arrayCheckBox[i].isSelected())
+						qua = horarios[contador] + "|" + qua;
+					else
+						qua = qua.replace(horarios[contador] + "|", "");
+				}
+				//	System.out.println(contador + ": Qua\n" + horarios[contador]);
+				else if (i % 6 == 3) {
+					if (arrayCheckBox[i].isSelected())
+						qui = horarios[contador] + "|" + qui;
+					else
+						qui = qui.replace(horarios[contador] + "|", "");
+				}
+				//	System.out.println(contador + ": Qui\n" + horarios[contador]);
+				else if (i % 6 == 4) {
+					if (arrayCheckBox[i].isSelected())
+						sex = horarios[contador] + "|" + sex;
+					else
+						sex = sex.replace(horarios[contador] + "|", "");
+				}
+				//	System.out.println(contador + ": Sex\n" + horarios[contador]);
+				else {
+					if (arrayCheckBox[i].isSelected())
+						sab = horarios[contador] + "|" + sab;
+					else
+						sab = sab.replace(horarios[contador] + "|", "");
+					contador++;
+				}
+				//	System.out.println(contador + ": Sab\n" + horarios[contador]);
 		}
 	}
 
