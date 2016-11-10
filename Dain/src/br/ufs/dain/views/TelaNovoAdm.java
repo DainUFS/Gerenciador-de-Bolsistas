@@ -167,7 +167,7 @@ public class TelaNovoAdm extends JDialog {
 								textField_telefone.getText().toString(),
 								textField_email.getText().toString(),
 								textField_matricula.getText().toString(),
-								passwordField_senha.getText().toString());
+								passwordField_senha.getText().toString(), 1);
 						
 						new DAO().cadastrarAdm(adm);
 						

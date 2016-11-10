@@ -21,7 +21,7 @@ public class GerenciadorDeficiente {
 		conn = conexao.getConexaoMySQL();
 
 		String sql = "INSERT INTO t_deficiente (d_matricula, d_nome, d_telefone, d_email, d_curso, d_sexo, "
-				+ "d_fk_horario, d_tipoDeficiencia, d_fk_adm) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "d_fk_horario, d_tipoDeficiencia, d_fk_adm, d_status) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
@@ -34,6 +34,7 @@ public class GerenciadorDeficiente {
 		stmt.setObject(7, null);
 		stmt.setString(8, d.getTipoDeficiencia());
 		stmt.setString(9, matricAdm);
+		stmt.setInt(10, d.getStatusAtivacao());
 
 		stmt.execute();
 		stmt.close();
@@ -43,14 +44,14 @@ public class GerenciadorDeficiente {
 		conn.close();
 	}
 	
-	public Deficiente buscarDeficienteM(String matric) throws SQLException {
+	public Deficiente buscarDeficienteMatricula(String matric) throws SQLException {
 
 		conn = conexao.getConexaoMySQL();
 
 		Deficiente deficiente = null;
 
 		String sql = "SELECT d_nome, d_telefone, d_email, "
-				+ "d_curso, d_sexo, d_tipoDeficiencia, d_fk_adm, d_fk_horario " + "FROM t_deficiente "
+				+ "d_curso, d_sexo, d_tipoDeficiencia, d_fk_adm, d_fk_horario, d_status " + "FROM t_deficiente "
 				+ "WHERE d_matricula = ?";
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -62,7 +63,7 @@ public class GerenciadorDeficiente {
 		while (rs.next()) {
 			deficiente = new Deficiente(rs.getString("d_telefone"), rs.getString("d_email"), rs.getString("d_nome"),
 					rs.getString("d_curso"), matric, rs.getString("d_sexo"), gHor.buscarHorario(rs.getInt("d_fk_horario")),
-					rs.getString("d_tipoDeficiencia"));
+					rs.getString("d_tipoDeficiencia"), rs.getInt("d_status"));
 		}
 		
 		conn.close();
@@ -70,14 +71,14 @@ public class GerenciadorDeficiente {
 		return deficiente;
 	}
 	
-	public Deficiente buscarDeficienteN(String nome) throws SQLException {
+	public Deficiente buscarDeficienteNome(String nome) throws SQLException {
 
 		conn = conexao.getConexaoMySQL();
 
 		Deficiente deficiente = null;
 
 		String sql = "SELECT d_matricula, d_telefone, d_email, "
-				+ "d_curso, d_sexo, d_tipoDeficiencia, d_fk_adm, d_fk_horario " + "FROM t_deficiente "
+				+ "d_curso, d_sexo, d_tipoDeficiencia, d_fk_adm, d_fk_horario, d_status " + "FROM t_deficiente "
 				+ "WHERE d_nome = ?";
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -89,14 +90,12 @@ public class GerenciadorDeficiente {
 		while (rs.next()) {
 			deficiente = new Deficiente(rs.getString("d_telefone"), rs.getString("d_email"), nome,
 					rs.getString("d_curso"), rs.getString("d_matricula"), rs.getString("d_sexo"), gHor.buscarHorario(rs.getInt("d_fk_horario")),
-					rs.getString("d_tipoDeficiencia"));
+					rs.getString("d_tipoDeficiencia"), rs.getInt("d_status"));
 		}
 		
 		conn.close();
 
 		return deficiente;
 	}
-
-
 
 }

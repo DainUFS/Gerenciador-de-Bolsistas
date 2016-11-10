@@ -29,6 +29,7 @@ CREATE TABLE `t_deficiente` (
   `d_email` varchar(45) NOT NULL,
   `d_curso` varchar(30) NOT NULL,
   `d_sexo` char(1) NOT NULL,
+  `d_status` varchar(45) NOT NULL,
   `d_tipoDeficiencia` varchar(30) NOT NULL,
   `d_fk_adm` varchar(8) DEFAULT NULL,
   `d_fk_horario` int(11) DEFAULT NULL,
@@ -47,7 +48,7 @@ CREATE TABLE `t_deficiente` (
 
 LOCK TABLES `t_deficiente` WRITE;
 /*!40000 ALTER TABLE `t_deficiente` DISABLE KEYS */;
-INSERT INTO `t_deficiente` VALUES ('20122012','Tarantino','09876543','@souSangrento','Pulp Fiction','M','sangue','32509874',22),('789456','77 54852363','@murilo.com','João das neve','Cuscuz','M','Viadagem','21',23),('matricY','nomeY','telY','emailY','cursoY','F','Transpira viadagem','12345',24),('odisseia2001','Stanley Kubrick','987455452','@kubrick','Iluminado','M','louco','32509874',25);
+INSERT INTO `t_deficiente` VALUES ('20122012','Tarantino','09876543','@souSangrento','Pulp Fiction','M','1','sangue','32509874',22),('789456','77 54852363','@murilo.com','João das neve','Cuscuz','M','1','Viadagem','21',23),('matricY','nomeY','telY','emailY','cursoY','F','0','Transpira viadagem','12345',24),('odisseia2001','Stanley Kubrick','987455452','@kubrick','Iluminado','M','1','louco','32509874',25);
 /*!40000 ALTER TABLE `t_deficiente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-09 11:55:10
+-- Dump completed on 2016-11-10 10:34:11

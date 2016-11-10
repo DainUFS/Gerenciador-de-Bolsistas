@@ -18,8 +18,8 @@ public class GerenciadorAdministrador {
 
 		conn = conexao.getConexaoMySQL();
 
-		String sql = "INSERT INTO t_adm (a_matricula, a_nome, a_email,  a_telefone, a_senha)"
-				+ "VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO t_adm (a_matricula, a_nome, a_email,  a_telefone, a_senha, a_status)"
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
@@ -28,6 +28,7 @@ public class GerenciadorAdministrador {
 		stmt.setString(3, a.getEmail());
 		stmt.setString(4, a.getTelefone());
 		stmt.setString(5, a.getSenha());
+		stmt.setInt(6, a.getStatusAtivacao());
 
 		stmt.execute();
 		stmt.close();
@@ -78,7 +79,7 @@ public class GerenciadorAdministrador {
 
 		while (rs.next()) {
 			adm = new Administrador(rs.getString("a_nome"), rs.getString("a_telefone"), rs.getString("a_email"), matric,
-					senha);
+					senha, rs.getInt("a_status"));
 		}
 
 		conn.close();
@@ -102,7 +103,7 @@ public class GerenciadorAdministrador {
 
 		while (rs.next()) {
 			adm = new Administrador(rs.getString("a_nome"), rs.getString("a_telefone"), rs.getString("a_email"), matric,
-					rs.getString("a_senha"));
+					rs.getString("a_senha"), rs.getInt("a_status"));
 		}
 
 		conn.close();

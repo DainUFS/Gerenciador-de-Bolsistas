@@ -4,11 +4,14 @@ public class Administrador extends Pessoa {
 	
 	private String matricula;
 	private String senha;
+	private int statusAtivacao;
 	
-	public Administrador(String telefone, String email, String nome, String matricula, String senha) {
+	public Administrador(String telefone, String email,
+			String nome, String matricula, String senha, int statusAtivacao) {
 		super(telefone, email, nome);
 		this.matricula = matricula;
 		this.senha = senha;
+		this.statusAtivacao = statusAtivacao;
 	}
 	
 	public String getMatricula() {
@@ -28,6 +31,14 @@ public class Administrador extends Pessoa {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public int getStatusAtivacao() {
+		return statusAtivacao;
+	}
+
+	public void setStatusAtivacao(int statusAtivacao) {
+		this.statusAtivacao = statusAtivacao;
 	}	
 	
 }

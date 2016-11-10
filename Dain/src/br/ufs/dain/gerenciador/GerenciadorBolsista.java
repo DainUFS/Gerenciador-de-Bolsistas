@@ -26,7 +26,7 @@ public class GerenciadorBolsista {
 		conn = conexao.getConexaoMySQL();
 
 		String sql = "INSERT INTO t_bolsista (b_matricula, b_nome, b_telefone, b_email, "
-				+ "b_curso, b_sexo, b_fk_adm, b_fk_horario) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "b_curso, b_sexo, b_fk_adm, b_fk_horario, b_status) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
@@ -38,7 +38,8 @@ public class GerenciadorBolsista {
 		stmt.setString(6, b.getSexo());
 		stmt.setString(7, matricAdm);
 		stmt.setObject(8, null);
-
+		stmt.setInt(9, b.getStatusAtivacao());
+		
 		stmt.execute();
 		stmt.close();
 
@@ -53,7 +54,7 @@ public class GerenciadorBolsista {
 
 		Bolsista bolsista = null;
 
-		String sql = "SELECT b_nome, b_telefone, b_email, " + "b_curso, b_sexo, b_atividade, b_fk_adm, b_fk_horario "
+		String sql = "SELECT b_nome, b_telefone, b_email, " + "b_curso, b_sexo, b_atividade, b_fk_adm, b_fk_horario, b_status "
 				+ "FROM t_bolsista " + "WHERE b_matricula = ?";
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -65,7 +66,7 @@ public class GerenciadorBolsista {
 		while (rs.next()) {
 			bolsista = new Bolsista(rs.getString("b_telefone"), rs.getString("b_email"), rs.getString("b_nome"),
 					rs.getString("b_curso"), matric, rs.getString("b_sexo"), gHor.buscarHorario(rs.getInt("b_fk_horario")),
-					rs.getInt("b_atividade"));
+					rs.getInt("b_atividade"), rs.getInt("b_status"));
 		}
 		
 		conn.close();
@@ -79,7 +80,7 @@ public class GerenciadorBolsista {
 
 		Bolsista bolsista = null;
 
-		String sql = "SELECT b_matricula, b_telefone, b_email, " + "b_curso, b_sexo, b_atividade, b_fk_adm, b_fk_horario "
+		String sql = "SELECT b_matricula, b_telefone, b_email, " + "b_curso, b_sexo, b_atividade, b_fk_adm, b_fk_horario, b_status "
 				+ "FROM t_bolsista " + "WHERE b_nome = ?";
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -91,7 +92,7 @@ public class GerenciadorBolsista {
 		while (rs.next()) {
 			bolsista = new Bolsista(rs.getString("b_telefone"), rs.getString("b_email"), nome,
 					rs.getString("b_curso"), rs.getString("b_matricula"), rs.getString("b_sexo"), gHor.buscarHorario(rs.getInt("b_fk_horario")),
-					rs.getInt("b_atividade"));
+					rs.getInt("b_atividade"), rs.getInt("b_status"));
 		}
 		
 		conn.close();
@@ -116,7 +117,7 @@ public class GerenciadorBolsista {
 			bolsista = new Bolsista(rs.getString("b_telefone"), rs.getString("b_email"), rs.getString("b_nome"),
 					rs.getString("b_curso"), rs.getString("b_matricula"), rs.getString("b_sexo"), 
 					gHor.buscarHorario(rs.getInt("b_fk_horario")),
-					rs.getInt("b_atividade"));
+					rs.getInt("b_atividade"), rs.getInt("b_status"));
 			listaBolsistas.add(bolsista);
 		}
 				
@@ -143,6 +144,10 @@ public class GerenciadorBolsista {
 		}
 		
 		return gHor.buscarHorario(idHor);
+	}
+	
+	public static void main(String[] args) throws SQLException {
+		System.out.println(new GerenciadorBolsista().buscarBolsistaNome("Stiven Spelberg").getStatusAtivacao());
 	}
 
 	

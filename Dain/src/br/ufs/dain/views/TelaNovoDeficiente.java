@@ -194,7 +194,7 @@ public class TelaNovoDeficiente extends JDialog {
 								textField_matricula.getText().toString(),
 								sexoSelecionado,
 								null,
-								textField_tipoDeficiencia.getText().toString());
+								textField_tipoDeficiencia.getText().toString(), 1);
 						
 						new DAO().cadastraDeficiente(d, adm.getMatricula());
 					}

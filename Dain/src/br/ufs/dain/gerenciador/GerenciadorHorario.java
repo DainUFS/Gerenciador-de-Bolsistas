@@ -95,10 +95,7 @@ public class GerenciadorHorario {
 	}
 		
 	public void aramazenarHorarioBol(Horario h, String matric) throws SQLException{
-		int id = buscarIdHorario(h);
-		if(id == -1){
-			id = aramazenarHorario(h);
-		}
+		int id = aramazenarHorario(h);
 		
 		conn = conexao.getConexaoMySQL();
 		

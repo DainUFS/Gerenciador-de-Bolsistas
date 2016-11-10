@@ -38,7 +38,7 @@ public class DAO implements InterfaceDAO {
 	@Override
 	public Deficiente getDeficienteMatricula(String matricula) {
 		try {
-			gDef.buscarDeficienteM(matricula);
+			gDef.buscarDeficienteMatricula(matricula);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -30,6 +30,7 @@ CREATE TABLE `t_bolsista` (
   `b_curso` varchar(30) NOT NULL,
   `b_sexo` char(1) NOT NULL,
   `b_atividade` varchar(45) DEFAULT NULL,
+  `b_status` int(11) DEFAULT NULL,
   `b_fk_adm` varchar(45) DEFAULT NULL,
   `b_fk_horario` int(11) DEFAULT NULL,
   PRIMARY KEY (`b_matricula`),
@@ -47,7 +48,7 @@ CREATE TABLE `t_bolsista` (
 
 LOCK TABLES `t_bolsista` WRITE;
 /*!40000 ALTER TABLE `t_bolsista` DISABLE KEYS */;
-INSERT INTO `t_bolsista` VALUES ('6543','Stanley Kubrick','369852','@murilo_de_milho','CC','F',NULL,'12345',44),('789456123','Billy Wilder','@icaro','Icaro','Ciência','F',NULL,'12345',23),('matricX','Stiven Spelberg','telX','emailX','cursoX','M',NULL,'12345',24);
+INSERT INTO `t_bolsista` VALUES ('3123','312','23','22','123','3',NULL,1,'12345',25),('6543','Stanley Kubrick','369852','@murilo_de_milho','CC','F','',1,'12345',22),('789456123','Billy Wilder','@icaro','Icaro','Ciência','F','',1,'12345',23),('dweq','dwe','qd','dw','sd','M',NULL,0,'12345',51),('matricX','Stiven Spelberg','telX','emailX','cursoX','M','',0,'12345',24);
 /*!40000 ALTER TABLE `t_bolsista` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-09 11:55:10
+-- Dump completed on 2016-11-10 10:34:11

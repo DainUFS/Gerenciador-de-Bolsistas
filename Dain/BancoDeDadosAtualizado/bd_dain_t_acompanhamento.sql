@@ -16,31 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `t_adm`
+-- Table structure for table `t_acompanhamento`
 --
 
-DROP TABLE IF EXISTS `t_adm`;
+DROP TABLE IF EXISTS `t_acompanhamento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_adm` (
-  `a_matricula` varchar(8) NOT NULL,
-  `a_nome` varchar(45) NOT NULL,
-  `a_email` varchar(45) NOT NULL,
-  `a_telefone` varchar(15) NOT NULL,
-  `a_senha` varchar(45) NOT NULL,
-  PRIMARY KEY (`a_matricula`),
-  UNIQUE KEY `a_matricula_UNIQUE` (`a_matricula`)
+CREATE TABLE `t_acompanhamento` (
+  `a_d_matricula` varchar(12) NOT NULL,
+  `a_b_matricula` varchar(12) NOT NULL,
+  PRIMARY KEY (`a_d_matricula`,`a_b_matricula`),
+  KEY `a_b_matricula_idx` (`a_b_matricula`),
+  CONSTRAINT `a_b_matricula` FOREIGN KEY (`a_b_matricula`) REFERENCES `t_bolsista` (`b_matricula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `a_d_matricula` FOREIGN KEY (`a_d_matricula`) REFERENCES `t_deficiente` (`d_matricula`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_adm`
+-- Dumping data for table `t_acompanhamento`
 --
 
-LOCK TABLES `t_adm` WRITE;
-/*!40000 ALTER TABLE `t_adm` DISABLE KEYS */;
-INSERT INTO `t_adm` VALUES ('123','Murilo dos Bugs','@cuscuz.com','741','123'),('12345','Szzana','@susana.com','56754656746546','12345'),('21','Tarantino','@KillBill','78451235','21'),('32509874','Kubrick','@odisseia','113456','789456'),('44444444','Kiko','@tesouro.com','5585416','555'),('matricZ','nomeZ','emailZ','telZ','1');
-/*!40000 ALTER TABLE `t_adm` ENABLE KEYS */;
+LOCK TABLES `t_acompanhamento` WRITE;
+/*!40000 ALTER TABLE `t_acompanhamento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_acompanhamento` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-09 11:55:10
+-- Dump completed on 2016-11-10 10:34:11
