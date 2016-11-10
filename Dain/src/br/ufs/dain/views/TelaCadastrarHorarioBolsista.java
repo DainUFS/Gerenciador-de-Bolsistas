@@ -66,11 +66,12 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 700, 500);
+		setBounds(100, 100, 794, 549);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		setTitle("Cadastrar Horário de Bolsista");
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 10, 5, 5));
@@ -112,15 +113,26 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(seg != null && ter != null && qua != null && qui != null && sex != null && sab != null)
+				if(seg != null && ter != null && qua != null && qui != null && sex != null && sab != null){
 					new DAO().cadastrHorarioBolsista(new Horario(seg, ter, qua, qui, sex, sab), matricula);
-				else
+					JOptionPane.showMessageDialog(panel, "Horárario Salvo!");
+				}else
 					JOptionPane.showMessageDialog(panel, "Nenhuma alteração foi feita!");
 //				System.out.println("Segunda: " + seg + "\nTerça: " + ter + "\nQuarta: " + qua
 //						+ "\nQuinta: " + qui + "\nSsexta: " + sex + "\nSábado: " + sab);
 			}
 		});
 		panel_2.add(btnSalvar);
+		
+		JButton btnNewButton = new JButton("Limpar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				for(int i = 0; i < 96; i++)
+					arrayCheckBox[i].setSelected(false);
+					
+			}
+		});
+		panel_2.add(btnNewButton);
 
 		JScrollPane scrollPane = new JScrollPane(panel_1);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);

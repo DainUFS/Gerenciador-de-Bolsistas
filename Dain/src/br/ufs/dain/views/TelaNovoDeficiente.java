@@ -64,7 +64,7 @@ public class TelaNovoDeficiente extends JDialog {
 		setModal(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_deficiente.png"));
 		setResizable(false);
-		setTitle("Adicionar Deficiente");
+		setTitle("Cadastrar Novo Deficiente");
 		setBounds(100, 100, 350, 500);
 		BorderLayout borderLayout = new BorderLayout();
 		getContentPane().setLayout(borderLayout);
