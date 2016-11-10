@@ -13,6 +13,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -35,7 +36,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 
 	String nome;
 	String matricula;
-	String seg = "", ter = "", qua = "", qui = "", sex = "", sab = "";
+	String seg, ter, qua, qui, sex, sab;
 
 	String[] horarios = { "07:00h - 08:00h", "08:00h - 09:00h", "09:00h - 10:00h", "10:00h - 11:00h",
 			"11:00h - 12:00h", "12:00h - 13:00h", "13:00h - 14:00h", "14:00h - 15:00h", "15:00h - 16:00h",
@@ -86,8 +87,8 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
 				if (!arg0.getValueIsAdjusting()) {
-					String matric = listaBolsista.get(list.getSelectedIndex()).getMatricula();
-					setaPainel(matric);
+					matricula = listaBolsista.get(list.getSelectedIndex()).getMatricula();
+					setaPainel(matricula);
 				}
 			}
 		});
@@ -111,9 +112,12 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//new DAO().cadastrHorarioBolsista(horario, matricula);
-				System.out.println("Segunda: " + seg + "\nTerça: " + ter + "\nQuarta: " + qua
-						+ "\nQuinta: " + qui + "\nSsexta: " + sex + "\nSábado: " + sab);
+				if(seg != null && ter != null && qua != null && qui != null && sex != null && sab != null)
+					new DAO().cadastrHorarioBolsista(new Horario(seg, ter, qua, qui, sex, sab), matricula);
+				else
+					JOptionPane.showMessageDialog(panel, "Nenhuma alteração foi feita!");
+//				System.out.println("Segunda: " + seg + "\nTerça: " + ter + "\nQuarta: " + qua
+//						+ "\nQuinta: " + qui + "\nSsexta: " + sex + "\nSábado: " + sab);
 			}
 		});
 		panel_2.add(btnSalvar);
@@ -170,6 +174,12 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 	private void setaCliqueCheckBox () {
 
 		int contador = 0;
+		seg = "";
+		ter = ""; 
+		qua = "";
+		qui = "";
+		sex = "";
+		sab = "";
 
 		for (int i = 0; i < arrayCheckBox.length; i++) {
 
@@ -180,7 +190,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 						seg = horarios[contador] + "|" + seg;
 					else
 						seg = seg.replace(horarios[contador] + "|", "");
-				//	System.out.println(/*i + " :: " + horarios[contador]*/seg);
+					System.out.println(/*i + " :: " + horarios[contador]*/seg);
 				}
 				//	System.out.println(contador + ": Seg\n" + horarios[contador]);
 				else if (i % 6 == 1) {
