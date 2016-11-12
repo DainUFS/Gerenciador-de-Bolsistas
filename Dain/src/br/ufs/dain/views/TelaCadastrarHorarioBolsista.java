@@ -32,21 +32,16 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 
 	private JPanel contentPane;
 
-	Horario horario;
+	private String matricula;
 
-	String nome;
-	String matricula;
-	String seg, ter, qua, qui, sex, sab;
-
-	String[] horarios = { "07:00h - 08:00h", "08:00h - 09:00h", "09:00h - 10:00h", "10:00h - 11:00h",
+	private String[] horarios = { "07:00h - 08:00h", "08:00h - 09:00h", "09:00h - 10:00h", "10:00h - 11:00h",
 			"11:00h - 12:00h", "12:00h - 13:00h", "13:00h - 14:00h", "14:00h - 15:00h", "15:00h - 16:00h",
 			"16:00h - 17:00h", "17:00h - 18:00h", "18:00h - 19:00h", "19:00h - 20:00h", "20:00h - 21:00h",
 			"21:00h - 22:00h", "22:00h - 23:00h" };
 
-	String[] colunas = { "Horário", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" };
+	private String[] colunas = { "Horário", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" };
 
-	JCheckBox[] arrayCheckBox = new JCheckBox[96];
-
+	private JCheckBox[] arrayCheckBox = new JCheckBox[96];
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -80,16 +75,26 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		preenchePainel(panel);
 
 		JList list = new JList();
+		list.setBorder(null);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+		
 		ArrayList<Bolsista> listaBolsista = new DAO().buscarBolsistas();
 
 		list.addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
 				if (!arg0.getValueIsAdjusting()) {
-					matricula = listaBolsista.get(list.getSelectedIndex()).getMatricula();
-					setaPainel(matricula);
+					// se nenhum ítem estiver selecionado, nada acontece
+					if (list.getSelectedIndex() != -1) {
+						matricula = listaBolsista.get(list.getSelectedIndex()).getMatricula();
+						setaPainel(matricula);			
+					}
+					//if (seg != null) {
+					//	JOptionPane.showConfirmDialog(panel,
+					//				"Deseja salvar as modificações feitas em " + list.getSelectedValue() + "?",
+					//				"As alterações não foram salvas!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+					//list.setSelectedIndex(indiceSelecionado);
+					//}
 				}
 			}
 		});
@@ -97,7 +102,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		DefaultListModel listModel = new DefaultListModel();
 
 		for (int i = 0; i < listaBolsista.size(); i++)
-			listModel.addElement(listaBolsista.get(i).getNome() + " (" + listaBolsista.get(i).getMatricula() + ")");
+			listModel.addElement(listaBolsista.get(i).getNome());
 
 		list.setModel(listModel);
 
@@ -106,20 +111,19 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 
 		panel_1.add(list);
 		list.setSelectedIndex(0);
-
+		
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.SOUTH);
 
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(seg != null && ter != null && qua != null && qui != null && sex != null && sab != null){
-					new DAO().cadastrHorarioBolsista(new Horario(seg, ter, qua, qui, sex, sab), matricula);
+				//if(seg != null) {
+					//new DAO().cadastrHorarioBolsista(new Horario(seg, ter, qua, qui, sex, sab), matricula);
+					setaCliqueCheckBox(matricula);
 					JOptionPane.showMessageDialog(panel, "Horárario Salvo!");
-				}else
-					JOptionPane.showMessageDialog(panel, "Nenhuma alteração foi feita!");
-//				System.out.println("Segunda: " + seg + "\nTerça: " + ter + "\nQuarta: " + qua
-//						+ "\nQuinta: " + qui + "\nSsexta: " + sex + "\nSábado: " + sab);
+				//} else
+				//	JOptionPane.showMessageDialog(panel, "Nenhuma alteração foi feita!");
 			}
 		});
 		panel_2.add(btnSalvar);
@@ -127,7 +131,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		JButton btnNewButton = new JButton("Limpar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				for(int i = 0; i < 96; i++)
+				for(int i = 0; i < arrayCheckBox.length; i++)
 					arrayCheckBox[i].setSelected(false);
 					
 			}
@@ -160,22 +164,21 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 				horas.setHorizontalAlignment(SwingConstants.CENTER);
 				panel.add(horas);
 				contador1++;
-
 			}
 			else {
 
-				int numeroCelula = i % colunas.length;
-				String diaCorrespondente = colunas[numeroCelula];
-				String horaCorrespondente = horarios[contador1 - 1];
+				//int numeroCelula = i % colunas.length;
+				//String diaCorrespondente = colunas[numeroCelula];
+				//String horaCorrespondente = horarios[contador1 - 1];
 
 				arrayCheckBox[contador2] = new JCheckBox();
 				arrayCheckBox[contador2].setHorizontalAlignment(SwingConstants.CENTER);
-				arrayCheckBox[contador2].addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						setaCliqueCheckBox();
-					}
-				});
+//				arrayCheckBox[contador2].addActionListener(new ActionListener() {
+//					@Override
+//					public void actionPerformed(ActionEvent e) {
+//						setaCliqueCheckBox();
+//					}
+//				});
 
 				panel.add(arrayCheckBox[contador2]);
 				contador2++;
@@ -183,15 +186,15 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		}
 	}
 
-	private void setaCliqueCheckBox () {
+	private void setaCliqueCheckBox (String matricula) {
 
 		int contador = 0;
-		seg = "";
-		ter = ""; 
-		qua = "";
-		qui = "";
-		sex = "";
-		sab = "";
+		String seg = "";
+		String ter = "";
+		String qua = "";
+		String qui = "";
+		String sex = "";
+		String sab = "";
 
 		for (int i = 0; i < arrayCheckBox.length; i++) {
 
@@ -242,6 +245,8 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 				}
 				//	System.out.println(contador + ": Sab\n" + horarios[contador]);
 		}
+		
+		new DAO().cadastrHorarioBolsista(new Horario(seg, ter, qua, qui, sex, sab), matricula);
 	}
 
 	private void setaPainel (String matric) {
@@ -299,36 +304,3 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		}
 	}
 }
-
-
-//	if (arrayCheckBox[1].isSelected()) {
-//		if (diaCorrespondente.equals(colunas[1])) {
-//			seg = horaCorrespondente + "|" + seg;
-//			System.out.println(seg);
-//		}
-//		if (diaCorrespondente.equals(colunas[2]))
-//			ter = horaCorrespondente + "|" + ter;
-//		if (diaCorrespondente.equals(colunas[3]))
-//			qua = horaCorrespondente + "|" + qua;
-//		if (diaCorrespondente.equals(colunas[4]))
-//			qui = horaCorrespondente + "|" + qui;
-//		if (diaCorrespondente.equals(colunas[5]))
-//			sex = horaCorrespondente + "|" + sex;
-//		if (diaCorrespondente.equals(colunas[6]))
-//			sab = horaCorrespondente + "|" + sab;
-//	} else {
-//		if (diaCorrespondente.equals(colunas[1]))
-//			seg = seg.replace(horaCorrespondente + "|", "");
-//		if (diaCorrespondente.equals(colunas[2]))
-//			ter = ter.replace(horaCorrespondente + "|", "");
-//		if (diaCorrespondente.equals(colunas[3]))
-//			qua = qua.replace(horaCorrespondente + "|", "");
-//		if (diaCorrespondente.equals(colunas[4]))
-//			qui = qui.replace(horaCorrespondente + "|", "");
-//		if (diaCorrespondente.equals(colunas[5]))
-//			sex = sex.replace(horaCorrespondente + "|", "");
-//		if (diaCorrespondente.equals(colunas[6]))
-//			sab = sab.replace(horaCorrespondente + "|", "");
-//	}
-//	new Horario(seg, ter, qua, qui, sex, sab);
-//}
