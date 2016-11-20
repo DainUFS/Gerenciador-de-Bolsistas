@@ -2,9 +2,12 @@ package br.ufs.dain.views;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -17,31 +20,41 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import br.ufs.dain.dao.DAO;
 import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Horario;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.border.TitledBorder;
-import javax.swing.BoxLayout;
-import java.awt.FlowLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Font;
 
 public class TelaCadastrarHorarioBolsista extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;
 
 	private JButton btnSalvar;
 	private JButton btnLimpar;
 
-	private String matricula;
+	private String matriculaSelecionada;
+	private String nomeSelecionado;
+	private String cursoSelecionado;
+
+	private JLabel labelNome;
+	private JLabel labelCurso;
+
+	private boolean isSalvo = true;
+
+	private int indexSelecionado;
 
 	private String[] horarios = { "07:00h - 08:00h", "08:00h - 09:00h", "09:00h - 10:00h", "10:00h - 11:00h",
 			"11:00h - 12:00h", "12:00h - 13:00h", "13:00h - 14:00h", "14:00h - 15:00h", "15:00h - 16:00h",
@@ -69,23 +82,36 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 	public TelaCadastrarHorarioBolsista() {
 
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 794, 549);
+		setBounds(100, 100, 800, 550);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(new Color(204, 204, 255));
+		contentPane.setBorder(new EmptyBorder(5, 10, 10, 10));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		setTitle("Cadastrar Horário de Bolsista");		
-
+		setTitle("Cadastrar Horário de Bolsista");
+		
 		preencherPainelPrincipal();
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				if (!isSalvo)
+					alertaSalvar();
+				if (isSalvo)
+					setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				else
+					setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			}
+		});
 	}
 
-	private JList getLista () {
+	private JList<String> getLista () {
 
-		JList list = new JList();
+		JList<String> list = new JList<String>();
+		list.setBorder(new EmptyBorder(0, 3, 0, 30));
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		DefaultListModel listModel = new DefaultListModel();
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
 		ArrayList<Bolsista> listaBolsista = new DAO().buscarBolsistas();
 
 		for (int i = 0; i < listaBolsista.size(); i++)
@@ -97,10 +123,20 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 				if (!arg0.getValueIsAdjusting()) {
 					// se nenhum ítem estiver selecionado, nada acontece
 					if (list.getSelectedIndex() != -1) {
-						btnSalvar.setEnabled(false);
-						matricula = listaBolsista.get(list.getSelectedIndex()).getMatricula();
-						atualizarPainel(matricula);
-						isCheckBoxVazio();
+						if (!isSalvo && list.getSelectedIndex() != indexSelecionado)
+							alertaSalvar();
+						if (isSalvo) {
+							btnSalvar.setEnabled(false);
+							indexSelecionado = list.getSelectedIndex();
+							nomeSelecionado = listaBolsista.get(list.getSelectedIndex()).getNome();
+							cursoSelecionado = listaBolsista.get(list.getSelectedIndex()).getCurso();
+							matriculaSelecionada = listaBolsista.get(list.getSelectedIndex()).getMatricula();
+							atualizarInfo();
+							atualizarPainel();
+							isCheckBoxVazio();
+						} else {
+							list.setSelectedIndex(indexSelecionado);
+						}
 					}
 				}
 			}
@@ -112,16 +148,32 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		return list;
 	}
 
+	private void alertaSalvar () {
+
+		int opcaoEscolhida = JOptionPane.showConfirmDialog(contentPane,
+				"<html>Deseja salvar as alterações feitas em <b>" + nomeSelecionado + "</b> antes de sair?</html>",
+				"Há alterações não salvas", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+
+		if (opcaoEscolhida == JOptionPane.YES_OPTION)
+			salvarHorario();
+		else if (opcaoEscolhida == JOptionPane.CANCEL_OPTION ||
+				opcaoEscolhida == JOptionPane.CLOSED_OPTION)
+			isSalvo = false;
+		else
+			isSalvo = true;
+	}
+
 	private void preencherPainelPrincipal () {
 
 		JPanel panel_checkbox = new JPanel();
+		panel_checkbox.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel_checkbox.setLayout(new GridLayout(17, 7, 0, 0));
 		preencherCheckBox(panel_checkbox);
 
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				salvarHorario(matricula);
+				salvarHorario();
 			}
 		});
 
@@ -132,34 +184,30 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 					arrayCheckBox[i].setSelected(false);
 				btnLimpar.setEnabled(false);
 				btnSalvar.setEnabled(true);
+				isSalvo = false;
 			}
 		});
 
-		JPanel panel_lista = new JPanel();
-		panel_lista.add(getLista());
-		contentPane.add(panel_lista, BorderLayout.WEST);
-
 		JPanel panel_botoes = new JPanel();
+		panel_botoes.setBackground(new Color(204, 204, 255));
 		panel_botoes.add(btnSalvar);
 		panel_botoes.add(btnLimpar);
 
 		JPanel panel_checkbox_botoes = new JPanel();
+		panel_checkbox_botoes.setBackground(new Color(204, 204, 255));
 		panel_checkbox_botoes.setBorder(new EmptyBorder(0, 10, 0, 0));
-		panel_checkbox_botoes.setLayout(new BorderLayout(0, 0));
+		panel_checkbox_botoes.setLayout(new BorderLayout(0, 2));
 
 		JPanel panel_nome = new JPanel();
+		panel_nome.setBackground(new Color(204, 204, 255));
 		panel_checkbox_botoes.add(panel_nome, BorderLayout.NORTH);
 		panel_nome.setLayout(new GridLayout(2, 1, 0, 0));
+		preencherInfo(panel_nome);
 
-		JLabel label_nome = new JLabel();
-		label_nome.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_nome.setHorizontalAlignment(SwingConstants.LEFT);
-		label_nome.setText("Nome do bolsista");
-		panel_nome.add(label_nome);
-
-		JLabel lblCursoDoBolsista = new JLabel("Curso do bolsista");
-		lblCursoDoBolsista.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		panel_nome.add(lblCursoDoBolsista);
+		JPanel panel_lista = new JPanel();
+		panel_lista.setLayout(new BorderLayout(0, 0));
+		panel_lista.add(getLista());
+		contentPane.add(panel_lista, BorderLayout.WEST);
 
 		panel_checkbox_botoes.add(panel_checkbox, BorderLayout.CENTER);
 		panel_checkbox_botoes.add(panel_botoes, BorderLayout.SOUTH);
@@ -168,6 +216,20 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(panel_lista);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		contentPane.add(scrollPane, BorderLayout.WEST);
+	}
+
+	private void preencherInfo (JPanel panel) {
+
+		labelNome = new JLabel();
+		labelNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		labelNome.setHorizontalAlignment(SwingConstants.LEFT);
+
+		labelCurso = new JLabel();
+		labelCurso.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		labelNome.setHorizontalAlignment(SwingConstants.LEFT);
+
+		panel.add(labelNome);
+		panel.add(labelCurso);
 	}
 
 	private void preencherCheckBox (JPanel panel) {
@@ -199,6 +261,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						btnSalvar.setEnabled(true);
+						isSalvo = false;
 						isCheckBoxVazio();
 					}
 				});
@@ -208,7 +271,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		}
 	}
 
-	private void salvarHorario (String matricula) {
+	private void salvarHorario () {
 
 		int contador = 0;
 		String seg = "";
@@ -219,45 +282,36 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		String sab = "";
 
 		for (int i = 0; i < arrayCheckBox.length; i++) {
-
-			//if (arrayCheckBox[i].isSelected())
-
 			if (i % 6 == 0) {
 				if (arrayCheckBox[i].isSelected())
 					seg = horarios[contador] + "|" + seg;
 				else
 					seg = seg.replace(horarios[contador] + "|", "");
-				System.out.println(/*i + " :: " + horarios[contador]*/seg);
 			}
-			//	System.out.println(contador + ": Seg\n" + horarios[contador]);
 			else if (i % 6 == 1) {
 				if (arrayCheckBox[i].isSelected())
 					ter = horarios[contador] + "|" + ter;
 				else
 					ter = ter.replace(horarios[contador] + "|", "");
 			}
-			//	System.out.println(contador + ": Ter\n" + horarios[contador]);
 			else if (i % 6 == 2) {
 				if (arrayCheckBox[i].isSelected())
 					qua = horarios[contador] + "|" + qua;
 				else
 					qua = qua.replace(horarios[contador] + "|", "");
 			}
-			//	System.out.println(contador + ": Qua\n" + horarios[contador]);
 			else if (i % 6 == 3) {
 				if (arrayCheckBox[i].isSelected())
 					qui = horarios[contador] + "|" + qui;
 				else
 					qui = qui.replace(horarios[contador] + "|", "");
 			}
-			//	System.out.println(contador + ": Qui\n" + horarios[contador]);
 			else if (i % 6 == 4) {
 				if (arrayCheckBox[i].isSelected())
 					sex = horarios[contador] + "|" + sex;
 				else
 					sex = sex.replace(horarios[contador] + "|", "");
 			}
-			//	System.out.println(contador + ": Sex\n" + horarios[contador]);
 			else {
 				if (arrayCheckBox[i].isSelected())
 					sab = horarios[contador] + "|" + sab;
@@ -265,33 +319,24 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 					sab = sab.replace(horarios[contador] + "|", "");
 				contador++;
 			}
-			//	System.out.println(contador + ": Sab\n" + horarios[contador]);
 		}
 
-		Horario horario = new DAO().buscarHorarioBolsista(matricula);
-		String segunda = horario.getSegunda();
-		String terca = horario.getTerca();
-		String quarta = horario.getQuarta();
-		String quinta = horario.getQuinta();
-		String sexta = horario.getSexta();
-		String sabado = horario.getSabado();
-
-		System.out.println(seg.equals(segunda));
-
-		//if (seg.equals(segunda) && ter.equals(terca) && qua.equals(quarta)
-		//	&& qui.equals(quinta) && sex.equals(sexta) && sab.equals(sabado))
-		//	JOptionPane.showMessageDialog(panel, "Nenhuma alteração foi feita!");
-		//else
-		new DAO().cadastrHorarioBolsista(new Horario(seg, ter, qua, qui, sex, sab), matricula);
+		new DAO().cadastrHorarioBolsista(new Horario(seg, ter, qua, qui, sex, sab), matriculaSelecionada);
 		btnSalvar.setEnabled(false);
-
+		isSalvo = true;
 	}
 
-	private void atualizarPainel (String matric) {
+	private void atualizarInfo () {
+
+		labelNome.setText(nomeSelecionado);
+		labelCurso.setText(cursoSelecionado);
+	}
+
+	private void atualizarPainel () {
 
 		int contador = 0;
 
-		Horario horario = new DAO().buscarHorarioBolsista(matric);
+		Horario horario = new DAO().buscarHorarioBolsista(matriculaSelecionada);
 		String segunda = horario.getSegunda();
 		String terca = horario.getTerca();
 		String quarta = horario.getQuarta();
@@ -303,10 +348,8 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 
 		for (int i = 0; i < arrayCheckBox.length; i++) {
 			if (i % 6 == 0)
-				if (segunda.contains(horarios[contador])) {
+				if (segunda.contains(horarios[contador]))
 					arrayCheckBox[i].setSelected(true);
-					arrayCheckBox[i].setBackground(Color.RED);
-				}
 				else
 					arrayCheckBox[i].setSelected(false);
 

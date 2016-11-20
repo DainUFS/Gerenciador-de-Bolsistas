@@ -44,7 +44,6 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 734, 500);
 		contentPane = new JPanel();
-		contentPane.setBorder(null);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
