@@ -242,6 +242,21 @@ public class TelaPrincipal extends JFrame {
 		contentPane.add(splitPane, BorderLayout.CENTER);
 		
 		organizaTabela(panelCentro);
+		
+		JPanel panel_2 = new JPanel();
+		contentPane.add(panel_2, BorderLayout.SOUTH);
+		
+		JLabel label_Nomeadm = new JLabel(adm.getNome());
+		panel_2.add(label_Nomeadm);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBackground(Color.YELLOW);
+		separator_1.setForeground(Color.BLUE);
+		separator_1.setOrientation(SwingConstants.VERTICAL);
+		panel_2.add(separator_1);
+		
+		JLabel lblMurilo = new JLabel("Murilo");
+		panel_2.add(lblMurilo);
 	}
 
 	private void organizaTabela(JPanel panel) {

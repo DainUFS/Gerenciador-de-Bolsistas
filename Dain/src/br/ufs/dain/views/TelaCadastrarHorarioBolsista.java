@@ -82,7 +82,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 	public TelaCadastrarHorarioBolsista() {
 
 		setLocationRelativeTo(null);
-		setBounds(100, 100, 800, 550);
+		setBounds(100, 100, 830, 570);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(204, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 10, 10, 10));
@@ -108,14 +108,14 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 	private JList<String> getLista () {
 
 		JList<String> list = new JList<String>();
-		list.setBorder(new EmptyBorder(0, 3, 0, 30));
+		list.setBorder(new EmptyBorder(1, 1, 1, 1));
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		DefaultListModel<String> listModel = new DefaultListModel<String>();
 		ArrayList<Bolsista> listaBolsista = new DAO().buscarBolsistas();
 
 		for (int i = 0; i < listaBolsista.size(); i++)
-			listModel.addElement(listaBolsista.get(i).getNome());
+			listModel.addElement(listaBolsista.get(i).getNome() + "          ");
 
 		list.addListSelectionListener(new ListSelectionListener() {
 			@Override
@@ -152,7 +152,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 
 		int opcaoEscolhida = JOptionPane.showConfirmDialog(contentPane,
 				"<html>Deseja salvar as alterações feitas em <b>" + nomeSelecionado + "</b> antes de sair?</html>",
-				"Há alterações não salvas", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+				"Há alterações não salvas", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
 		if (opcaoEscolhida == JOptionPane.YES_OPTION)
 			salvarHorario();
@@ -199,6 +199,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		panel_checkbox_botoes.setLayout(new BorderLayout(0, 2));
 
 		JPanel panel_nome = new JPanel();
+		panel_nome.setBorder(new EmptyBorder(0, 0, 2, 0));
 		panel_nome.setBackground(new Color(204, 204, 255));
 		panel_checkbox_botoes.add(panel_nome, BorderLayout.NORTH);
 		panel_nome.setLayout(new GridLayout(2, 1, 0, 0));
@@ -211,11 +212,26 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 
 		panel_checkbox_botoes.add(panel_checkbox, BorderLayout.CENTER);
 		panel_checkbox_botoes.add(panel_botoes, BorderLayout.SOUTH);
-		contentPane.add(panel_checkbox_botoes, BorderLayout.CENTER);
+		//contentPane.add(panel_checkbox_botoes, BorderLayout.CENTER);
 
 		JScrollPane scrollPane = new JScrollPane(panel_lista);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		contentPane.add(scrollPane, BorderLayout.WEST);
+		//contentPane.add(scrollPane, BorderLayout.WEST);
+		
+		JPanel panel_dica = new JPanel();
+		panel_dica.setBackground(new Color(255, 255, 153));
+		contentPane.add(panel_dica, BorderLayout.NORTH);
+		
+		JPanel panel_ = new JPanel();
+		panel_.setBorder(new EmptyBorder(5, 0, 0, 0));
+		panel_.setBackground(new Color(204, 204, 255));
+		panel_.setLayout(new BorderLayout(0, 0));
+		panel_.add(panel_checkbox_botoes, BorderLayout.CENTER);
+		panel_.add(scrollPane, BorderLayout.WEST);
+		contentPane.add(panel_);
+		
+		JLabel lblSelecioneUmBolsista = new JLabel("Selecione um bolsista na lista da esquerda e em seguida marque os hor\u00E1rios que ele(a) n\u00E3o pode exercer sua fun\u00E7\u00E3o.");
+		panel_dica.add(lblSelecioneUmBolsista);
 	}
 
 	private void preencherInfo (JPanel panel) {
@@ -225,7 +241,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		labelNome.setHorizontalAlignment(SwingConstants.LEFT);
 
 		labelCurso = new JLabel();
-		labelCurso.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		labelCurso.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		labelNome.setHorizontalAlignment(SwingConstants.LEFT);
 
 		panel.add(labelNome);
