@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
--- Host: localhost    Database: bd_dain
+-- Host: 127.0.0.1    Database: banco_dain
 -- ------------------------------------------------------
--- Server version	5.7.15-log
+-- Server version	5.7.16-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -48,7 +48,7 @@ CREATE TABLE `t_deficiente` (
 
 LOCK TABLES `t_deficiente` WRITE;
 /*!40000 ALTER TABLE `t_deficiente` DISABLE KEYS */;
-INSERT INTO `t_deficiente` VALUES ('20122012','Tarantino','09876543','@souSangrento','Pulp Fiction','M','1','sangue','32509874',22),('789456','77 54852363','@murilo.com','João das neve','Cuscuz','M','1','Viadagem','21',23),('matricY','nomeY','telY','emailY','cursoY','F','0','Transpira viadagem','12345',24),('odisseia2001','Stanley Kubrick','987455452','@kubrick','Iluminado','M','1','louco','32509874',25);
+INSERT INTO `t_deficiente` VALUES ('19992999','@carlos','Carlos','23455','Urbanismo','M','1','cego','21',NULL),('200110019898','Lucas Souza','12345678','@luquinhas','Cinema','M','1','Deficiência Visual','21',NULL),('20122012','Tarantino','09876543','@souSangrento','Pulp Fiction','M','1','sangue','32509874',22),('789456','77 54852363','@murilo.com','João das neve','Cuscuz','M','1','Viadagem','21',23),('matricY','nomeY','telY','emailY','cursoY','F','0','Transpira viadagem','12345',24),('odisseia2001','Stanley Kubrick','987455452','@kubrick','Iluminado','M','1','louco','32509874',25);
 /*!40000 ALTER TABLE `t_deficiente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -61,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-10 10:34:11
+-- Dump completed on 2016-11-25  0:17:52

@@ -5,9 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import br.ufs.dain.conexao.Conexao;
 import br.ufs.dain.modelo.Administrador;
+import br.ufs.dain.modelo.Bolsista;
 
 public class GerenciadorAdministrador {
 	Conexao conexao = new Conexao();
@@ -62,11 +64,12 @@ public class GerenciadorAdministrador {
 
 	}
 
-	public Administrador buscarAdm(String matric, String senha) throws SQLException {
+	public Administrador buscarAdmAtivo(String matric, String senha) throws SQLException {
 
 		conn = conexao.getConexaoMySQL();
 
-		String sql = "SELECT * FROM t_adm " + "WHERE a_matricula = ? and a_senha = ?";
+		String sql = "SELECT * FROM t_adm " + "WHERE a_matricula = ? "
+				+ "and a_senha = ? and a_status = 1";
 
 		Administrador adm = null;
 
@@ -110,5 +113,32 @@ public class GerenciadorAdministrador {
 
 		return adm;
 	}
+	
+	public ArrayList<Administrador> listarAdm() throws SQLException{
+		
+		conn = conexao.getConexaoMySQL();
+		
+		ArrayList<Administrador> listaAdminstrador = new ArrayList<>();
+		Administrador adm;
+		
+		String sql = "SELECT * FROM t_adm WHERE a_status = 1";
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+
+		ResultSet rs = (ResultSet) stmt.executeQuery();
+		
+		while (rs.next()) {
+			adm = new Administrador(rs.getString("a_telefone"), rs.getString("a_email"), rs.getString("a_nome"),
+					rs.getString("a_matricula"), rs.getString("a_senha"),
+					rs.getInt("a_status"));
+			
+			listaAdminstrador.add(adm);
+		}
+				
+		conn.close();
+		
+		return listaAdminstrador;
+	}
+	
 
 }

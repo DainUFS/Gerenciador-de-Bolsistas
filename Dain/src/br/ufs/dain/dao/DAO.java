@@ -147,7 +147,7 @@ public class DAO implements InterfaceDAO {
 	@Override
 	public Administrador buscarAdm(String matric, String senha) {
 		try {
-			return gAdm.buscarAdm(matric, senha);
+			return gAdm.buscarAdmAtivo(matric, senha);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

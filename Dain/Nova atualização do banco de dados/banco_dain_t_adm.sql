@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
--- Host: localhost    Database: bd_dain
+-- Host: 127.0.0.1    Database: banco_dain
 -- ------------------------------------------------------
--- Server version	5.7.15-log
+-- Server version	5.7.16-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,29 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `t_acompanhamento`
+-- Table structure for table `t_adm`
 --
 
-DROP TABLE IF EXISTS `t_acompanhamento`;
+DROP TABLE IF EXISTS `t_adm`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_acompanhamento` (
-  `a_d_matricula` varchar(12) NOT NULL,
-  `a_b_matricula` varchar(12) NOT NULL,
-  PRIMARY KEY (`a_d_matricula`,`a_b_matricula`),
-  KEY `a_b_matricula_idx` (`a_b_matricula`),
-  CONSTRAINT `a_b_matricula` FOREIGN KEY (`a_b_matricula`) REFERENCES `t_bolsista` (`b_matricula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `a_d_matricula` FOREIGN KEY (`a_d_matricula`) REFERENCES `t_deficiente` (`d_matricula`) ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE `t_adm` (
+  `a_matricula` varchar(8) NOT NULL,
+  `a_nome` varchar(45) NOT NULL,
+  `a_email` varchar(45) NOT NULL,
+  `a_telefone` varchar(15) NOT NULL,
+  `a_status` int(11) NOT NULL,
+  `a_senha` varchar(45) NOT NULL,
+  PRIMARY KEY (`a_matricula`),
+  UNIQUE KEY `a_matricula_UNIQUE` (`a_matricula`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_acompanhamento`
+-- Dumping data for table `t_adm`
 --
 
-LOCK TABLES `t_acompanhamento` WRITE;
-/*!40000 ALTER TABLE `t_acompanhamento` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_acompanhamento` ENABLE KEYS */;
+LOCK TABLES `t_adm` WRITE;
+/*!40000 ALTER TABLE `t_adm` DISABLE KEYS */;
+INSERT INTO `t_adm` VALUES ('123','Murilo dos Bugs','@cuscuz.com','741',1,'123'),('1234','A','1234567','123456',1,'1234'),('12345','Szzana','@susana.com','56754656746546',1,'12345'),('21','Tarantino','@KillBill','78451235',0,'21'),('32509874','Kubrick','@odisseia','113456',1,'789456'),('44444444','Kiko','@tesouro.com','5585416',0,'555'),('matricZ','nomeZ','emailZ','telZ',1,'1'),('wef','eqwfew','efwe','ef',1,'feewq');
+/*!40000 ALTER TABLE `t_adm` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-10 10:34:11
+-- Dump completed on 2016-11-25  0:17:52

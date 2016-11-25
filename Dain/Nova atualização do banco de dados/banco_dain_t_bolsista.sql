@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
--- Host: localhost    Database: bd_dain
+-- Host: 127.0.0.1    Database: banco_dain
 -- ------------------------------------------------------
--- Server version	5.7.15-log
+-- Server version	5.7.16-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -48,7 +48,7 @@ CREATE TABLE `t_bolsista` (
 
 LOCK TABLES `t_bolsista` WRITE;
 /*!40000 ALTER TABLE `t_bolsista` DISABLE KEYS */;
-INSERT INTO `t_bolsista` VALUES ('3123','312','23','22','123','3',NULL,1,'12345',25),('6543','Stanley Kubrick','369852','@murilo_de_milho','CC','F','',1,'12345',22),('789456123','Billy Wilder','@icaro','Icaro','Ciência','F','',1,'12345',23),('dweq','dwe','qd','dw','sd','M',NULL,0,'12345',51),('matricX','Stiven Spelberg','telX','emailX','cursoX','M','',0,'12345',24);
+INSERT INTO `t_bolsista` VALUES ('20007000','Icaro','989999899','@icaro','Arquiterua','M',NULL,0,'21',NULL),('3123','312','23','22','123','3',NULL,1,'12345',25),('6543','Stanley Kubrick','369852','@murilo_de_milho','CC','F','',1,'12345',22),('789456123','Billy Wilder','@icaro','Icaro','Ciência','F','',1,'12345',23),('dweq','dwe','qd','dw','sd','M',NULL,0,'12345',51),('matricX','Stiven Spelberg','telX','emailX','cursoX','M','',0,'12345',24);
 /*!40000 ALTER TABLE `t_bolsista` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -61,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-10 10:34:11
+-- Dump completed on 2016-11-25  0:17:52

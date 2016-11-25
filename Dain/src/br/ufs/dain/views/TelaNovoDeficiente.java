@@ -187,9 +187,9 @@ public class TelaNovoDeficiente extends JDialog {
 						else if (rdbtnFeminino.isSelected())
 							sexoSelecionado = "F";
 						
-						Deficiente d = new Deficiente(textField_nome.getText().toString(),
-								textField_telefone.getText().toString(),
+						Deficiente d = new Deficiente(textField_telefone.getText().toString(),
 								textField_email.getText().toString(),
+								textField_nome.getText().toString(),
 								textField_curso.getText().toString(),
 								textField_matricula.getText().toString(),
 								sexoSelecionado,

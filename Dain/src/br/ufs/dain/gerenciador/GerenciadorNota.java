@@ -58,23 +58,48 @@ public class GerenciadorNota {
 		conn.close();
 
 	}
+	
+	public int buscarId(String anotacao) throws SQLException{
+		int id = 0;
+		
+		conn = conexao.getConexaoMySQL();
+		
+		String sql = "SELECT n_id FROM banco_dain.t_nota WHERE n_anotacao = ?";
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
-	/*public void deletaNota(String anotacao) {
+		stmt.setString(1, anotacao);
+		
+		ResultSet rs = (ResultSet) stmt.executeQuery();
+
+		while (rs.next()) {
+			id = rs.getInt("n_id");
+		}
+
+		conn.close();
+		
+		return id;
+	}
+
+	public void deletaNota(String anotacao) throws SQLException {
 		Nota nota;
 
 		conn = conexao.getConexaoMySQL();
 
-		String sql = "UPDATE t_nota SET n_anotacao = ? WHERE n_fk_adm = ?";
+		String sql = "DELETE FROM t_nota WHERE n_id = ?";
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
-		stmt.setString(1, nota.getAnotacao() + " " + novaAnotacao);
-		stmt.setString(2, matric);
-
+		stmt.setInt(1, new GerenciadorNota().buscarId(anotacao));
+		
 		stmt.execute();
 		stmt.close();
 
 		conn.close();
 	}
-*/
+	
+	public static void main(String[] args) throws SQLException {
+		new GerenciadorNota().deletaNota("aaa");
+	}
+
 }

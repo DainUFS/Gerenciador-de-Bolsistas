@@ -107,7 +107,7 @@ public class GerenciadorBolsista {
 		ArrayList<Bolsista> listaBolsistas = new ArrayList<>();
 		Bolsista bolsista;
 		
-		String sql = "SELECT * FROM t_bolsista";
+		String sql = "SELECT * FROM t_bolsista WHERE b_status = 1";
 		
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 

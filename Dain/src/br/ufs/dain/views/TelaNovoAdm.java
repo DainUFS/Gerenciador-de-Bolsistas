@@ -163,9 +163,9 @@ public class TelaNovoAdm extends JDialog {
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						
-						Administrador adm = new Administrador(textField_nome.getText().toString(),
-								textField_telefone.getText().toString(),
+						Administrador adm = new Administrador(textField_telefone.getText().toString(),
 								textField_email.getText().toString(),
+								textField_nome.getText().toString(),
 								textField_matricula.getText().toString(),
 								passwordField_senha.getText().toString(), 1);
 						

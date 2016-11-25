@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import br.ufs.dain.conexao.Conexao;
+import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Deficiente;
 
 public class GerenciadorDeficiente {
@@ -96,6 +98,38 @@ public class GerenciadorDeficiente {
 		conn.close();
 
 		return deficiente;
+	}
+	
+	public ArrayList<Deficiente> listarDeficiente() throws SQLException {
+
+		conn = conexao.getConexaoMySQL();
+		
+		ArrayList<Deficiente> listaDeficiente = new ArrayList<>();
+		Deficiente deficiente;
+		
+		String sql = "SELECT * FROM t_deficiente WHERE d_status = 1";
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+
+		ResultSet rs = (ResultSet) stmt.executeQuery();
+		
+		while (rs.next()) {
+			deficiente = new Deficiente(rs.getString("d_telefone"), 
+					rs.getString("d_email"), 
+					rs.getString("d_nome"),
+					rs.getString("d_curso"), 
+					rs.getString("d_matricula"), 
+					rs.getString("d_sexo"), 
+					gHor.buscarHorario(rs.getInt("d_fk_horario")),
+					rs.getString("d_tipoDeficiencia"), 
+					rs.getInt("d_status"));
+			
+			listaDeficiente.add(deficiente);
+		}
+				
+		conn.close();
+
+		return listaDeficiente;
 	}
 
 }
