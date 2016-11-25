@@ -184,4 +184,30 @@ public class DAO implements InterfaceDAO {
 	public static void main(String[] args) {
 		System.out.println(new DAO().buscarHorarioBolsista("6543").getSegunda());
 	}
+
+	@Override
+	public ArrayList<Deficiente> buscarDeficiente() {
+		// TODO Auto-generated method stub
+		try {
+			return gDef.listarDeficiente();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+
+	@Override
+	public ArrayList<Administrador> buscarAdm() {
+		try {
+			return gAdm.listarAdm();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 }

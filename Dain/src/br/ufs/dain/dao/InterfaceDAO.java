@@ -18,6 +18,8 @@ public interface InterfaceDAO {
 	
 	public boolean cadastrHorarioDef(Horario h, String matric);
 	
+	public ArrayList<Deficiente> buscarDeficiente ();
+	
 	
 	public boolean cadastraBolsista(Bolsista d, String matricAdm);
 	
@@ -27,7 +29,7 @@ public interface InterfaceDAO {
 	
 	public boolean cadastrHorarioBolsista(Horario h, String matric);
 	
-	public ArrayList<Bolsista> buscarBolsistas ();
+	public ArrayList<Bolsista> buscarBolsistas();
 	
 	public Horario buscarHorarioBolsista(String matricula);
 	
@@ -37,6 +39,8 @@ public interface InterfaceDAO {
 	public boolean validarLogin(Login login);
 	
 	public Administrador buscarAdm(String matric, String senha);
+	
+	public ArrayList<Administrador> buscarAdm();
 	
 	
 }
