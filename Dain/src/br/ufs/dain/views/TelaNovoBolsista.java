@@ -78,6 +78,7 @@ public class TelaNovoBolsista extends JDialog {
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(new Color(255, 255, 153));
 			panel.setBorder(new EmptyBorder(0, 0, 0, 0));
 			contentPanel.add(panel, BorderLayout.NORTH);
 			{
@@ -85,7 +86,7 @@ public class TelaNovoBolsista extends JDialog {
 				lblCadastreUmNovo.setIcon(null);
 				panel.add(lblCadastreUmNovo);
 				lblCadastreUmNovo.setHorizontalAlignment(SwingConstants.CENTER);
-				lblCadastreUmNovo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+				lblCadastreUmNovo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			}
 		}
 		JPanel panel = new JPanel();
@@ -180,7 +181,6 @@ public class TelaNovoBolsista extends JDialog {
 			panel_1.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			{
 				JButton button = new JButton("Salvar");
-				button.setBackground(new Color(0, 0, 255));
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						
@@ -206,7 +206,6 @@ public class TelaNovoBolsista extends JDialog {
 			}
 			{
 				JButton button = new JButton("Cancelar");
-				button.setBackground(new Color(0, 0, 255));
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();

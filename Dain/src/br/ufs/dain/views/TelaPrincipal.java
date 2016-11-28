@@ -29,7 +29,13 @@ import javax.swing.tree.DefaultTreeModel;
 import br.ufs.dain.dao.DAO;
 import br.ufs.dain.modelo.Administrador;
 import br.ufs.dain.modelo.Bolsista;
+import br.ufs.dain.modelo.Deficiente;
+
 import java.awt.Color;
+import java.awt.Component;
+import javax.swing.Box;
+import javax.swing.UIManager;
+import java.awt.Insets;
 
 public class TelaPrincipal extends JFrame {
 
@@ -74,11 +80,13 @@ public class TelaPrincipal extends JFrame {
 																							// diferente
 		
 		setExtendedState(MAXIMIZED_BOTH);
-		setTitle("Divis\u00E3o de A\u00E7\u00F5es Inclusivas - Dain");
+		setTitle("Divis\u00E3o de A\u00E7\u00F5es Inclusivas - Universidade Federal de Sergipe");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 346);
 
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setMargin(new Insets(2, 2, 2, 2));
+		menuBar.setBorderPainted(false);
 		setJMenuBar(menuBar);
 
 		JMenu mnItem = new JMenu("Arquivo");
@@ -167,8 +175,7 @@ public class TelaPrincipal extends JFrame {
 		//
 
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(204, 204, 255));
-		contentPane.setBorder(new EmptyBorder(0, 2, 2, 2));
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
@@ -196,7 +203,7 @@ public class TelaPrincipal extends JFrame {
 		ArrayList<Bolsista> bolsistas = new DAO().buscarBolsistas();
 		
 		JTree tree = new JTree();
-		tree.setBorder(new EmptyBorder(2, 2, 2, 2));
+		tree.setBorder(new EmptyBorder(3, 2, 3, 2));
 		tree.setRootVisible(false);
 		tree.setModel(new DefaultTreeModel(
 			new DefaultMutableTreeNode("JTree") {
@@ -226,6 +233,7 @@ public class TelaPrincipal extends JFrame {
 				}
 			}
 		));
+		expandAllNodes(tree, 0, 3);
 		panel.add(tree);
 		JScrollPane scrollPane_2 = new JScrollPane(panel_1);
 		
@@ -233,30 +241,25 @@ public class TelaPrincipal extends JFrame {
 		panel_1.add(label_adm);
 
 		JSplitPane splitPane_1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, scrollPane_1, scrollPane_2);
+		splitPane_1.setContinuousLayout(true);
 		splitPane_1.setResizeWeight(0.5);
 		splitPane_1.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		contentPane.add(splitPane_1, BorderLayout.NORTH);
+		contentPane.add(splitPane_1, BorderLayout.EAST);
 		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, tabbedPane, splitPane_1);
+		splitPane.setContinuousLayout(true);
+		splitPane.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
 		splitPane.setResizeWeight(0.8);
 		contentPane.add(splitPane, BorderLayout.CENTER);
 		
 		organizaTabela(panelCentro);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
 		contentPane.add(panel_2, BorderLayout.SOUTH);
 		
 		JLabel label_Nomeadm = new JLabel(adm.getNome());
 		panel_2.add(label_Nomeadm);
-		
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setBackground(Color.YELLOW);
-		separator_1.setForeground(Color.BLUE);
-		separator_1.setOrientation(SwingConstants.VERTICAL);
-		panel_2.add(separator_1);
-		
-		JLabel lblMurilo = new JLabel("Murilo");
-		panel_2.add(lblMurilo);
 	}
 
 	private void organizaTabela(JPanel panel) {

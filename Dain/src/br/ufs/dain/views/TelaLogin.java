@@ -118,9 +118,8 @@ public class TelaLogin extends JFrame {
 					Administrador adm = new DAO().buscarAdm(s1, s2);
 					
 					TelaPrincipal telaPrincipal = new TelaPrincipal(adm);
-					//telaPrincipal.setExtendedState(MAXIMIZED_BOTH);
 					telaPrincipal.setVisible(true);
-					
+					///////////////////// um errão a tratar aqui
 				} else {
 					System.out.println("NÃO ENTROU!");
 				}
