@@ -81,7 +81,7 @@ public class GerenciadorAdministrador {
 		ResultSet rs = (ResultSet) stmt.executeQuery();
 
 		while (rs.next()) {
-			adm = new Administrador(rs.getString("a_nome"), rs.getString("a_telefone"), rs.getString("a_email"), matric,
+			adm = new Administrador(rs.getString("a_telefone"), rs.getString("a_email"), rs.getString("a_nome"), matric,
 					senha, rs.getInt("a_status"));
 		}
 

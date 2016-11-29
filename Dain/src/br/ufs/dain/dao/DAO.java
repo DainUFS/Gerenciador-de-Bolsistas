@@ -182,7 +182,7 @@ public class DAO implements InterfaceDAO {
 
 	
 	public static void main(String[] args) {
-		System.out.println(new DAO().buscarHorarioBolsista("6543").getSegunda());
+		System.out.println(new DAO().buscarAdm("794613", "xurita").getNome());
 	}
 
 	@Override
