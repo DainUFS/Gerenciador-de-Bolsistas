@@ -48,12 +48,12 @@ public class DAO implements InterfaceDAO {
 
 	@Override
 	public Deficiente getDeficienteNome(String nome) {
-//		try {
-//			gDef.buscarDeficienteNome(nome);
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			gDef.buscarDeficienteNome(nome);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -120,19 +120,19 @@ public class DAO implements InterfaceDAO {
 
 	@Override
 	public boolean cadastrHorarioDef(Horario h, String matric) {
-		// TODO Auto-generated method stub
+	/*	// TODO Auto-generated method stub
 		try {
-			gHor.aramazenarHorarioDef(h, matric);
+			//gHor.aramazenarHorarioDef(h, matric);
 			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		return false;
 	}
 	
 	@Override
-	public boolean cadastrHorarioBolsista(Horario h, String matric) {
+	public boolean cadastrarHorarioBolsista(Horario h, String matric) {
 		try {
 			gHor.aramazenarHorarioBol(h, matric);
 			return true;

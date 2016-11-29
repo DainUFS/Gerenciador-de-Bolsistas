@@ -22,7 +22,7 @@ public class Conexao {
 	 
 	        	String serverName = "localhost:3306";    //caminho do servidor do BD
 	 
-	        	String mydatabase = "banco_dain";        //nome do seu banco de dados
+	        	String mydatabase = "bd_dain";        //nome do seu banco de dados
 	 
 	        	String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
 	 

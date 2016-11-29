@@ -68,8 +68,8 @@ public class GerenciadorAdministrador {
 
 		conn = conexao.getConexaoMySQL();
 
-		String sql = "SELECT * FROM t_adm " + "WHERE a_matricula = ? "
-				+ "and a_senha = ? and a_status = 1";
+		String sql = "SELECT * FROM t_adm WHERE a_matricula = ? "
+				+ "AND a_senha = ? AND a_status = 1";
 
 		Administrador adm = null;
 

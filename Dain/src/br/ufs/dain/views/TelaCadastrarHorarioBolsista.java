@@ -337,7 +337,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 			}
 		}
 
-		new DAO().cadastrHorarioBolsista(new Horario(seg, ter, qua, qui, sex, sab), matriculaSelecionada);
+		new DAO().cadastrarHorarioBolsista(new Horario(seg, ter, qua, qui, sex, sab), matriculaSelecionada);
 		btnSalvar.setEnabled(false);
 		isSalvo = true;
 	}

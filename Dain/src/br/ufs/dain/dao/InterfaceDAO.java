@@ -27,7 +27,7 @@ public interface InterfaceDAO {
 	
 	public Bolsista getBolsistaNome(String nome);
 	
-	public boolean cadastrHorarioBolsista(Horario h, String matric);
+	public boolean cadastrarHorarioBolsista(Horario h, String matric);
 	
 	public ArrayList<Bolsista> buscarBolsistas();
 	
