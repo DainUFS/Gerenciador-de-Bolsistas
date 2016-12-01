@@ -189,6 +189,7 @@ public class GerenciadorBolsista {
 		
 	}
 	
+	
 //	public static void main(String[] args) throws SQLException {
 //		//System.out.println(new GerenciadorBolsista().buscarIdHr("5823"));
 //		Horario h = new Horario("11:00h - 12:00h|", 

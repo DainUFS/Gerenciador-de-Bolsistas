@@ -71,7 +71,6 @@ public class GerenciadorHorario {
 		return id;
 	}
 	
-	
 	public void atualizarHorario(Horario h, int id) throws SQLException{
 		
 		conn = conexao.getConexaoMySQL();
@@ -126,8 +125,6 @@ public class GerenciadorHorario {
 
 	}
 
-	
-	
 	
 	public static void main(String[] args) throws SQLException {
 		GerenciadorHorario g = new GerenciadorHorario();
