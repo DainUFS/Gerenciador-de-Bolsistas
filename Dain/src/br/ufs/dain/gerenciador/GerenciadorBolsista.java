@@ -188,8 +188,6 @@ public class GerenciadorBolsista {
 		}
 		
 	}
-
-	
 	
 	public static void main(String[] args) throws SQLException {
 		//System.out.println(new GerenciadorBolsista().buscarIdHr("5823"));

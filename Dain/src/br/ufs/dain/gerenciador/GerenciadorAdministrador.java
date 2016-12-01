@@ -140,5 +140,4 @@ public class GerenciadorAdministrador {
 		return listaAdminstrador;
 	}
 	
-
 }

@@ -124,7 +124,6 @@ public class GerenciadorHorario {
 		return horario;
 
 	}
-
 	
 	public static void main(String[] args) throws SQLException {
 		GerenciadorHorario g = new GerenciadorHorario();
