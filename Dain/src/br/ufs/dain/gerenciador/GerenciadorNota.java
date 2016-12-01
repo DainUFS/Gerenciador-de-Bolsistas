@@ -23,7 +23,7 @@ public class GerenciadorNota {
 
 		conn = conexao.getConexaoMySQL();
 
-		String sql = "SELECT * FROM t_nota WHERE n_fk_adm = ?";
+		String sql = "SELECT * F'ROM t_nota WHERE n_fk_adm = ?";
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
@@ -99,7 +99,8 @@ public class GerenciadorNota {
 	}
 	
 	public static void main(String[] args) throws SQLException {
-		new GerenciadorNota().deletaNota("aaa");
+		//System.out.println(new GerenciadorNota().buscarNota("32509874").getAnotacao());
+		new GerenciadorNota().deletaNota("Anotacao01");
 	}
 
 }

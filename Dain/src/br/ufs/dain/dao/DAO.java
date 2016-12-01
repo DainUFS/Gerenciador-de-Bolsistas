@@ -14,6 +14,7 @@ import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Deficiente;
 import br.ufs.dain.modelo.Horario;
 import br.ufs.dain.modelo.Login;
+import br.ufs.dain.modelo.Nota;
 
 public class DAO implements InterfaceDAO {
 	
@@ -40,7 +41,6 @@ public class DAO implements InterfaceDAO {
 		try {
 			gDef.buscarDeficienteMatricula(matricula);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -51,7 +51,6 @@ public class DAO implements InterfaceDAO {
 		try {
 			gDef.buscarDeficienteNome(nome);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -71,11 +70,9 @@ public class DAO implements InterfaceDAO {
 
 	@Override
 	public Bolsista getBolsistaMatricula(String matric) {
-		// TODO Auto-generated method stub
 		try {
 			return gBol.buscarBolsistaMatricula(matric);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -86,7 +83,6 @@ public class DAO implements InterfaceDAO {
 		try {
 			gBol.buscarBolsistaNome(nome);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -105,29 +101,24 @@ public class DAO implements InterfaceDAO {
 
 	@Override
 	public boolean validarLogin(Login login) {
-		// TODO Auto-generated method stub
-
 		try {
 			if(gAdm.buscarSenhaAdm(login.getLogin()) != null &&
 					gAdm.buscarSenhaAdm(login.getLogin()).equals(login.getSenha())) 
 				return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
 	}
 
 	@Override
-	public boolean cadastrHorarioDef(Horario h, String matric) {
-	/*	// TODO Auto-generated method stub
+	public boolean cadastrHorarioDeficiente(Horario h, String matric) {
 		try {
-			//gHor.aramazenarHorarioDef(h, matric);
+			gDef.persistirHorario(h, matric);
 			return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		return false;
 	}
 	
@@ -148,7 +139,6 @@ public class DAO implements InterfaceDAO {
 		try {
 			return gAdm.buscarAdmAtivo(matric, senha);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -160,7 +150,6 @@ public class DAO implements InterfaceDAO {
 		try {
 			return gBol.listarBolsistas();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -173,24 +162,16 @@ public class DAO implements InterfaceDAO {
 		try {
 			return gBol.buscarHorarioBolsista(matricula);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	
-	public static void main(String[] args) {
-		System.out.println(new DAO().buscarAdm("794613", "xurita").getNome());
-	}
-
 	@Override
 	public ArrayList<Deficiente> buscarDeficiente() {
-		// TODO Auto-generated method stub
 		try {
 			return gDef.listarDeficiente();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -203,10 +184,38 @@ public class DAO implements InterfaceDAO {
 		try {
 			return gAdm.listarAdm();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return null;
+	}
+
+	@Override
+	public void cadastrarNota(String matric, String anotacao) {
+		try {
+			gNota.armazenarAnotacao(matric, anotacao);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void deletarNota(String anotacao) {
+		try {
+			gNota.deletaNota(anotacao);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public Nota buscarNota(String matric) {
+		Nota nota = null;
+		try {
+			nota = gNota.buscarNota(matric);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return nota;
 	}
 }
