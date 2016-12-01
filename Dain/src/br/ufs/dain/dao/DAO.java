@@ -134,10 +134,9 @@ public class DAO implements InterfaceDAO {
 	@Override
 	public boolean cadastrarHorarioBolsista(Horario h, String matric) {
 		try {
-			gHor.aramazenarHorarioBol(h, matric);
+			gBol.persistirHorario(h, matric);
 			return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
