@@ -29,11 +29,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import br.ufs.dain.dao.DAO;
-import br.ufs.dain.modelo.Bolsista;
+import br.ufs.dain.modelo.Deficiente;
 import br.ufs.dain.modelo.Horario;
 import java.awt.Color;
 
-public class TelaCadastrarHorarioBolsista extends JFrame {
+public class TelaCadastrarHorarioDeficiente extends JFrame {
 
 	/**
 	 * 
@@ -70,7 +70,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 			public void run() {
 				try {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-					TelaCadastrarHorarioBolsista frame = new TelaCadastrarHorarioBolsista();
+					TelaCadastrarHorarioDeficiente frame = new TelaCadastrarHorarioDeficiente();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -79,7 +79,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		});
 	}
 
-	public TelaCadastrarHorarioBolsista() {
+	public TelaCadastrarHorarioDeficiente() {
 
 		setLocationRelativeTo(null);
 		setBounds(100, 100, 830, 570);
@@ -88,7 +88,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 10, 10, 10));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		setTitle("Cadastrar Horário de Bolsista");
+		setTitle("Cadastrar Horário de Deficiente");
 		
 		preencherPainelPrincipal();
 		
@@ -112,10 +112,10 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		DefaultListModel<String> listModel = new DefaultListModel<String>();
-		ArrayList<Bolsista> listaBolsista = new DAO().buscarBolsistas();
+		ArrayList<Deficiente> lista = new DAO().buscarDeficiente();
 
-		for (int i = 0; i < listaBolsista.size(); i++)
-			listModel.addElement(listaBolsista.get(i).getNome() + "          ");
+		for (int i = 0; i < lista.size(); i++)
+			listModel.addElement(lista.get(i).getNome() + "          ");
 
 		list.addListSelectionListener(new ListSelectionListener() {
 			@Override
@@ -128,9 +128,9 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 						if (isSalvo) {
 							btnSalvar.setEnabled(false);
 							indexSelecionado = list.getSelectedIndex();
-							nomeSelecionado = listaBolsista.get(list.getSelectedIndex()).getNome();
-							cursoSelecionado = listaBolsista.get(list.getSelectedIndex()).getCurso();
-							matriculaSelecionada = listaBolsista.get(list.getSelectedIndex()).getMatricula();
+							nomeSelecionado = lista.get(list.getSelectedIndex()).getNome();
+							cursoSelecionado = lista.get(list.getSelectedIndex()).getCurso();
+							matriculaSelecionada = lista.get(list.getSelectedIndex()).getMatricula();
 							atualizarInfo();
 							atualizarPainel();
 							isCheckBoxVazio();
@@ -230,8 +230,8 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		panel_.add(scrollPane, BorderLayout.WEST);
 		contentPane.add(panel_);
 		
-		JLabel lblSelecioneUmBolsista = new JLabel("Selecione um bolsista na lista da esquerda e em seguida marque os hor\u00E1rios que ele(a) n\u00E3o pode exercer sua fun\u00E7\u00E3o.");
-		panel_dica.add(lblSelecioneUmBolsista);
+		JLabel lblSelecioneUmDeficiente = new JLabel("Selecione um deficiente na lista da esquerda e em seguida marque os hor\u00E1rios que ele(a) n\u00E3o pode exercer sua fun\u00E7\u00E3o.");
+		panel_dica.add(lblSelecioneUmDeficiente);
 	}
 
 	private void preencherInfo (JPanel panel) {
@@ -337,7 +337,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 			}
 		}
 
-		new DAO().cadastrarHorarioBolsista(new Horario(seg, ter, qua, qui, sex, sab), matriculaSelecionada);
+		new DAO().cadastrHorarioDeficiente(new Horario(seg, ter, qua, qui, sex, sab), matriculaSelecionada);
 		btnSalvar.setEnabled(false);
 		isSalvo = true;
 	}
@@ -352,7 +352,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 
 		int contador = 0;
 
-		Horario horario = new DAO().buscarHorarioBolsista(matriculaSelecionada);
+		Horario horario = new DAO().buscarHorarioDeficiente(matriculaSelecionada);
 //		String segunda = horario.getSegunda();
 //		String terca = horario.getTerca();
 //		String quarta = horario.getQuarta();

@@ -11,7 +11,8 @@ import br.ufs.dain.modelo.Nota;
 
 public interface InterfaceDAO {
 	
-	//Bolsista
+	
+	//Deficiente
 	public boolean cadastraDeficiente(Deficiente d, String matricAdm);
 	
 	public Deficiente getDeficienteMatricula(String matricula);
@@ -22,8 +23,10 @@ public interface InterfaceDAO {
 	
 	public ArrayList<Deficiente> buscarDeficiente ();
 	
+	public Horario buscarHorarioDeficiente(String matricula);
 	
-	//Deficiente
+	
+	//Bolsista
 	public boolean cadastraBolsista(Bolsista d, String matricAdm);
 	
 	public Bolsista getBolsistaMatricula(String matricula);

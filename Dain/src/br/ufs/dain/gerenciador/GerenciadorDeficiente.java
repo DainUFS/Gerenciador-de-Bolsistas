@@ -175,6 +175,26 @@ public class GerenciadorDeficiente {
 		}
 	}
 	
+	public Horario buscarHorarioDeficiente(String matricula) throws SQLException{
+		int idHor = 0;
+		
+		conn = conexao.getConexaoMySQL();
+		
+		String sql = "SELECT d_fk_horario FROM t_deficiente WHERE d_matricula = ?";
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+
+		stmt.setString(1, matricula);
+
+		ResultSet rs = (ResultSet) stmt.executeQuery();
+		
+		while (rs.next()) {
+			idHor = rs.getInt("d_fk_horario");
+		}
+		
+		return gHor.buscarHorario(idHor);
+	}
+	
 	public static void main(String[] args) throws SQLException {
 		Horario h = new Horario("MUDOU", 
 				"MUDOU", 

@@ -218,4 +218,14 @@ public class DAO implements InterfaceDAO {
 		}
 		return nota;
 	}
+
+	@Override
+	public Horario buscarHorarioDeficiente(String matricula) {
+		try {
+			return gDef.buscarHorarioDeficiente(matricula);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

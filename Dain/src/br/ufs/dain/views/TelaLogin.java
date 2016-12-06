@@ -117,10 +117,10 @@ public class TelaLogin extends JFrame {
 						dispose();
 						new TelaPrincipal(new DAO().buscarAdm(matricula, senha)).setVisible(true);
 					} else {
-						JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos");
+						JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos.");
 					}
 				} catch (SQLException e1) {
-					JOptionPane.showMessageDialog(null, "Não foi possivel a Conexão ao Banco de Dados.");
+					JOptionPane.showMessageDialog(null, "Não foi possivel a conectar ao banco de dados.");
 					e1.printStackTrace();
 				}
 			}
