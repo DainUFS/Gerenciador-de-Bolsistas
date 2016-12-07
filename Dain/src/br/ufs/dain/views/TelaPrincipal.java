@@ -298,11 +298,22 @@ public class TelaPrincipal extends JFrame {
 
 		JMenuItem mntmHorrios = new JMenuItem("Deficiente");
 		mnItem_2.add(mntmHorrios);
+		
 		mntmHorrioDoBolsista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaCadastrarHorarioBolsista telaCadastrarHorarioBolsista = new TelaCadastrarHorarioBolsista();
 				telaCadastrarHorarioBolsista.setLocationRelativeTo(null);
 				telaCadastrarHorarioBolsista.setVisible(true);
+			}
+		});
+		
+		mntmHorrios.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastrarHorarioDeficiente telaCadastrarHorarioDeficiente = new TelaCadastrarHorarioDeficiente();
+				telaCadastrarHorarioDeficiente.setLocationRelativeTo(null);
+				telaCadastrarHorarioDeficiente.setVisible(true);
 			}
 		});
 
