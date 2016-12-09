@@ -68,8 +68,8 @@ public class GerenciadorAdministrador {
 
 		conn = conexao.getConexaoMySQL();
 
-		String sql = "SELECT * FROM t_adm " + "WHERE a_matricula = ? "
-				+ "and a_senha = ? and a_status = 1";
+		String sql = "SELECT * FROM t_adm WHERE a_matricula = ? "
+				+ "AND a_senha = ? AND a_status = 1";
 
 		Administrador adm = null;
 
@@ -81,7 +81,7 @@ public class GerenciadorAdministrador {
 		ResultSet rs = (ResultSet) stmt.executeQuery();
 
 		while (rs.next()) {
-			adm = new Administrador(rs.getString("a_nome"), rs.getString("a_telefone"), rs.getString("a_email"), matric,
+			adm = new Administrador(rs.getString("a_telefone"), rs.getString("a_email"), rs.getString("a_nome"), matric,
 					senha, rs.getInt("a_status"));
 		}
 
@@ -140,5 +140,4 @@ public class GerenciadorAdministrador {
 		return listaAdminstrador;
 	}
 	
-
 }

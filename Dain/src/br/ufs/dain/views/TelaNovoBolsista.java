@@ -14,6 +14,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -197,9 +198,15 @@ public class TelaNovoBolsista extends JDialog {
 								textField_curso.getText().toString(),
 								textField_matricula.getText().toString(),
 								sexoSelecionado,
-								null);
+								null, 1, 1);
 						
-						new DAO().cadastraBolsista(bolsista, adm.getMatricula());
+						boolean novo = new DAO().cadastraBolsista(bolsista, adm.getMatricula());
+						if(novo){
+							JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+						}else{
+							JOptionPane.showMessageDialog(null, "Não foi possivel cadastrar novo bolsista! "
+									+ "Verifique se os dados estão corretos.");
+						}
 					}
 				});
 				panel_1.add(button);

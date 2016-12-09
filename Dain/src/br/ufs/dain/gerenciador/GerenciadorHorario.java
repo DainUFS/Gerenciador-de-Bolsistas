@@ -48,8 +48,8 @@ public class GerenciadorHorario {
 
 		int id = -1;
 
-		String sql = "SELECT h_id FROM t_horario " + "WHERE h_segunda = ? and h_terca = ? and h_quarta = ?  "
-				+ "and h_quinta = ? and h_sexta = ? and h_sabado = ?";
+		String sql = "SELECT h_id FROM t_horario " + "WHERE h_segunda = ? AND h_terca = ? AND h_quarta = ?  "
+				+ "AND h_quinta = ? AND h_sexta = ? AND h_sabado = ?";
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
@@ -71,45 +71,30 @@ public class GerenciadorHorario {
 		return id;
 	}
 	
-	public void aramazenarHorarioDef(Horario h, String matric) throws SQLException{
-		int id = buscarIdHorario(h);
-		if(id == -1){
-			id = aramazenarHorario(h);
-		}
+	public void atualizarHorario(Horario h, int id) throws SQLException{
 		
 		conn = conexao.getConexaoMySQL();
 		
-		String sql = "UPDATE t_deficiente SET d_fk_horario = ? WHERE d_matricula = ?";		
+		String sql = "UPDATE t_horario SET h_segunda = ?, "
+				+ "h_terca = ?, "
+				+ "h_quarta = ?, "
+				+ "h_quinta = ?, "
+				+ "h_sexta = ?, "
+				+ "h_sabado = ? "
+				+ "WHERE h_id = ?";
 		
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 		
-		stmt.setInt(1, id);
-		stmt.setString(2, matric);
+		stmt.setString(1, h.getSegunda());
+		stmt.setString(2, h.getTerca());
+		stmt.setString(3, h.getQuarta());
+		stmt.setString(4, h.getQuinta());
+		stmt.setString(5, h.getSexta());
+		stmt.setString(6, h.getSabado());
+		stmt.setInt(7, id);
 		
 		stmt.execute();
 		stmt.close();
-
-		System.out.println("Gravado!");
-
-		conn.close();
-	}
-		
-	public void aramazenarHorarioBol(Horario h, String matric) throws SQLException{
-		int id = aramazenarHorario(h);
-		
-		conn = conexao.getConexaoMySQL();
-		
-		String sql = "UPDATE t_bolsista SET b_fk_horario = ? WHERE b_matricula = ?";		
-		
-		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
-		
-		stmt.setInt(1, id);
-		stmt.setString(2, matric);
-		
-		stmt.execute();
-		stmt.close();
-
-		System.out.println("Gravado!");
 
 		conn.close();
 	}
@@ -139,7 +124,19 @@ public class GerenciadorHorario {
 		return horario;
 
 	}
-
+	
+	public static void main(String[] args) throws SQLException {
+		GerenciadorHorario g = new GerenciadorHorario();
+		Horario h = new Horario("11:00h - 12:00h|10:00h - 11:00h|", 
+				"11:00h - 12:00h|10:00h - 11:00h|", 
+				"11:00h - 12:00h|10:00h - 11:00h|", 
+				"11:00h - 12:00h|10:00h - 11:00h|", 
+				"11:00h - 12:00h|10:00h - 11:00h|", 
+				"11:00h - 12:00h|10:00h - 11:00h|");
+		
+		System.out.println(g.aramazenarHorario(h));
+		
+	}
 
 
 }

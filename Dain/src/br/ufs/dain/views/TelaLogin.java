@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -13,11 +14,19 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import br.ufs.dain.dao.DAO;
+import br.ufs.dain.gerenciador.GerenciadorLogin;
 import br.ufs.dain.modelo.Administrador;
 import br.ufs.dain.modelo.Login;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaLogin extends JFrame {
 
@@ -27,16 +36,17 @@ public class TelaLogin extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel contentPane;
+	
 	private JTextField textField_user;
 	private JTextField textField_pass;
-	DAO dao = new DAO();
-	Login login;
-	boolean bool;
-	String s1, s2;
+
+	private String matricula;
+	private String senha;
+	
 	private JPanel panel;
 	private JPanel panel_1;
-	private JLabel lblEsqueceuSuaSenha;
-	//
+	
+
 	/**
 	 * Launch the application.
 	 */
@@ -75,7 +85,7 @@ public class TelaLogin extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(new GridLayout(2, 2, 0, 5));
 		
-		JLabel lblNewLabel = new JLabel("Usu\u00E1rio");
+		JLabel lblNewLabel = new JLabel("Matr\u00EDcula");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblNewLabel);
 		
@@ -96,37 +106,27 @@ public class TelaLogin extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(new GridLayout(3, 1, 0, 0));
 		
-		JButton btnNewButton = new JButton("New button");
-		panel_1.add(btnNewButton);
-		
-		lblEsqueceuSuaSenha = new JLabel("Esqueceu sua senha?");
-		lblEsqueceuSuaSenha.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_1.add(lblEsqueceuSuaSenha);
-		
-		
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				s1 = textField_user.getText().toString();
-				s2 = textField_pass.getText().toString();
-				login = new Login(s1, s2);
-				bool = dao.validarLogin(login);
-				if (bool == true) {
-					System.out.println("ENTROU!");
-					dispose();
-					
-					Administrador adm = new DAO().buscarAdm(s1, s2);
-					
-					TelaPrincipal telaPrincipal = new TelaPrincipal(adm);
-					telaPrincipal.setVisible(true);
-					///////////////////// um errão a tratar aqui
-				} else {
-					System.out.println("NÃO ENTROU!");
+		JButton btnNewButton = new JButton("Entrar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				matricula = textField_user.getText().toString();
+				senha = textField_pass.getText().toString();
+				
+				try {
+					if(new GerenciadorLogin().validarSenha(matricula, senha)) {
+						dispose();
+						new TelaPrincipal(new DAO().buscarAdm(matricula, senha)).setVisible(true);
+					} else {
+						JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos.");
+					}
+				} catch (SQLException e1) {
+					JOptionPane.showMessageDialog(null, "Não foi possivel a conectar ao banco de dados.");
+					e1.printStackTrace();
 				}
-			
-			}	
+			}
 		});
-		
+		panel_1.add(btnNewButton);
+				
 	}
 
 }

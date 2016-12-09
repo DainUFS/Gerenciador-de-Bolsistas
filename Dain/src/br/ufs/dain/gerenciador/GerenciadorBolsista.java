@@ -146,9 +146,59 @@ public class GerenciadorBolsista {
 		return gHor.buscarHorario(idHor);
 	}
 	
+	public int buscarIdHr(String matric) throws SQLException {
+
+		conn = conexao.getConexaoMySQL();
+
+		int id = 0;
+
+		String sql = "SELECT b_fk_horario FROM t_bolsista "
+				+ "WHERE b_matricula = ?";
+
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+
+		stmt.setString(1, matric);
+
+		ResultSet rs = (ResultSet) stmt.executeQuery();
+
+		while (rs.next()) {
+			id = rs.getInt("b_fk_horario"); 
+		}
+		
+		return id;
+
+	}
+	
+	public void persistirHorario(Horario h, String matric) throws SQLException{
+		int id = buscarIdHr(matric);
+		conn = conexao.getConexaoMySQL();
+		
+		if(id == 0){
+			id = gHor.aramazenarHorario(h);
+			String sql = "UPDATE t_bolsista SET b_fk_horario = ? WHERE b_matricula = ?";
+			PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+			
+			stmt.setInt(1, id);
+			stmt.setString(2, matric);
+			
+			stmt.execute();
+			conn.close();
+		}else{
+			gHor.atualizarHorario(h, id);
+		}
+		
+	}
+	
 	public static void main(String[] args) throws SQLException {
-		System.out.println(new GerenciadorBolsista().buscarBolsistaNome("Stiven Spelberg").getStatusAtivacao());
+		//System.out.println(new GerenciadorBolsista().buscarIdHr("5823"));
+		Horario h = new Horario("11:00h - 12:00h|", 
+				"11:00h - 12:00h|", 
+				"11:00h - 12:00h|", 
+				"11:00h - 12:00h|", 
+				"11:00h - 12:00h|", 
+				"11:00h - 12:00h|");
+		new GerenciadorBolsista().persistirHorario(h, "dweq");
 	}
 
-	
 }
+
