@@ -28,7 +28,7 @@ public class Conexao {
 	 
 	        	String username = "root";        //nome de um usuário de seu BD      
 	 
-	        	String password = "dainsql";      //sua senha de acesso
+	        	String password = "pweb";      //sua senha de acesso
 	 
 	        	connection = DriverManager.getConnection(url, username, password);
 	 
