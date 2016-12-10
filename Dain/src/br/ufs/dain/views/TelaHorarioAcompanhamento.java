@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -15,12 +16,24 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import br.ufs.dain.dao.DAO;
+import br.ufs.dain.modelo.Bolsista;
+
 import javax.swing.JScrollPane;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.AbstractListModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaHorarioAcompanhamento extends JFrame {
 
@@ -42,7 +55,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 734, 500);
+		setBounds(100, 100, 912, 500);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
@@ -63,53 +76,85 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		JLabel lblNewLabel = new JLabel(atribuiPosFixoFeira(dia));
 		panel_1.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 
 		JLabel lblNewLabel_1 = new JLabel(hora);
 		panel_1.add(lblNewLabel_1);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2, BorderLayout.CENTER);
-		panel_2.setLayout(new GridLayout(0, 3, 0, 0));
+		panel_2.setLayout(new GridLayout(0, 4, 0, 0));
+		
+		JPanel panel_7 = new JPanel();
+		panel_2.add(panel_7);
+		panel_7.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_3 = new JPanel();
+		panel_7.add(panel_3);
 		panel_3.setBorder(new EmptyBorder(5, 3, 5, 3));
-		panel_2.add(panel_3);
 		panel_3.setLayout(new GridLayout(1, 2, 10, 10));
 		
-		JList list = new JList();
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-		panel_3.add(list);
+		JList<String> list_1 = getLista();
+		JScrollPane scroll_1 = new JScrollPane(list_1);
+		scroll_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		panel_3.add(scroll_1);
 		
-		JList list_1 = new JList();
-		list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		panel_3.add(list_1);
+		JList<String> list_2 = getLista();
+		JScrollPane scroll_2 = new JScrollPane(list_2);
+		scroll_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		panel_3.add(scroll_2);
+		
+		JPanel panel_8 = new JPanel();
+		panel_7.add(panel_8, BorderLayout.SOUTH);
+		panel_8.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel panel_4 = new JPanel();
+		panel_4.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Apoio", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_2.add(panel_4);
-		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.Y_AXIS));
 		
-		JButton btnNewButton = new JButton("Apoio");
-		panel_4.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Dain");
-		panel_4.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("Bicen");
-		panel_4.add(btnNewButton_2);
-		
-		JButton btnNewButton_3 = new JButton("Salvar");
-		panel_4.add(btnNewButton_3);
+		JLabel lblXxx = new JLabel("xxx");
+		panel_4.add(lblXxx);
 		
 		JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new TitledBorder(null, "Dain", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		JLabel lblNewLabel_2 = new JLabel("<html><body></body></html>");
+		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 13));
+		panel_5.add(lblNewLabel_2);
 		panel_2.add(panel_5);
 		
-		JButton btnNewButton_4 = new JButton("New button");
-		panel_5.add(btnNewButton_4);
+		JPanel panel_6 = new JPanel();
+		panel_6.setBorder(new TitledBorder(null, "Bicen", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_2.add(panel_6);
+		
+		JButton btnRelacionarAssistidobolsista = new JButton("Apoio");
+		panel_8.add(btnRelacionarAssistidobolsista);
+		
+		JButton btnAdicionarDain = new JButton("Dain");
+		btnAdicionarDain.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				atualizaLabel(panel_5, list_1);
+			}
+		});
+		panel_8.add(btnAdicionarDain);
+		
+		JButton btnAdicionarBicen = new JButton("Bicen");
+		panel_8.add(btnAdicionarBicen);
+				
+		
+		JPanel panel_9 = new JPanel();
+		panel_9.setBorder(new EmptyBorder(10, 0, 10, 0));
+		panel.add(panel_9, BorderLayout.SOUTH);
+		panel_9.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JButton btnSalvar = new JButton("Salvar");
+		panel_9.add(btnSalvar);
+		
+		JButton btnLimpar = new JButton("Limpar");
+		panel_9.add(btnLimpar);
 	}
 
 	private String atribuiPosFixoFeira (String dia) {
@@ -163,4 +208,45 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		return tituloPanel;
 	}
 	
+	private JList<String> getLista () {
+		
+		JList<String> list = new JList<String>();
+		list.setBorder(new EmptyBorder(1, 1, 1, 1));
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
+		ArrayList<Bolsista> listaBolsista = new DAO().buscarBolsistas();
+		
+		for (int i = 0; i < listaBolsista.size(); i++) {
+			String horarioLivre = null;
+			if (dia.equals("Segunda"))
+				horarioLivre = new DAO().buscarHorarioBolsista(listaBolsista.get(i).getMatricula()).getSegunda();
+			else if (dia.equals("Terça"))
+				horarioLivre = new DAO().buscarHorarioBolsista(listaBolsista.get(i).getMatricula()).getTerca();
+			else if (dia.equals("Quarta"))
+				horarioLivre = new DAO().buscarHorarioBolsista(listaBolsista.get(i).getMatricula()).getQuarta();
+			else if (dia.equals("Quinta"))
+				horarioLivre = new DAO().buscarHorarioBolsista(listaBolsista.get(i).getMatricula()).getQuinta();
+			else if (dia.equals("Sexta"))
+				horarioLivre = new DAO().buscarHorarioBolsista(listaBolsista.get(i).getMatricula()).getSexta();
+			else
+				horarioLivre = new DAO().buscarHorarioBolsista(listaBolsista.get(i).getMatricula()).getSabado();
+
+			if (horarioLivre.contains(hora + "|"))
+				listModel.addElement(listaBolsista.get(i).getNome() + "          ");
+		}
+		list.setModel(listModel);
+		
+		return list;
+	}
+	
+	private void atualizaLabel (JPanel panel, JList<String> list) {
+		
+		JLabel label = (JLabel) panel.getComponent(0);
+		String s = label.getText();
+		s = s.replace("<html>", "");
+		s = s.replace("</html>", "");
+		s = s.replace("<body>", "");
+		s = s.replace("</body>", "");
+		label.setText("<html><body>" + s + "<br>" + list.getSelectedValue());
+	}
 }
