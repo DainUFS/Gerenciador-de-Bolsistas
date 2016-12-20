@@ -192,61 +192,65 @@ public class TelaPrincipal extends JFrame {
 	private void distribuiNomes () {
 
 		ArrayList<Bolsista> bolsistas = new DAO().buscarBolsistas();
-		
-		for (int i = 0; i < bolsistas.size(); i++) {
-			
-			int contador = 0;
-			
-			Horario horario = new DAO().buscarHorarioBolsista(bolsistas.get(i).getMatricula());
-			String segunda = horario.getSegunda();
-			String terca = horario.getTerca();
-			String quarta = horario.getQuarta();
-			String quinta = horario.getQuinta();
-			String sexta = horario.getSexta();
-			String sabado = horario.getSabado();
 
-			for (int j = 0; j < arrayButton.length; j++) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				for (int i = 0; i < bolsistas.size(); i++) {
 
-				if (j % 6 == 0)
-					if (segunda.contains(horarios[contador] + "|"))
-						inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
-					else
-						arrayButton[j].setSelected(false);
+					int contador = 0;
 
-				else if (j % 6 == 1)
-					if (terca.contains(horarios[contador] + "|"))
-						inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
-					else
-						arrayButton[j].setSelected(false);
+					Horario horario = new DAO().buscarHorarioBolsista(bolsistas.get(i).getMatricula());
+					String segunda = horario.getSegunda();
+					String terca = horario.getTerca();
+					String quarta = horario.getQuarta();
+					String quinta = horario.getQuinta();
+					String sexta = horario.getSexta();
+					String sabado = horario.getSabado();
 
-				else if (j % 6 == 2)
-					if (quarta.contains(horarios[contador] + "|"))
-						inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
-					else
-						arrayButton[j].setSelected(false);
+					for (int j = 0; j < arrayButton.length; j++) {
 
-				else if (j % 6 == 3)
-					if (quinta.contains(horarios[contador] + "|"))
-						inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
-					else
-						arrayButton[j].setSelected(false);
+						if (j % 6 == 0)
+							if (segunda.contains(horarios[contador] + "|"))
+								inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
+							else
+								arrayButton[j].setSelected(false);
 
-				else if (j % 6 == 4)
-					if (sexta.contains(horarios[contador] + "|"))
-						inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
-					else
-						arrayButton[j].setSelected(false);
+						else if (j % 6 == 1)
+							if (terca.contains(horarios[contador] + "|"))
+								inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
+							else
+								arrayButton[j].setSelected(false);
 
-				else {
-					if (sabado.contains(horarios[contador] + "|"))
-						inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
-					else
-						arrayButton[j].setSelected(false);
-					contador++;
+						else if (j % 6 == 2)
+							if (quarta.contains(horarios[contador] + "|"))
+								inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
+							else
+								arrayButton[j].setSelected(false);
+
+						else if (j % 6 == 3)
+							if (quinta.contains(horarios[contador] + "|"))
+								inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
+							else
+								arrayButton[j].setSelected(false);
+
+						else if (j % 6 == 4)
+							if (sexta.contains(horarios[contador] + "|"))
+								inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
+							else
+								arrayButton[j].setSelected(false);
+
+						else {
+							if (sabado.contains(horarios[contador] + "|"))
+								inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
+							else
+								arrayButton[j].setSelected(false);
+							contador++;
+						}
+					}
 				}
 			}
-		}
-
+		}).start();
 	}
 
 	private void inserirNomeTabela (String matricula, int indice) {
@@ -285,7 +289,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		mnItem_1.add(mntmBolsista);
 
-		JMenuItem mntmDeficiente = new JMenuItem("Deficiente");
+		JMenuItem mntmDeficiente = new JMenuItem("Assistido");
 		mntmDeficiente.setIcon(new ImageIcon(getClass().getResource("/br/ufs/dain/resources/icone_deficiente.png")));
 		mntmDeficiente.setMnemonic('D');
 		mntmDeficiente.addActionListener(new ActionListener() {
@@ -315,7 +319,7 @@ public class TelaPrincipal extends JFrame {
 		JMenuItem mntmHorrioDoBolsista = new JMenuItem("Bolsistas");
 		mnItem_2.add(mntmHorrioDoBolsista);
 
-		JMenuItem mntmHorrios = new JMenuItem("Deficiente");
+		JMenuItem mntmHorrios = new JMenuItem("Assistidos");
 		mnItem_2.add(mntmHorrios);
 
 		mntmHorrioDoBolsista.addActionListener(new ActionListener() {
@@ -369,7 +373,7 @@ public class TelaPrincipal extends JFrame {
 
 		DefaultMutableTreeNode nodeAdministradores = new DefaultMutableTreeNode("Administradores (" + adms.size() + ")");
 		DefaultMutableTreeNode nodeBolsistas = new DefaultMutableTreeNode("Bolsistas (" + bolsistas.size() + ")");
-		DefaultMutableTreeNode nodeDeficientes = new DefaultMutableTreeNode("Deficientes (" + deficientes.size() + ")");
+		DefaultMutableTreeNode nodeDeficientes = new DefaultMutableTreeNode("Assistidos (" + deficientes.size() + ")");
 
 		JTree tree = new JTree();
 		tree.setShowsRootHandles(true);

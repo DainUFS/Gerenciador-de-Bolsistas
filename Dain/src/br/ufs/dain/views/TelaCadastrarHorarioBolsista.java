@@ -230,7 +230,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 		panel_.add(scrollPane, BorderLayout.WEST);
 		contentPane.add(panel_);
 		
-		JLabel lblSelecioneUmBolsista = new JLabel("Selecione um bolsista na lista da esquerda e em seguida marque os hor\u00E1rios que ele(a) n\u00E3o pode exercer sua fun\u00E7\u00E3o.");
+		JLabel lblSelecioneUmBolsista = new JLabel("Selecione um aluno bolsista e marque os hor\u00E1rios em que ele(a) n\u00E3o pode exercer sua fun\u00E7\u00E3o.");
 		panel_dica.add(lblSelecioneUmBolsista);
 	}
 
