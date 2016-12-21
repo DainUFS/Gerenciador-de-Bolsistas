@@ -230,7 +230,7 @@ public class TelaCadastrarHorarioDeficiente extends JFrame {
 		panel_.add(scrollPane, BorderLayout.WEST);
 		contentPane.add(panel_);
 		
-		JLabel lblSelecioneUmDeficiente = new JLabel("Selecione um aluno assistido e marque os hor\u00E1rios que ele(a) precisam de acompanhamento.");
+		JLabel lblSelecioneUmDeficiente = new JLabel("Selecione um aluno assistido e marque os hor\u00E1rios que ele(a) precisa de acompanhamento.");
 		panel_dica.add(lblSelecioneUmDeficiente);
 	}
 

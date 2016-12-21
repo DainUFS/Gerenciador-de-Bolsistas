@@ -111,23 +111,26 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		panel_7.add(panel_8, BorderLayout.SOUTH);
 		panel_8.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Apoio", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_2.add(panel_4);
+		JPanel panel_apoio = new JPanel();
+		panel_apoio.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Apoio", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_2.add(panel_apoio);
 		
 		JLabel lblXxx = new JLabel("xxx");
-		panel_4.add(lblXxx);
+		panel_apoio.add(lblXxx);
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBorder(new TitledBorder(null, "Dain", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		JPanel panel_dain = new JPanel();
+		panel_dain.setBorder(new TitledBorder(null, "Dain", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		JLabel lblNewLabel_2 = new JLabel("<html><body></body></html>");
 		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 13));
-		panel_5.add(lblNewLabel_2);
-		panel_2.add(panel_5);
+		panel_dain.add(lblNewLabel_2);
+		panel_2.add(panel_dain);
 		
-		JPanel panel_6 = new JPanel();
-		panel_6.setBorder(new TitledBorder(null, "Bicen", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.add(panel_6);
+		JPanel panel_bicen = new JPanel();
+		panel_bicen.setBorder(new TitledBorder(null, "Bicen", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		JLabel lblNewLabel_3 = new JLabel("<html><body></body></html>");
+		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 13));
+		panel_bicen.add(lblNewLabel_3);
+		panel_2.add(panel_bicen);
 		
 		JButton btnRelacionarAssistidobolsista = new JButton("Apoio");
 		panel_8.add(btnRelacionarAssistidobolsista);
@@ -136,12 +139,17 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		btnAdicionarDain.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				atualizaLabel(panel_5, list_1);
+				atualizaLabel(panel_dain, list_1);
 			}
 		});
 		panel_8.add(btnAdicionarDain);
 		
 		JButton btnAdicionarBicen = new JButton("Bicen");
+		btnAdicionarBicen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				atualizaLabel(panel_bicen, list_1);
+			}
+		});
 		panel_8.add(btnAdicionarBicen);
 				
 		
@@ -247,6 +255,9 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		s = s.replace("</html>", "");
 		s = s.replace("<body>", "");
 		s = s.replace("</body>", "");
-		label.setText("<html><body>" + s + "<br>" + list.getSelectedValue());
+		if (s.equals(""))
+			label.setText(list.getSelectedValue());
+		else
+			label.setText("<html><body>" + s + "<br>" + list.getSelectedValue());
 	}
 }

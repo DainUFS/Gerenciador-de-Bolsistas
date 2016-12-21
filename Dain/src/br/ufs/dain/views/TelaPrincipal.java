@@ -63,7 +63,7 @@ public class TelaPrincipal extends JFrame {
 	public TelaPrincipal(Administrador adm) {
 
 		getMenuBar(adm);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaPrincipal.class.getResource("/br/ufs/dain/resources/logoDain.jpg")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaPrincipal.class.getResource("/br/ufs/dain/resources/logoDainIcone.png")));
 		// aqui
 		// tem
 		// q
@@ -339,6 +339,17 @@ public class TelaPrincipal extends JFrame {
 				telaCadastrarHorarioDeficiente.setVisible(true);
 			}
 		});
+		
+		JMenu mnNotas = new JMenu("Notas");
+		menuBar.add(mnNotas);
+		
+		JMenuItem mntmNova = new JMenuItem("Nova");
+		mntmNova.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		mnNotas.add(mntmNova);
 
 		JMenu mnNewMenu_3 = new JMenu("Conta");
 		menuBar.add(mnNewMenu_3);
