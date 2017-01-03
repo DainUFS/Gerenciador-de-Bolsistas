@@ -170,11 +170,6 @@ public class TelaPrincipal extends JFrame {
 				arrayButton[contador2].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				arrayButton[contador2].setToolTipText(diaCorrespondente + ", " + horaCorrespondente);
 
-				//				if (i == 100)
-				//					button.setText(
-				//							"<html><body><font style=\"color:red\">Murilo</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Almeida<br>"
-				//									+ "<font style=\"color:green\">Formiga</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Negão<br></body></html>");
-
 				// função para chamar nova tela ao clicar em botão
 				arrayButton[contador2].addActionListener(new ActionListener() {
 					@Override
@@ -343,13 +338,18 @@ public class TelaPrincipal extends JFrame {
 		JMenu mnNotas = new JMenu("Notas");
 		menuBar.add(mnNotas);
 		
-		JMenuItem mntmNova = new JMenuItem("Nova");
+		JMenuItem mntmNova = new JMenuItem("Nova Nota");
 		mntmNova.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				TelaNovaNota telaNovaNota = new TelaNovaNota();
+				telaNovaNota.setLocationRelativeTo(null);
+				telaNovaNota.setVisible(true);
 			}
 		});
 		mnNotas.add(mntmNova);
+		
+		JMenuItem mntmMinhasNotas = new JMenuItem("Minhas Notas");
+		mnNotas.add(mntmMinhasNotas);
 
 		JMenu mnNewMenu_3 = new JMenu("Conta");
 		menuBar.add(mnNewMenu_3);
