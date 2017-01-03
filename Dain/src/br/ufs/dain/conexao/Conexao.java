@@ -31,7 +31,7 @@ public class Conexao {
 //<<<<<<< HEAD
 //	        	String password = "dainsql";      //sua senha de acesso
 //=======
-	        	String password = "pweb";	    //sua senha de acesso
+	        	String password = "dainsql";	    //sua senha de acesso
 //>>>>>>> origin/master
 	 
 	        	connection = DriverManager.getConnection(url, username, password);
