@@ -258,6 +258,6 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		if (s.equals(""))
 			label.setText(list.getSelectedValue());
 		else
-			label.setText("<html><body>" + s + "<br>" + list.getSelectedValue());
+			label.setText("<html><body>" + s + "<br>" + list.getSelectedValue() + "</html></body>");
 	}
 }

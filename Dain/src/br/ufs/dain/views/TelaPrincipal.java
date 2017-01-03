@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -334,10 +335,10 @@ public class TelaPrincipal extends JFrame {
 				telaCadastrarHorarioDeficiente.setVisible(true);
 			}
 		});
-		
+
 		JMenu mnNotas = new JMenu("Notas");
 		menuBar.add(mnNotas);
-		
+
 		JMenuItem mntmNova = new JMenuItem("Nova Nota");
 		mntmNova.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -347,8 +348,13 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 		mnNotas.add(mntmNova);
-		
+
 		JMenuItem mntmMinhasNotas = new JMenuItem("Minhas Notas");
+		mntmMinhasNotas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+			}
+		});
 		mnNotas.add(mntmMinhasNotas);
 
 		JMenu mnNewMenu_3 = new JMenu("Conta");
@@ -358,6 +364,18 @@ public class TelaPrincipal extends JFrame {
 		mnNewMenu_3.add(mntmDetalhes);
 
 		JMenuItem mntmSair = new JMenuItem("Sair");
+		mntmSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int n = JOptionPane.showConfirmDialog(contentPane, "Deseja realmente sair, " + adm.getNome() + "?", "Sair",
+						JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+				if (n == JOptionPane.YES_OPTION) {
+					TelaLogin telaLogin = new TelaLogin();
+					telaLogin.setLocationRelativeTo(null);
+					telaLogin.setVisible(true);
+					dispose();
+				}
+			}
+		});
 		mnNewMenu_3.add(mntmSair);
 
 		JMenu mnNewMenu_4 = new JMenu("Ajuda");
