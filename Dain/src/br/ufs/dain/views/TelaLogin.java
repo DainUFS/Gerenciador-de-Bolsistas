@@ -15,19 +15,11 @@ import javax.swing.border.EmptyBorder;
 
 import br.ufs.dain.dao.DAO;
 import br.ufs.dain.gerenciador.GerenciadorLogin;
-import br.ufs.dain.modelo.Administrador;
-import br.ufs.dain.modelo.Login;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Toolkit;
 
 public class TelaLogin extends JFrame {
 
@@ -70,7 +62,6 @@ public class TelaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaLogin() {
-		//setIconImage(Toolkit.getDefaultToolkit().getImage(TelaLogin.class.getResource("/br/ufs/dain/resources/logoDain.jpg")));
 		
 		setTitle("Entrar no Sistema");
 		setResizable(false);

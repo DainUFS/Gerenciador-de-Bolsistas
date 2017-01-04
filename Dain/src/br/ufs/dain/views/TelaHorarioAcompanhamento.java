@@ -16,30 +16,31 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import br.ufs.dain.dao.DAO;
 import br.ufs.dain.modelo.Bolsista;
 
 import javax.swing.JScrollPane;
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JButton;
-import javax.swing.AbstractListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.TitledBorder;
-import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.BoxLayout;
+import javax.swing.border.LineBorder;
+import java.awt.Component;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+import javax.swing.border.CompoundBorder;
 
 public class TelaHorarioAcompanhamento extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
+	
+	private final short SCROLL_SPEED = 12;
+	
 	private String dia;
 	private String hora;
 
@@ -65,6 +66,8 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane(panel);
 		contentPane.add(scrollPane, BorderLayout.SOUTH);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(SCROLL_SPEED);
+		scrollPane.getHorizontalScrollBar().setUnitIncrement(SCROLL_SPEED);
 
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
@@ -86,7 +89,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2, BorderLayout.CENTER);
-		panel_2.setLayout(new GridLayout(0, 4, 0, 0));
+		panel_2.setLayout(new GridLayout(0, 4, 3, 0));
 		
 		JPanel panel_7 = new JPanel();
 		panel_2.add(panel_7);
@@ -95,40 +98,58 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		JPanel panel_3 = new JPanel();
 		panel_7.add(panel_3);
 		panel_3.setBorder(new EmptyBorder(5, 3, 5, 3));
-		panel_3.setLayout(new GridLayout(1, 2, 10, 10));
+		panel_3.setLayout(new GridLayout(2, 1, 0, 5));
 		
 		JList<String> list_1 = getLista();
 		JScrollPane scroll_1 = new JScrollPane(list_1);
 		scroll_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll_1.getVerticalScrollBar().setUnitIncrement(SCROLL_SPEED);
+		scroll_1.getHorizontalScrollBar().setUnitIncrement(SCROLL_SPEED);
 		panel_3.add(scroll_1);
 		
 		JList<String> list_2 = getLista();
 		JScrollPane scroll_2 = new JScrollPane(list_2);
+		scroll_2.getVerticalScrollBar().setUnitIncrement(SCROLL_SPEED);
+		scroll_2.getHorizontalScrollBar().setUnitIncrement(SCROLL_SPEED);
+		JLabel lblAssistidosQuePrecisam = new JLabel("Assistidos que precisam de apoio");
+		lblAssistidosQuePrecisam.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblAssistidosQuePrecisam.setHorizontalAlignment(SwingConstants.CENTER);
+		scroll_1.setColumnHeaderView(lblAssistidosQuePrecisam);
 		scroll_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		panel_3.add(scroll_2);
+		
+		JLabel lblBolsistasDisponveis = new JLabel("Bolsistas dispon\u00EDveis");
+		lblBolsistasDisponveis.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblBolsistasDisponveis.setHorizontalAlignment(SwingConstants.CENTER);
+		scroll_2.setColumnHeaderView(lblBolsistasDisponveis);
 		
 		JPanel panel_8 = new JPanel();
 		panel_7.add(panel_8, BorderLayout.SOUTH);
 		panel_8.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel panel_apoio = new JPanel();
-		panel_apoio.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Apoio", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_apoio.setBorder(new TitledBorder(null, "APOIO", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, null));
 		panel_2.add(panel_apoio);
+		panel_apoio.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JLabel lblXxx = new JLabel("xxx");
+		JLabel lblXxx = new JLabel("<html><body></body></html>");
+		lblXxx.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblXxx.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_apoio.add(lblXxx);
 		
 		JPanel panel_dain = new JPanel();
-		panel_dain.setBorder(new TitledBorder(null, "Dain", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_dain.setBorder(new TitledBorder(null, "DAIN", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, null));
+		panel_dain.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		JLabel lblNewLabel_2 = new JLabel("<html><body></body></html>");
-		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 13));
+		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 15));
 		panel_dain.add(lblNewLabel_2);
 		panel_2.add(panel_dain);
 		
 		JPanel panel_bicen = new JPanel();
-		panel_bicen.setBorder(new TitledBorder(null, "Bicen", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_bicen.setBorder(new TitledBorder(null, "BICEN", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, null));
+		panel_bicen.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		JLabel lblNewLabel_3 = new JLabel("<html><body></body></html>");
-		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 13));
+		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 15));
 		panel_bicen.add(lblNewLabel_3);
 		panel_2.add(panel_bicen);
 		
@@ -139,7 +160,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		btnAdicionarDain.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				atualizaLabel(panel_dain, list_1);
+				atualizaLabel(panel_dain, list_2);
 			}
 		});
 		panel_8.add(btnAdicionarDain);
@@ -147,7 +168,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		JButton btnAdicionarBicen = new JButton("Bicen");
 		btnAdicionarBicen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				atualizaLabel(panel_bicen, list_1);
+				atualizaLabel(panel_bicen, list_2);
 			}
 		});
 		panel_8.add(btnAdicionarBicen);

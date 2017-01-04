@@ -48,7 +48,7 @@ public class TelaPrincipal extends JFrame {
 
 	private JButton[] arrayButton = new JButton[96];
 
-	private final short SCROLL_SPEED = 10;
+	private final static short SCROLL_SPEED = 12;
 
 	private ArrayList<Bolsista> bolsistas = new DAO().buscarBolsistas();
 	private ArrayList<Administrador> adms = new DAO().buscarAdm();
@@ -434,14 +434,10 @@ public class TelaPrincipal extends JFrame {
 		tree.addKeyListener(new KeyListener() {
 
 			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub	
-			}
+			public void keyTyped(KeyEvent e) {}
 
 			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub	
-			}
+			public void keyReleased(KeyEvent e) {}
 
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -460,7 +456,7 @@ public class TelaPrincipal extends JFrame {
 						tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
 					}
 					/* retrieve the node that was selected */ 
-					Object nodeInfo = node.getUserObject();
+					//Object nodeInfo = node.getUserObject();
 				}
 			}
 		});
@@ -483,7 +479,7 @@ public class TelaPrincipal extends JFrame {
 						tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
 					}
 					/* retrieve the node that was selected */ 
-					Object nodeInfo = node.getUserObject();
+					//Object nodeInfo = node.getUserObject();
 				}
 			}
 		});
