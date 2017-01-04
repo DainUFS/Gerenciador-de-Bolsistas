@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import br.ufs.dain.conexao.Conexao;
 import br.ufs.dain.modelo.Administrador;
@@ -23,11 +25,11 @@ public class GerenciadorNota {
 
 		conn = conexao.getConexaoMySQL();
 
-		String sql = "SELECT * F'ROM t_nota WHERE n_fk_adm = ?";
+		String sql = "SELECT * FROM t_nota WHERE n_id = ?";
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
-		stmt.setString(1, matric);
+		stmt.setLong(1, buscarId(matric));
 
 		ResultSet rs = (ResultSet) stmt.executeQuery();
 
@@ -41,16 +43,21 @@ public class GerenciadorNota {
 	}
 
 	public void armazenarAnotacao(String matric, String novaAnotacao) throws SQLException {
-		Nota nota = buscarNota(matric);
+		//Nota nota = buscarNota(matric);
 
 		conn = conexao.getConexaoMySQL();
+		
+		Date data = new Date(System.currentTimeMillis());  
+		SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd"); 
 
-		String sql = "UPDATE t_nota SET n_anotacao = ? WHERE n_fk_adm = ?";
+		String sql = "INSERT INTO t_nota (n_anotacao, n_data, n_fk_adm) VALUES "
+				+ "(?, ?, ?)";
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
-		stmt.setString(1, nota.getAnotacao() + " " + novaAnotacao);
-		stmt.setString(2, matric);
+		stmt.setString(1, novaAnotacao);
+		stmt.setString(2, formatarDate.format(data));
+		stmt.setString(3, matric);
 
 		stmt.execute();
 		stmt.close();
@@ -59,16 +66,16 @@ public class GerenciadorNota {
 
 	}
 	
-	public int buscarId(String anotacao) throws SQLException{
+	public int buscarId(String matr) throws SQLException{
 		int id = 0;
 		
 		conn = conexao.getConexaoMySQL();
 		
-		String sql = "SELECT n_id FROM banco_dain.t_nota WHERE n_anotacao = ?";
+		String sql = "SELECT n_id FROM banco_dain.t_nota WHERE n_fk_adm = ?";
 		
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
-		stmt.setString(1, anotacao);
+		stmt.setString(1, matr);
 		
 		ResultSet rs = (ResultSet) stmt.executeQuery();
 
@@ -100,7 +107,8 @@ public class GerenciadorNota {
 	
 	public static void main(String[] args) throws SQLException {
 		//System.out.println(new GerenciadorNota().buscarNota("32509874").getAnotacao());
-		new GerenciadorNota().deletaNota("Anotacao01");
+		Nota nota = new GerenciadorNota().buscarNota("123");
+		System.out.println(nota.getAnotacao());
 	}
 
 }

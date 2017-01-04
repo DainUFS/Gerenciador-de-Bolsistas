@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import br.ufs.dain.dao.DAO;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Panel;
@@ -20,6 +23,8 @@ import javax.swing.JEditorPane;
 import java.awt.Button;
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaNovaNota extends JFrame {
 
@@ -28,7 +33,7 @@ public class TelaNovaNota extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -39,12 +44,12 @@ public class TelaNovaNota extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaNovaNota() {
+	public TelaNovaNota(String matAdm) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -68,6 +73,13 @@ public class TelaNovaNota extends JFrame {
 		
 		
 		Button button = new Button("Salvar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String nota = textArea.getText().toString();
+				DAO dao = new DAO();
+				dao.cadastrarNota(matAdm, nota);
+			} 
+		});
 		panel.add(button);
 	}
 
