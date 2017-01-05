@@ -6,10 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import br.ufs.dain.conexao.Conexao;
 import br.ufs.dain.modelo.Administrador;
+import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Nota;
 
 public class GerenciadorNota {
@@ -19,27 +21,30 @@ public class GerenciadorNota {
 	Connection conn;
 	Statement stmt;
 
-	public Nota buscarNota(String matric) throws SQLException {
-		Nota nota = null;
+	public ArrayList<Nota> buscarNotas(String matric) throws SQLException {
 		Administrador adm = ger_adm.buscarAdmMatricula(matric);
 
 		conn = conexao.getConexaoMySQL();
+		
+		ArrayList<Nota> listaNotas = new ArrayList<>();
+		Nota nota;
 
-		String sql = "SELECT * FROM t_nota WHERE n_id = ?";
+		String sql = "SELECT * FROM t_nota WHERE n_fk_adm = ?";
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
-		stmt.setLong(1, buscarId(matric));
+		stmt.setString(1, matric);
 
 		ResultSet rs = (ResultSet) stmt.executeQuery();
 
 		while (rs.next()) {
 			nota = new Nota(rs.getString("n_anotacao"), adm);
+			listaNotas.add(nota);
 		}
 
 		conn.close();
 
-		return nota;
+		return listaNotas;
 	}
 
 	public void armazenarAnotacao(String matric, String novaAnotacao) throws SQLException {
@@ -66,16 +71,16 @@ public class GerenciadorNota {
 
 	}
 	
-	public int buscarId(String matr) throws SQLException{
+	public int buscarId(String nota) throws SQLException{
 		int id = 0;
 		
 		conn = conexao.getConexaoMySQL();
 		
-		String sql = "SELECT n_id FROM banco_dain.t_nota WHERE n_fk_adm = ?";
+		String sql = "SELECT n_id FROM t_nota WHERE n_anotacao = ?";
 		
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
-		stmt.setString(1, matr);
+		stmt.setString(1, nota);
 		
 		ResultSet rs = (ResultSet) stmt.executeQuery();
 
@@ -89,7 +94,6 @@ public class GerenciadorNota {
 	}
 
 	public void deletaNota(String anotacao) throws SQLException {
-		Nota nota;
 
 		conn = conexao.getConexaoMySQL();
 
@@ -97,7 +101,7 @@ public class GerenciadorNota {
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
-		stmt.setInt(1, new GerenciadorNota().buscarId(anotacao));
+		stmt.setInt(1, buscarId(anotacao));
 		
 		stmt.execute();
 		stmt.close();
@@ -106,9 +110,13 @@ public class GerenciadorNota {
 	}
 	
 	public static void main(String[] args) throws SQLException {
-		//System.out.println(new GerenciadorNota().buscarNota("32509874").getAnotacao());
-		Nota nota = new GerenciadorNota().buscarNota("123");
-		System.out.println(nota.getAnotacao());
+		ArrayList<Nota> notas;
+		notas = new GerenciadorNota().buscarNotas("123");
+		System.out.println(notas.get(0).getAnotacao());
+		System.out.println(notas.get(1).getAnotacao());
+		new GerenciadorNota().deletaNota("TestandoBanco");
+		System.out.println(new GerenciadorNota().buscarId("outra"));
+	
 	}
 
 }

@@ -209,14 +209,14 @@ public class DAO implements InterfaceDAO {
 	}
 
 	@Override
-	public Nota buscarNota(String matric) {
-		Nota nota = null;
+	public ArrayList<Nota> buscarNota(String matric) {
+		ArrayList<Nota> notas = null;
 		try {
-			nota = gNota.buscarNota(matric);
+			notas = gNota.buscarNotas(matric);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return nota;
+		return notas;
 	}
 
 	@Override
@@ -227,5 +227,9 @@ public class DAO implements InterfaceDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static void main(String[] args) {
+	
 	}
 }
