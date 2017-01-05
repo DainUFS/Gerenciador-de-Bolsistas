@@ -55,7 +55,7 @@ public interface InterfaceDAO {
 	
 	public void deletarNota(String anotacao);
 	
-	public Nota buscarNota(String matric);
+	public ArrayList<Nota> buscarNota(String matric);
 	
 	
 }
