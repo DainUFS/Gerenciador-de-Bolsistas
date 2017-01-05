@@ -352,7 +352,9 @@ public class TelaPrincipal extends JFrame {
 		JMenuItem mntmMinhasNotas = new JMenuItem("Minhas Notas");
 		mntmMinhasNotas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				TelaMinhasNotas telaMinhasNotas = new TelaMinhasNotas();
+				telaMinhasNotas.setLocationRelativeTo(null);
+				telaMinhasNotas.setVisible(true);
 			}
 		});
 		mnNotas.add(mntmMinhasNotas);

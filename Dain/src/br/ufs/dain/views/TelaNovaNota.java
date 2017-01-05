@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import br.ufs.dain.dao.DAO;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Panel;
 import javax.swing.JTextArea;
@@ -78,6 +79,8 @@ public class TelaNovaNota extends JFrame {
 				String nota = textArea.getText().toString();
 				DAO dao = new DAO();
 				dao.cadastrarNota(matAdm, nota);
+				JOptionPane.showMessageDialog(null, "Nota Cadastrada!");
+				textArea.setText("");
 			} 
 		});
 		panel.add(button);
