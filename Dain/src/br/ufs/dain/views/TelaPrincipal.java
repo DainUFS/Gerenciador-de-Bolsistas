@@ -65,11 +65,6 @@ public class TelaPrincipal extends JFrame {
 
 		getMenuBar(adm);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaPrincipal.class.getResource("/br/ufs/dain/resources/logoDainIcone.png")));
-		// aqui
-		// tem
-		// q
-		// setar
-		// diferente
 
 		setExtendedState(MAXIMIZED_BOTH);
 		setTitle("Divis\u00E3o de A\u00E7\u00F5es Inclusivas - Universidade Federal de Sergipe");
@@ -352,7 +347,7 @@ public class TelaPrincipal extends JFrame {
 		JMenuItem mntmMinhasNotas = new JMenuItem("Minhas Notas");
 		mntmMinhasNotas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				TelaMinhasNotas telaMinhasNotas = new TelaMinhasNotas();
+				TelaMinhasNotas telaMinhasNotas = new TelaMinhasNotas(adm);
 				telaMinhasNotas.setLocationRelativeTo(null);
 				telaMinhasNotas.setVisible(true);
 			}
@@ -496,7 +491,7 @@ public class TelaPrincipal extends JFrame {
 			tree.expandRow(i);
 		}
 
-		if(tree.getRowCount() != rowCount){
+		if(tree.getRowCount() != rowCount) {
 			expandAllNodes(tree, rowCount, tree.getRowCount());
 		}
 	}

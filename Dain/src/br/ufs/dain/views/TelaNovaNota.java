@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import br.ufs.dain.dao.DAO;
+import br.ufs.dain.modelo.Nota;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,26 +31,11 @@ import java.awt.event.ActionEvent;
 public class TelaNovaNota extends JFrame {
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaNovaNota frame = new TelaNovaNota();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
-	 * Create the frame.
-	 */
+	
+	public TelaNovaNota(String matAdm, String nota) {
+		
+	}
+	
 	public TelaNovaNota(String matAdm) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
