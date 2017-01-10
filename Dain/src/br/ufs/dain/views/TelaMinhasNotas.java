@@ -64,17 +64,6 @@ public class TelaMinhasNotas extends JFrame {
 			
 			int x = i;
 			
-			editar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					new TelaNovaNota(adm.getMatricula(), notas.get(x).getAnotacao());
-				}
-			});
-			excluir.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-				}
-			});
-			
 			JPanel panel_interno = new JPanel();
 			panel_interno.setLayout(new BorderLayout());
 			JTextArea textArea = new JTextArea();
@@ -83,6 +72,26 @@ public class TelaMinhasNotas extends JFrame {
 			textArea.setText(notas.get(i).getAnotacao());
 			panel_interno.add(BorderLayout.CENTER, textArea);
 			panel_interno.add(BorderLayout.SOUTH, panel_2);
+			
+			editar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					new TelaNovaNota(adm.getMatricula(), notas.get(x).getAnotacao());
+					
+				}
+			});
+			
+			excluir.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					DAO dao = new DAO();
+					dao.deletarNota(textArea.getText().toString());
+					JOptionPane.showMessageDialog(null, "Nota deletada com sucesso!");
+					setVisible(false);
+					TelaMinhasNotas telaMinhasNotas = new TelaMinhasNotas(adm);
+					telaMinhasNotas.setLocationRelativeTo(null);
+					telaMinhasNotas.setVisible(true);
+					
+				}
+			});
 			
 			panel.add(panel_interno);
 		}		

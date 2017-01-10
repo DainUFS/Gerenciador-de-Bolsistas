@@ -109,6 +109,15 @@ public class GerenciadorNota {
 		conn.close();
 	}
 	
+	public void editarNota(String nota){
+		
+		conn = conexao.getConexaoMySQL();
+		
+		String sql = "UPDATE t_nota SET n_anotacao = ?"
+				+ "WHERE n_id = ?";
+		
+	}
+	
 	public static void main(String[] args) throws SQLException {
 		ArrayList<Nota> notas;
 		notas = new GerenciadorNota().buscarNotas("123");
