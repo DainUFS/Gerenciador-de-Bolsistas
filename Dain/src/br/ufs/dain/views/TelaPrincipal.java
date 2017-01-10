@@ -337,7 +337,7 @@ public class TelaPrincipal extends JFrame {
 		JMenuItem mntmNova = new JMenuItem("Nova Nota");
 		mntmNova.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaNovaNota telaNovaNota = new TelaNovaNota(adm.getMatricula());
+				TelaNovaNota telaNovaNota = new TelaNovaNota(adm.getMatricula(), null);
 				telaNovaNota.setLocationRelativeTo(null);
 				telaNovaNota.setVisible(true);
 			}

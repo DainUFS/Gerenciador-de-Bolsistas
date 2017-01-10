@@ -62,9 +62,11 @@ public class TelaMinhasNotas extends JFrame {
 			panel_2.add(editar);
 			panel_2.add(excluir);
 			
+			int x = i;
+			
 			editar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new TelaNovaNota(matAdm, notas.get(i).getAnotacao());
+					new TelaNovaNota(adm.getMatricula(), notas.get(x).getAnotacao());
 				}
 			});
 			excluir.addActionListener(new ActionListener() {

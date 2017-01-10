@@ -33,10 +33,6 @@ public class TelaNovaNota extends JFrame {
 	private JPanel contentPane;
 	
 	public TelaNovaNota(String matAdm, String nota) {
-		
-	}
-	
-	public TelaNovaNota(String matAdm) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -49,6 +45,7 @@ public class TelaNovaNota extends JFrame {
 		contentPane.add(lblNewLabel_1, BorderLayout.NORTH);
 		
 		JTextArea textArea = new JTextArea();
+		textArea.setText(nota);
 		textArea.setLineWrap(true);
 		contentPane.add(textArea, BorderLayout.WEST);
 		
