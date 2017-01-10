@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 import br.ufs.dain.conexao.Conexao;
+import br.ufs.dain.dao.DAO;
 import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Horario;
 
@@ -22,12 +23,14 @@ public class GerenciadorBolsista {
 	Statement stmt;
 	
 	public void armazenarBolsista(Bolsista b, String matricAdm) throws SQLException {
-
+		
+		int id = gHor.aramazenarHorario(b.getHorario());
+		
 		conn = conexao.getConexaoMySQL();
 
 		String sql = "INSERT INTO t_bolsista (b_matricula, b_nome, b_telefone, b_email, "
 				+ "b_curso, b_sexo, b_fk_adm, b_fk_horario, b_status) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+		
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
 		stmt.setString(1, b.getMatricula());
@@ -37,7 +40,7 @@ public class GerenciadorBolsista {
 		stmt.setString(5, b.getCurso());
 		stmt.setString(6, b.getSexo());
 		stmt.setString(7, matricAdm);
-		stmt.setObject(8, null);
+		stmt.setInt(8, id);
 		stmt.setInt(9, b.getStatusAtivacao());
 		
 		stmt.execute();

@@ -236,4 +236,23 @@ public class DAO implements InterfaceDAO {
 		
 	
 	}
+
+	@Override
+	public void editarNota(String novaNota, String nota) {
+		try {
+			gNota.editarNota(nota, novaNota);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public int aramazenarHor(Horario hr) {
+		try {
+			 return gHor.aramazenarHorario(hr);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }

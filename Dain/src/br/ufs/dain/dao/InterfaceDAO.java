@@ -57,5 +57,11 @@ public interface InterfaceDAO {
 	
 	public ArrayList<Nota> buscarNota(String matric);
 	
+	public void editarNota(String novaNota, String antigaNota);
+	
+	
+	//Horario
+	public int aramazenarHor(Horario hr);
+	
 	
 }

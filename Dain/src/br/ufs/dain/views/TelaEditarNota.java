@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import br.ufs.dain.dao.DAO;
+import br.ufs.dain.modelo.Administrador;
 import br.ufs.dain.modelo.Nota;
 
 import javax.swing.JLabel;
@@ -32,7 +33,7 @@ public class TelaEditarNota extends JFrame {
 
 	private JPanel contentPane;
 	
-	public TelaEditarNota(String matAdm, String nota) {
+	public TelaEditarNota(String nota, Administrador adm) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -59,11 +60,14 @@ public class TelaEditarNota extends JFrame {
 		Button button = new Button("Salvar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String nota = textArea.getText().toString();
+				String 	novaNota = textArea.getText().toString();
 				DAO dao = new DAO();
-				
+				dao.editarNota(novaNota, nota);
 				JOptionPane.showMessageDialog(null, "Nota Salva!");
-				textArea.setText("");
+				setVisible(false);
+				TelaMinhasNotas telaMinhasNotas = new TelaMinhasNotas(adm);
+				telaMinhasNotas.setLocationRelativeTo(null);
+				telaMinhasNotas.setVisible(true);
 			} 
 		});
 		panel.add(button);

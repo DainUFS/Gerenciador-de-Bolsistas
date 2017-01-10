@@ -24,6 +24,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import br.ufs.dain.dao.DAO;
+import br.ufs.dain.gerenciador.GerenciadorHorario;
 import br.ufs.dain.modelo.Administrador;
 import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Horario;
@@ -192,13 +193,15 @@ public class TelaNovoBolsista extends JDialog {
 						else if (rdbtnFeminino.isSelected())
 							sexoSelecionado = "F";
 						
+						Horario hr = new Horario("", "", "", "", "", "");
+			
 						Bolsista bolsista = new Bolsista (textField_telefone.getText().toString(),
 								textField_email.getText().toString(),
 								textField_nome.getText().toString(),
 								textField_curso.getText().toString(),
 								textField_matricula.getText().toString(),
 								sexoSelecionado,
-								null, 1, 1);
+								hr, 1, 1);
 						
 						boolean novo = new DAO().cadastraBolsista(bolsista, adm.getMatricula());
 						if(novo){

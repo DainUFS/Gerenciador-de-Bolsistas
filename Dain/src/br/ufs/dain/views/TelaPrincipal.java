@@ -39,6 +39,7 @@ import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Deficiente;
 import br.ufs.dain.modelo.Horario;
 import javax.swing.JSeparator;
+import javax.swing.JTextField;
 
 public class TelaPrincipal extends JFrame {
 
@@ -94,7 +95,6 @@ public class TelaPrincipal extends JFrame {
 		JPanel panel = new JPanel();
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JScrollPane scrollPane_1 = new JScrollPane(panel);
 		scrollPane_1.getVerticalScrollBar().setUnitIncrement(SCROLL_SPEED);
@@ -105,6 +105,7 @@ public class TelaPrincipal extends JFrame {
 		JScrollPane scrollPane_2 = new JScrollPane(panel_1);
 		scrollPane_2.getVerticalScrollBar().setUnitIncrement(SCROLL_SPEED);
 		scrollPane_2.getHorizontalScrollBar().setUnitIncrement(SCROLL_SPEED);
+		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JLabel label_adm = new JLabel(adm.getNome());
 		panel_1.add(label_adm);

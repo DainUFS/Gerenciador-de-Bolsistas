@@ -76,7 +76,11 @@ public class TelaMinhasNotas extends JFrame {
 			editar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					new TelaNovaNota(adm.getMatricula(), notas.get(x).getAnotacao());
-					
+					String nota = textArea.getText().toString();
+					TelaEditarNota edita = new TelaEditarNota(nota, adm);
+					edita.setLocationRelativeTo(null);
+					edita.setVisible(true);
+					setVisible(false);
 				}
 			});
 			

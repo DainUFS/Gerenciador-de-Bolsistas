@@ -88,7 +88,7 @@ public class GerenciadorNota {
 			id = rs.getInt("n_id");
 		}
 
-		conn.close();
+		
 		
 		return id;
 	}
@@ -109,22 +109,31 @@ public class GerenciadorNota {
 		conn.close();
 	}
 	
-	public void editarNota(String nota){
+	public void editarNota(String nota, String novaNota) throws SQLException{
+		
+		int id = buscarId(nota);
 		
 		conn = conexao.getConexaoMySQL();
 		
 		String sql = "UPDATE t_nota SET n_anotacao = ?"
 				+ "WHERE n_id = ?";
 		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+		
+		stmt.setString(1, novaNota);
+		stmt.setInt(2, id);
+		
+		stmt.execute();
+		stmt.close();
+
+		conn.close();
+		
 	}
 	
 	public static void main(String[] args) throws SQLException {
 		ArrayList<Nota> notas;
-		notas = new GerenciadorNota().buscarNotas("123");
-		System.out.println(notas.get(0).getAnotacao());
-		System.out.println(notas.get(1).getAnotacao());
-		new GerenciadorNota().deletaNota("TestandoBanco");
-		System.out.println(new GerenciadorNota().buscarId("outra"));
+		new GerenciadorNota().editarNota("teste em A", "ola");
+		
 	
 	}
 
