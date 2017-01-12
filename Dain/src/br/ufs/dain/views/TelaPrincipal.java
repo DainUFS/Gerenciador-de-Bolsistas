@@ -359,6 +359,13 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnNewMenu_3);
 
 		JMenuItem mntmDetalhes = new JMenuItem("Minha Conta");
+		mntmDetalhes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaMinhaConta minhaConta = new TelaMinhaConta(adm);
+				minhaConta.setLocationRelativeTo(null);
+				minhaConta.setVisible(true);
+			}
+		});
 		mnNewMenu_3.add(mntmDetalhes);
 
 		JMenuItem mntmSair = new JMenuItem("Sair");
@@ -380,6 +387,13 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnNewMenu_4);
 
 		JMenuItem mntmExibirAjuda = new JMenuItem("Exibir Ajuda");
+		mntmExibirAjuda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaExibirAjuda exibirAjuda = new TelaExibirAjuda();
+				exibirAjuda.setLocationRelativeTo(null);
+				exibirAjuda.setVisible(true);
+			}
+		});
 		mnNewMenu_4.add(mntmExibirAjuda);
 
 		JSeparator separator = new JSeparator();

@@ -140,4 +140,48 @@ public class GerenciadorAdministrador {
 		return listaAdminstrador;
 	}
 	
+	public void altualizarDados(Administrador adm, String matr) throws SQLException{
+		
+		conn = conexao.getConexaoMySQL();
+		
+		String sql = "UPDATE t_adm SET "
+				+ "a_nome = ?, "
+				+ "a_email = ?, "
+				+ "a_telefone = ?, "
+				+ "a_status = ? WHERE a_matricula = ? ";
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+		
+		stmt.setString(1, adm.getNome());
+		stmt.setString(2, adm.getEmail());
+		stmt.setString(3, adm.getTelefone());
+		stmt.setInt(4, adm.getStatusAtivacao());
+		stmt.setString(5, matr);
+		
+		stmt.execute();
+		conn.close();
+		
+	}
+	
+	public void mudarSenha(Administrador adm, String novaSenha) throws SQLException{
+		
+		conn = conexao.getConexaoMySQL();
+		
+		String sql = "UPDATE t_adm SET "
+				+ "a_senha = ? WHERE a_matricula = ? ";
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+		
+		stmt.setString(1, novaSenha);
+		stmt.setString(2, adm.getMatricula());
+		
+		stmt.execute();
+		conn.close();
+	}
+	
+	public static void main(String[] args) throws SQLException {
+		GerenciadorAdministrador ger = new GerenciadorAdministrador();
+		Administrador adm = new Administrador("11", "11", "no", "123", "123", 1);
+		ger.mudarSenha(adm, "789");
+	}
 }

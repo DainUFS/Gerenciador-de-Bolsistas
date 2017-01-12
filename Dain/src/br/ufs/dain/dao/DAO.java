@@ -255,4 +255,22 @@ public class DAO implements InterfaceDAO {
 		}
 		return 0;
 	}
+
+	@Override
+	public void atualizarDados(Administrador adm, String mat) {
+		try {
+			gAdm.altualizarDados(adm, mat);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
+
+	@Override
+	public void mudarSenha(Administrador adm, String novaSenha) {
+		try {
+			gAdm.mudarSenha(adm, novaSenha);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

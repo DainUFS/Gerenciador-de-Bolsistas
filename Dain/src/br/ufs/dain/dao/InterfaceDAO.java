@@ -49,6 +49,10 @@ public interface InterfaceDAO {
 	
 	public ArrayList<Administrador> buscarAdm();
 	
+	public void atualizarDados(Administrador adm, String mat);
+	
+	public void mudarSenha(Administrador adm, String novaSenha);
+	
 	
 	//Notas
 	public void cadastrarNota(String matric, String anotacao);
