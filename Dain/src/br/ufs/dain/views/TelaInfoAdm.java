@@ -14,6 +14,9 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import java.awt.GridLayout;
+import javax.swing.border.TitledBorder;
+import javax.swing.BoxLayout;
 
 public class TelaInfoAdm extends JFrame {
 
@@ -26,14 +29,41 @@ public class TelaInfoAdm extends JFrame {
 		this.nome = nome;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 823, 544);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		JLabel lblInformaesDeAdministrador = new JLabel("Informa\u00E7\u00F5es de Administrador");
-		contentPane.add(lblInformaesDeAdministrador, BorderLayout.CENTER);
+		JPanel panel_2 = new JPanel();
+		contentPane.add(panel_2, BorderLayout.NORTH);
+		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
+		
+		JPanel panel = new JPanel();
+		panel_2.add(panel);
+		panel.setBorder(new TitledBorder(null, "Informa\u00E7\u00F5es Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setLayout(new GridLayout(1, 2, 0, 5));
+		
+		JLabel lblNome = new JLabel("Nome: ");
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel.add(lblNome);
+		
+		JLabel lblMatrcula = new JLabel("Matr\u00EDcula: ");
+		lblMatrcula.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel.add(lblMatrcula);
+		
+		JPanel panel_1 = new JPanel();
+		panel_2.add(panel_1);
+		panel_1.setBorder(new TitledBorder(null, "Contatos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JLabel lblTelefone = new JLabel("Telefone: ");
+		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_1.add(lblTelefone);
+		
+		JLabel lblEmail = new JLabel("E-mail: ");
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_1.add(lblEmail);
 	}
 	
 	public void abrirAba (JTabbedPane tabbedPane) {
@@ -41,7 +71,7 @@ public class TelaInfoAdm extends JFrame {
 		contentPane.setOpaque(false);
 		tabbedPane.add(contentPane);
 		tabbedPane.setTabComponentAt(tabbedPane.indexOfComponent(contentPane),
-				getTitlePanel(tabbedPane, contentPane, nome));
+				getTitlePanel(tabbedPane, contentPane, "Administrador: " + nome));
 
 	}
 
