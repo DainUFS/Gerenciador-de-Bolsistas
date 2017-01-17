@@ -90,13 +90,13 @@ public class TelaMudarSenha extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(adm.getSenha().toString().equals(textFieldSenhaAtual.getText().toString())){
 					if(textFieldNovaSenha.getText().toString().equals(
-							textFieldRepetir.getText().toString())){
+							textFieldRepetir.getText().toString()) && !textFieldNovaSenha.getText().toString().equals("")){
 							DAO dao = new DAO();
 							dao.mudarSenha(adm, textFieldNovaSenha.getText().toString());
 							JOptionPane.showMessageDialog(null, "Nova Senha Salva com Sucesso!");
 							dispose();
 					}else{
-						JOptionPane.showMessageDialog(null, "Senha Nova não Confere!");
+						JOptionPane.showMessageDialog(null, "Senha Nova não Altenticada! ");
 					}
 				}else{
 					JOptionPane.showMessageDialog(null, "Senha Atual não Confere!");

@@ -63,6 +63,8 @@ public interface InterfaceDAO {
 	
 	public void editarNota(String novaNota, String antigaNota);
 	
+	public ArrayList<Nota> TodasAsNota();
+	
 	
 	//Horario
 	public int aramazenarHor(Horario hr);

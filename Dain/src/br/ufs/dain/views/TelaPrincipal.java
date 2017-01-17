@@ -40,6 +40,9 @@ import br.ufs.dain.modelo.Deficiente;
 import br.ufs.dain.modelo.Horario;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class TelaPrincipal extends JFrame {
 
@@ -105,10 +108,47 @@ public class TelaPrincipal extends JFrame {
 		JScrollPane scrollPane_2 = new JScrollPane(panel_1);
 		scrollPane_2.getVerticalScrollBar().setUnitIncrement(SCROLL_SPEED);
 		scrollPane_2.getHorizontalScrollBar().setUnitIncrement(SCROLL_SPEED);
-		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
-
-		JLabel label_adm = new JLabel(adm.getNome());
-		panel_1.add(label_adm);
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[]{100, 0};
+		gbl_panel_1.rowHeights = new int[]{29, 0, 0, 0, 0, 0};
+		gbl_panel_1.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panel_1.setLayout(gbl_panel_1);
+		
+				JLabel label_adm = new JLabel(adm.getNome());
+				GridBagConstraints gbc_label_adm = new GridBagConstraints();
+				gbc_label_adm.insets = new Insets(0, 0, 5, 0);
+				gbc_label_adm.fill = GridBagConstraints.BOTH;
+				gbc_label_adm.gridx = 0;
+				gbc_label_adm.gridy = 0;
+				panel_1.add(label_adm, gbc_label_adm);
+				
+				JLabel lblNewLabel = new JLabel("New label");
+				GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+				gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+				gbc_lblNewLabel.gridx = 0;
+				gbc_lblNewLabel.gridy = 1;   
+				panel_1.add(lblNewLabel, gbc_lblNewLabel);
+				
+				JLabel lblNewLabel_1 = new JLabel("New label");
+				GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+				gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
+				gbc_lblNewLabel_1.gridx = 0;
+				gbc_lblNewLabel_1.gridy = 2;
+				panel_1.add(lblNewLabel_1, gbc_lblNewLabel_1);
+				
+				JLabel lblNewLabel_2 = new JLabel("New label");
+				GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+				gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 0);
+				gbc_lblNewLabel_2.gridx = 0;
+				gbc_lblNewLabel_2.gridy = 3;
+				panel_1.add(lblNewLabel_2, gbc_lblNewLabel_2);
+				
+				JLabel lblNewLabel_3 = new JLabel("New label");
+				GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+				gbc_lblNewLabel_3.gridx = 0;
+				gbc_lblNewLabel_3.gridy = 4;
+				panel_1.add(lblNewLabel_3, gbc_lblNewLabel_3);
 
 		JSplitPane splitPane_1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, scrollPane_1, scrollPane_2);
 		splitPane_1.setContinuousLayout(true);
@@ -430,15 +470,15 @@ public class TelaPrincipal extends JFrame {
 					{
 						for (int i = 0; i < adms.size(); i++)
 							nodeAdministradores.add(new DefaultMutableTreeNode(adms.get(i).getNome()));
-						add(nodeAdministradores);
+							add(nodeAdministradores);
 
 						for (int i = 0; i < bolsistas.size(); i++)
 							nodeBolsistas.add(new DefaultMutableTreeNode(bolsistas.get(i).getNome()));
-						add(nodeBolsistas);
+							add(nodeBolsistas);
 
 						for (int i = 0; i < deficientes.size(); i++)
 							nodeDeficientes.add(new DefaultMutableTreeNode(deficientes.get(i).getNome()));
-						add(nodeDeficientes);
+							add(nodeDeficientes);
 					}
 				});
 		tree.setModel(model);

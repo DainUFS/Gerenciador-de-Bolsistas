@@ -273,4 +273,15 @@ public class DAO implements InterfaceDAO {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public ArrayList<Nota> TodasAsNota() {
+		ArrayList<Nota> notas = null;
+		try {
+			notas = gNota.TodasAsNotas();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return notas;
+	}
 }

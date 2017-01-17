@@ -8,9 +8,9 @@ public abstract class Pessoa {
 	
 	public Pessoa(String telefone, String email, String nome) {
 		super();
-		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
+		this.nome = nome;
 	}
 
 	public String getNome() {

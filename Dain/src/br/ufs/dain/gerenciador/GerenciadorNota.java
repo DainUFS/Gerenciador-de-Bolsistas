@@ -130,11 +130,33 @@ public class GerenciadorNota {
 		
 	}
 	
-	public static void main(String[] args) throws SQLException {
-		ArrayList<Nota> notas;
-		new GerenciadorNota().editarNota("teste em A", "ola");
+	public ArrayList<Nota> TodasAsNotas() throws SQLException {
 		
-	
+		conn = conexao.getConexaoMySQL();
+
+		Administrador adm;
+		Nota nota;
+		
+		ArrayList<Nota> listaNotas = new ArrayList<>();
+		GerenciadorAdministrador gAdm = new GerenciadorAdministrador();
+
+		String sql = "SELECT n_anotacao, n_fk_adm  FROM t_nota WHERE n_anotacao <> ?";
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+
+		stmt.setString(1, "");
+
+		ResultSet rs = (ResultSet) stmt.executeQuery();
+
+		while (rs.next()) {
+			adm = gAdm.buscarAdmMatricula(rs.getString("n_fk_adm"));
+			nota = new Nota(rs.getString("n_anotacao"), adm);
+			listaNotas.add(nota);
+		}
+
+		conn.close();
+
+		return listaNotas;
 	}
 
 }

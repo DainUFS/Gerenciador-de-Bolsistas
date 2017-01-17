@@ -94,7 +94,7 @@ public class GerenciadorAdministrador {
 
 		conn = conexao.getConexaoMySQL();
 
-		String sql = "SELECT * FROM t_adm " + "WHERE a_matricula = ?";
+		String sql = "SELECT * FROM t_adm WHERE a_matricula = ?";
 
 		Administrador adm = null;
 
@@ -181,7 +181,6 @@ public class GerenciadorAdministrador {
 	
 	public static void main(String[] args) throws SQLException {
 		GerenciadorAdministrador ger = new GerenciadorAdministrador();
-		Administrador adm = new Administrador("11", "11", "no", "123", "123", 1);
-		ger.mudarSenha(adm, "789");
+		System.out.println(ger.buscarAdmMatricula("123").getNome());
 	}
 }
