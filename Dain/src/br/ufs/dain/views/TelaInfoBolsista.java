@@ -18,29 +18,12 @@ import javax.swing.border.EmptyBorder;
 
 public class TelaInfoBolsista extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+
 	private JPanel contentPane;
 	
 	private String nome;
 	
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TelaInfoBolsista frame = new TelaInfoBolsista();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the frame.
-	 */
 	public TelaInfoBolsista(String nome) {
 		
 		this.nome = nome;
