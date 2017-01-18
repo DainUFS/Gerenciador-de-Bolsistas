@@ -158,5 +158,10 @@ public class GerenciadorNota {
 
 		return listaNotas;
 	}
+	
+	public static void main(String[] args) throws SQLException {
+		GerenciadorNota gN = new GerenciadorNota();
+		System.out.println(gN.TodasAsNotas().get(1).getAnotacao().toString());
+	}
 
 }

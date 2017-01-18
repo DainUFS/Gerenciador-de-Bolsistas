@@ -7,7 +7,7 @@ public class Administrador extends Pessoa {
 	private int statusAtivacao;
 	
 	public Administrador(String nome, String telefone, String email, String matricula, String senha, int statusAtivacao) {
-		super(telefone, email, nome);
+		super(nome, telefone, email);
 		this.matricula = matricula;
 		this.senha = senha;
 		this.statusAtivacao = statusAtivacao;
