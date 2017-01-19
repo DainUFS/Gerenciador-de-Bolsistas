@@ -48,9 +48,6 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.AncestorEvent;
-import javax.swing.JTextPane;
-import javax.swing.JList;
-import java.awt.Frame;
 
 public class TelaPrincipal extends JFrame {
 
@@ -74,10 +71,11 @@ public class TelaPrincipal extends JFrame {
 	private String[] colunas = { "Horário", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" };
 
 	public TelaPrincipal(Administrador adm) {
-		setExtendedState(Frame.MAXIMIZED_BOTH);
 
 		getMenuBar(adm);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaPrincipal.class.getResource("/br/ufs/dain/resources/logoDainIcone.png")));
+
+		setExtendedState(MAXIMIZED_BOTH);
 		setTitle("Divis\u00E3o de A\u00E7\u00F5es Inclusivas - Universidade Federal de Sergipe");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 346);
@@ -114,17 +112,15 @@ public class TelaPrincipal extends JFrame {
 		panel.add(getTree());
 		
 		JScrollPane scrollPane_2 = new JScrollPane(panel_1);
-		panel_1.setLayout(null);
+		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		DAO dao = new DAO();
-		ArrayList<Nota> todasNotas = dao.TodasAsNota();
+		JLabel lblBuscaPorFiltros = new JLabel("Busca por Filtros");
+		lblBuscaPorFiltros.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBuscaPorFiltros.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_1.add(lblBuscaPorFiltros);
 		scrollPane_2.getVerticalScrollBar().setUnitIncrement(SCROLL_SPEED);
 		scrollPane_2.getHorizontalScrollBar().setUnitIncrement(SCROLL_SPEED);
-		
-		/*DAO dao = new DAO();
-		ArrayList<Nota> todasNotas = dao.TodasAsNota();**/
-				
-				
+
 		JSplitPane splitPane_1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, scrollPane_1, scrollPane_2);
 		splitPane_1.setContinuousLayout(true);
 		splitPane_1.setResizeWeight(0.5);
