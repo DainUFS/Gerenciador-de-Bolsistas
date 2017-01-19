@@ -81,7 +81,7 @@ public class DAO implements InterfaceDAO {
 	@Override
 	public Bolsista getBolsistaNome(String nome) {
 		try {
-			gBol.buscarBolsistaNome(nome);
+			return gBol.buscarBolsistaNome(nome);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

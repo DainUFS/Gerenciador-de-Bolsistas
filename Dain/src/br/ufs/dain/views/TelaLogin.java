@@ -119,7 +119,5 @@ public class TelaLogin extends JFrame {
 			}
 		});
 		panel_1.add(btnNewButton);
-				
 	}
-
 }

@@ -1,9 +1,13 @@
 package br.ufs.dain.views;
 
 import java.awt.BorderLayout;
+import java.awt.Choice;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,9 +27,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -39,15 +44,6 @@ import br.ufs.dain.modelo.Administrador;
 import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Deficiente;
 import br.ufs.dain.modelo.Horario;
-import br.ufs.dain.modelo.Nota;
-
-import javax.swing.JSeparator;
-import javax.swing.JTextField;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.event.AncestorListener;
-import javax.swing.event.AncestorEvent;
 
 public class TelaPrincipal extends JFrame {
 
@@ -69,6 +65,8 @@ public class TelaPrincipal extends JFrame {
 			"21:00h - 22:00h", "22:00h - 23:00h" };
 
 	private String[] colunas = { "Horário", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" };
+	private JTextField textField;
+	private JTextField textField_1;
 
 	public TelaPrincipal(Administrador adm) {
 
@@ -112,18 +110,94 @@ public class TelaPrincipal extends JFrame {
 		panel.add(getTree());
 		
 		JScrollPane scrollPane_2 = new JScrollPane(panel_1);
-		panel_1.setLayout(new BorderLayout(0, 0));
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[]{0, 0};
+		gbl_panel_1.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel_1.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panel_1.setLayout(gbl_panel_1);
 		
-		JLabel lblBuscaPorFiltros = new JLabel("Busca por Filtros");
-		lblBuscaPorFiltros.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBuscaPorFiltros.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_1.add(lblBuscaPorFiltros);
+		JLabel lblNewLabel = new JLabel("Buscar Bolsistas:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel.gridx = 0;
+		gbc_lblNewLabel.gridy = 0;
+		panel_1.add(lblNewLabel, gbc_lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Nome:");
+		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel_1.gridx = 0;
+		gbc_lblNewLabel_1.gridy = 1;
+		panel_1.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		
+		textField = new JTextField();
+		textField.setText("");
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.insets = new Insets(0, 0, 5, 0);
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.gridx = 0;
+		gbc_textField.gridy = 2;
+		panel_1.add(textField, gbc_textField);
+		textField.setColumns(10);
+		
+		JLabel lblMatricula = new JLabel("Matricula:");
+		GridBagConstraints gbc_lblMatricula = new GridBagConstraints();
+		gbc_lblMatricula.insets = new Insets(0, 0, 5, 0);
+		gbc_lblMatricula.gridx = 0;
+		gbc_lblMatricula.gridy = 3;
+		panel_1.add(lblMatricula, gbc_lblMatricula);
+		
+		textField_1 = new JTextField();
+		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
+		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_1.gridx = 0;
+		gbc_textField_1.gridy = 4;
+		panel_1.add(textField_1, gbc_textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblTipoDeAtividade = new JLabel("Tipo de Atividade:");
+		GridBagConstraints gbc_lblTipoDeAtividade = new GridBagConstraints();
+		gbc_lblTipoDeAtividade.insets = new Insets(0, 0, 5, 0);
+		gbc_lblTipoDeAtividade.gridx = 0;
+		gbc_lblTipoDeAtividade.gridy = 5;
+		panel_1.add(lblTipoDeAtividade, gbc_lblTipoDeAtividade);
+		
+		Choice choice = new Choice();
+		choice.setFont(new Font("Dialog", Font.PLAIN, 13));
+		choice.add("Nenhum");
+		choice.add("Dain");
+		choice.add("Apoio");
+		choice.add("Bicen");
+		GridBagConstraints gbc_choice = new GridBagConstraints();
+		gbc_choice.insets = new Insets(0, 0, 5, 0);
+		gbc_choice.gridx = 0;
+		gbc_choice.gridy = 6;
+		panel_1.add(choice, gbc_choice);
+		
+		JPanel panel_3 = new JPanel();
+		GridBagConstraints gbc_panel_3 = new GridBagConstraints();
+		gbc_panel_3.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_3.fill = GridBagConstraints.BOTH;
+		gbc_panel_3.gridx = 0;
+		gbc_panel_3.gridy = 8;
+		panel_1.add(panel_3, gbc_panel_3);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		panel_3.add(btnBuscar);
+		btnBuscar.setVerticalAlignment(SwingConstants.BOTTOM);
+		
+		
+		
+		
 		scrollPane_2.getVerticalScrollBar().setUnitIncrement(SCROLL_SPEED);
 		scrollPane_2.getHorizontalScrollBar().setUnitIncrement(SCROLL_SPEED);
 
 		JSplitPane splitPane_1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, scrollPane_1, scrollPane_2);
 		splitPane_1.setContinuousLayout(true);
-		splitPane_1.setResizeWeight(0.5);
+		splitPane_1.setResizeWeight(0.7);
 		splitPane_1.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		contentPane.add(splitPane_1, BorderLayout.EAST);
 
@@ -139,6 +213,7 @@ public class TelaPrincipal extends JFrame {
 
 		JLabel label_Nomeadm = new JLabel(adm.getNome());
 		panel_2.add(label_Nomeadm);
+	
 
 		organizaTabela(panelCentro);
 		distribuiNomes();

@@ -45,16 +45,16 @@ public class TelaHorarioAcompanhamento extends JFrame {
 	private JButton btnAdicionarBicen;
 	private JButton btnRelacionarAssistidobolsista;
 	private JButton btnAdicionarDain;
-	
+
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
-	
-	private ArrayList<String> bolsistasApoio = new ArrayList<>();
-	private ArrayList<String> bolsistasDain = new ArrayList<>();
-	private ArrayList<String> bolsistasBicen = new ArrayList<>();
-	private ArrayList<String> deficientesApoio = new ArrayList<>();
-	
+
+	private ArrayList<Bolsista> bolsistasApoio = new ArrayList<>();
+	private ArrayList<Bolsista> bolsistasDain = new ArrayList<>();
+	private ArrayList<Bolsista> bolsistasBicen = new ArrayList<>();
+	private ArrayList<Deficiente> deficientesApoio = new ArrayList<>();
+
 	/**
 	 * Create the frame.
 	 */
@@ -142,35 +142,41 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		panel_apoio.setBorder(new TitledBorder(null, "APOIO", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, null));
 		panel_2.add(panel_apoio);
 		panel_apoio.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel_apoio.add(lblNewLabel_2);
 
 		JPanel panel_dain = new JPanel();
 		panel_dain.setBorder(new TitledBorder(null, "DAIN", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, null));
 		panel_dain.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		panel_2.add(panel_dain);
-		
+
 		lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel_dain.add(lblNewLabel_3);
 
 		JPanel panel_bicen = new JPanel();
 		panel_bicen.setBorder(new TitledBorder(null, "BICEN", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, null));
 		panel_bicen.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		panel_2.add(panel_bicen);
-		
+
 		lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel_bicen.add(lblNewLabel_4);
 
 		btnRelacionarAssistidobolsista = new JButton("Apoio");
 		btnRelacionarAssistidobolsista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (!bolsistasApoio.contains(list_2.getSelectedValue())) {
-					bolsistasApoio.add(list_2.getSelectedValue());
-					atualizaLabel(panel_apoio, bolsistasApoio);
+				if (list_2.getSelectedIndex() != -1) {
+					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
+					if (!bolsistasApoio.contains(b)) {
+						bolsistasApoio.add(b);
+						atualizaLabel(panel_apoio, bolsistasApoio);
+					}
+					else
+						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado já está prestando serviço nesse horário!");
 				}
-				else
-					JOptionPane.showMessageDialog(contentPane, "Selecione um aluno da lista antes de realizar essa operação!");
 			}
 		});
 		panel_8.add(btnRelacionarAssistidobolsista);
@@ -179,7 +185,15 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		btnAdicionarDain.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//atualizaLabel(panel_dain, list_2);
+				if (list_2.getSelectedIndex() != -1) {
+					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
+					if (!bolsistasDain.contains(b)) {
+						bolsistasApoio.add(b);
+						atualizaLabel(panel_dain, bolsistasDain);
+					}
+					else
+						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado já está prestando serviço nesse horário!");
+				}
 			}
 		});
 		panel_8.add(btnAdicionarDain);
@@ -187,7 +201,15 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		btnAdicionarBicen = new JButton("Bicen");
 		btnAdicionarBicen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//atualizaLabel(panel_bicen, list_2);
+				if (list_2.getSelectedIndex() != -1) {
+					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
+					if (!bolsistasApoio.contains(b)) {
+						bolsistasApoio.add(b);
+						atualizaLabel(panel_bicen, bolsistasBicen);
+					}
+					else
+						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado já está prestando serviço nesse horário!");
+				}
 			}
 		});
 		panel_8.add(btnAdicionarBicen);
@@ -195,7 +217,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		btnDesalocar = new JButton("Desalocar");
 		btnDesalocar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 			}
 		});
 		panel_8.add(btnDesalocar);
@@ -287,40 +309,23 @@ public class TelaHorarioAcompanhamento extends JFrame {
 				horarioLivre = new DAO().buscarHorarioBolsista(listaBolsista.get(i).getMatricula()).getSabado();
 
 			if (!horarioLivre.contains(hora + "|"))
-				listModel.addElement(listaBolsista.get(i).getNome() + "          ");
+				listModel.addElement(listaBolsista.get(i).getNome());
 		}
 		list.setModel(listModel);
 
 		return list;
 	}
 
-	private void atualizaLabel (JPanel panel, ArrayList<String> list) {
-		
-//		if (list.getSelectedIndex() == -1) {
-//			JOptionPane.showMessageDialog(this, "Selecione um aluno da lista antes de realizar essa operação!");
-//		}
-//		else if (lblXxx.getText().contains(list.getSelectedValue()) ||
-//				lblNewLabel_2.getText().contains(list.getSelectedValue()) ||
-//				lblNewLabel_3.getText().contains(list.getSelectedValue()))
-//		{
-//			JOptionPane.showMessageDialog(this, "O aluno selecionado já está prestando serviço nesse horário!");
-//		} else {
-//			JLabel label = (JLabel) panel.getComponent(0);
-//			String s = label.getText();
-//			s = s.replace("<html>", "");
-//			s = s.replace("</html>", "");
-//			s = s.replace("<body>", "");
-//			s = s.replace("</body>", "");
-//			if (s.equals(""))
-//				label.setText(list.getSelectedValue());
-//			else
-//				label.setText("<html><body>" + s + "<br>" + list.getSelectedValue() + "</html></body>");
-//		}
-		System.out.println(bolsistasApoio.get(0));
-		panel.removeAll();
-		for (int i = 0; i < bolsistasApoio.size(); i++) {
-			lblNewLabel_2.setText(""+bolsistasApoio.get(i));
+	private void atualizaLabel (JPanel panel, ArrayList<Bolsista> list) {
+
+		JLabel label = (JLabel) panel.getComponent(0);
+
+		String s = "<html><body>";
+		for (int i = 0; i < list.size(); i++) {
+			s += list.get(i).getNome() + "<br>";
 		}
-		System.out.println(lblNewLabel_2.getText());
+		s += "</html></body>";
+		System.out.println(s);
+		label.setText(s);
 	}
 }
