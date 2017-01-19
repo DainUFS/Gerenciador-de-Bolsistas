@@ -48,6 +48,9 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.AncestorEvent;
+import javax.swing.JTextPane;
+import javax.swing.JList;
+import java.awt.Frame;
 
 public class TelaPrincipal extends JFrame {
 
@@ -71,11 +74,10 @@ public class TelaPrincipal extends JFrame {
 	private String[] colunas = { "Horário", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" };
 
 	public TelaPrincipal(Administrador adm) {
+		setExtendedState(Frame.MAXIMIZED_BOTH);
 
 		getMenuBar(adm);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaPrincipal.class.getResource("/br/ufs/dain/resources/logoDainIcone.png")));
-
-		setExtendedState(MAXIMIZED_BOTH);
 		setTitle("Divis\u00E3o de A\u00E7\u00F5es Inclusivas - Universidade Federal de Sergipe");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 346);
@@ -110,81 +112,19 @@ public class TelaPrincipal extends JFrame {
 		panel.setLayout(new BorderLayout(0, 0));
 
 		panel.add(getTree());
-		JScrollPane scrollPane_2 = new JScrollPane(panel_1);
-		scrollPane_2.getVerticalScrollBar().setUnitIncrement(SCROLL_SPEED);
-		scrollPane_2.getHorizontalScrollBar().setUnitIncrement(SCROLL_SPEED);
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{100, 0};
-		gbl_panel_1.rowHeights = new int[]{29, 0, 0, 0, 0, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel_1.setLayout(gbl_panel_1);
 		
-		/*DAO dao = new DAO();
-				ArrayList<Nota> todasNotas = dao.TodasAsNota();
-				
-				for (int i = 0; i < todasNotas.size(); i++) {
-					
-					int x = i;
-					
-					JPanel panel_interno = new JPanel();
-					panel_interno.setLayout(new BorderLayout());
-				
-					
-					JLabel label_adm_1 = new JLabel();
-					GridBagConstraints gbc_label_adm_1 = new GridBagConstraints();
-					label_adm_1.setText(todasNotas.get(i).getAnotacao());
-					gbc_label_adm_1.insets = new Insets(0, 0, 5, 0);
-					gbc_label_adm_1.fill = GridBagConstraints.BOTH;
-					gbc_label_adm_1.gridx = 0;
-					gbc_label_adm_1.gridy = 0;
-					panel_1.add(label_adm_1, gbc_label_adm_1);
-					
-					panel_interno.add(BorderLayout.CENTER, label_adm_1);
-					
-					panel.add(panel_interno);
-				}	**/
+		JScrollPane scrollPane_2 = new JScrollPane(panel_1);
+		panel_1.setLayout(null);
+		
 		DAO dao = new DAO();
 		ArrayList<Nota> todasNotas = dao.TodasAsNota();
-		for (int i = 0; i < todasNotas.size(); i++) {
-			JLabel label_adm_1 = new JLabel(todasNotas.get(i).getAnotacao().toString());
-			GridBagConstraints gbc_label_adm_1 = new GridBagConstraints();
-			gbc_label_adm_1.insets = new Insets(0, 0, 5, 0);
-			gbc_label_adm_1.fill = GridBagConstraints.BOTH;
-			gbc_label_adm_1.gridx = 0;
-			gbc_label_adm_1.gridy = 0;
-			panel_1.add(label_adm_1, gbc_label_adm_1);
-		}
+		scrollPane_2.getVerticalScrollBar().setUnitIncrement(SCROLL_SPEED);
+		scrollPane_2.getHorizontalScrollBar().setUnitIncrement(SCROLL_SPEED);
+		
+		/*DAO dao = new DAO();
+		ArrayList<Nota> todasNotas = dao.TodasAsNota();**/
 				
 				
-				
-				/*JLabel label_adm_2 = new JLabel("New label");
-				GridBagConstraints gbc_label_adm_2 = new GridBagConstraints();
-				gbc_label_adm_2.insets = new Insets(0, 0, 5, 0);
-				gbc_label_adm_2.gridx = 0;
-				gbc_label_adm_2.gridy = 1;   
-				panel_1.add(label_adm_2, gbc_label_adm_2);
-				
-				JLabel label_adm_3 = new JLabel("New label");
-				GridBagConstraints gbc_label_adm_3 = new GridBagConstraints();
-				gbc_label_adm_3.insets = new Insets(0, 0, 5, 0);
-				gbc_label_adm_3.gridx = 0;
-				gbc_label_adm_3.gridy = 2;
-				panel_1.add(label_adm_3, gbc_label_adm_3);
-				
-				JLabel label_adm_4 = new JLabel("New label");
-				GridBagConstraints gbc_label_adm_4 = new GridBagConstraints();
-				gbc_label_adm_4.insets = new Insets(0, 0, 5, 0);
-				gbc_label_adm_4.gridx = 0;
-				gbc_label_adm_4.gridy = 3;
-				panel_1.add(label_adm_4, gbc_label_adm_4);
-				
-				JLabel label_adm_5 = new JLabel("New label");
-				GridBagConstraints gbc_label_adm_5 = new GridBagConstraints();
-				gbc_label_adm_5.gridx = 0;
-				gbc_label_adm_5.gridy = 4;
-				panel_1.add(label_adm_5, gbc_label_adm_5);*/
-
 		JSplitPane splitPane_1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, scrollPane_1, scrollPane_2);
 		splitPane_1.setContinuousLayout(true);
 		splitPane_1.setResizeWeight(0.5);
