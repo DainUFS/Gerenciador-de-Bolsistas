@@ -144,7 +144,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		panel_apoio.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_apoio.add(lblNewLabel_2);
 
 		JPanel panel_dain = new JPanel();
@@ -153,7 +153,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		panel_2.add(panel_dain);
 
 		lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_dain.add(lblNewLabel_3);
 
 		JPanel panel_bicen = new JPanel();
@@ -162,16 +162,18 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		panel_2.add(panel_bicen);
 
 		lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_bicen.add(lblNewLabel_4);
 
 		btnRelacionarAssistidobolsista = new JButton("Apoio");
 		btnRelacionarAssistidobolsista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (list_2.getSelectedIndex() != -1) {
+				if (list_1.getSelectedIndex() != -1 && list_2.getSelectedIndex() != -1) {
 					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
-					if (!bolsistasApoio.contains(b)) {
+					Deficiente d = new DAO().getDeficienteNome(list_1.getSelectedValue());
+					if (!buscaCompara(b, bolsistasApoio) && !buscaCompara(b, bolsistasDain) && !buscaCompara(b, bolsistasBicen)) {
 						bolsistasApoio.add(b);
+						deficientesApoio.add(d);
 						atualizaLabel(panel_apoio, bolsistasApoio);
 					}
 					else
@@ -187,8 +189,8 @@ public class TelaHorarioAcompanhamento extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (list_2.getSelectedIndex() != -1) {
 					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
-					if (!bolsistasDain.contains(b)) {
-						bolsistasApoio.add(b);
+					if (!buscaCompara(b, bolsistasApoio) && !buscaCompara(b, bolsistasDain) && !buscaCompara(b, bolsistasBicen)) {
+						bolsistasDain.add(b);
 						atualizaLabel(panel_dain, bolsistasDain);
 					}
 					else
@@ -203,8 +205,8 @@ public class TelaHorarioAcompanhamento extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (list_2.getSelectedIndex() != -1) {
 					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
-					if (!bolsistasApoio.contains(b)) {
-						bolsistasApoio.add(b);
+					if (!buscaCompara(b, bolsistasApoio) && !buscaCompara(b, bolsistasDain) && !buscaCompara(b, bolsistasBicen)) {
+						bolsistasBicen.add(b);
 						atualizaLabel(panel_bicen, bolsistasBicen);
 					}
 					else
@@ -217,7 +219,23 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		btnDesalocar = new JButton("Desalocar");
 		btnDesalocar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				if (list_2.getSelectedIndex() != -1) {
+					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
+					if (buscaCompara(b, bolsistasApoio)) {
+						bolsistasApoio.remove(b);
+						atualizaLabel(panel_apoio, bolsistasApoio);
+					}
+					else if (buscaCompara(b, bolsistasDain)) {
+						bolsistasDain.remove(b);
+						atualizaLabel(panel_dain, bolsistasDain);
+					}
+					else if (buscaCompara(b, bolsistasBicen)) {
+						bolsistasBicen.remove(b);
+						atualizaLabel(panel_bicen, bolsistasBicen);
+					}
+					else
+						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado não está prestando serviço nesse horário!");
+				}
 			}
 		});
 		panel_8.add(btnDesalocar);
@@ -325,7 +343,17 @@ public class TelaHorarioAcompanhamento extends JFrame {
 			s += list.get(i).getNome() + "<br>";
 		}
 		s += "</html></body>";
-		System.out.println(s);
 		label.setText(s);
+	}
+	
+	private boolean buscaCompara (Bolsista b, ArrayList<Bolsista> list) {
+		
+		for (int i = 0; i < list.size(); i++) {
+			if (b.getNome().equals(list.get(i).getNome())) {
+				list.set(i, b);
+				return true;
+			}
+		}
+		return false;
 	}
 }
