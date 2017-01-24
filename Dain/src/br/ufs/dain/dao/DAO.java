@@ -49,7 +49,7 @@ public class DAO implements InterfaceDAO {
 	@Override
 	public Deficiente getDeficienteNome(String nome) {
 		try {
-			gDef.buscarDeficienteNome(nome);
+			return gDef.buscarDeficienteNome(nome);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -229,14 +229,6 @@ public class DAO implements InterfaceDAO {
 		return null;
 	}
 	
-	public static void main(String[] args) {
-		DAO dao = new DAO();
-		System.out.println(dao.buscarNota("123").get(0).getAnotacao());
-		
-		
-	
-	}
-
 	@Override
 	public void editarNota(String novaNota, String nota) {
 		try {
@@ -283,5 +275,10 @@ public class DAO implements InterfaceDAO {
 			e.printStackTrace();
 		}
 		return notas;
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println(new DAO().buscarDeficiente().get(0).getNome());
 	}
 }

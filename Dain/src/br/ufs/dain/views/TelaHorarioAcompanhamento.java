@@ -111,7 +111,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		panel_3.setBorder(new EmptyBorder(5, 3, 5, 3));
 		panel_3.setLayout(new GridLayout(2, 1, 0, 5));
 
-		JList<String> list_1 = getLista();
+		JList<String> list_1 = getListaDeficientes();
 		JScrollPane scroll_1 = new JScrollPane(list_1);
 		scroll_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll_1.getVerticalScrollBar().setUnitIncrement(SCROLL_SPEED);
@@ -168,16 +168,18 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		btnRelacionarAssistidobolsista = new JButton("Apoio");
 		btnRelacionarAssistidobolsista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (list_1.getSelectedIndex() != -1 && list_2.getSelectedIndex() != -1) {
+				if (list_1.getSelectedIndex() != -1 && list_2.getSelectedIndex() != -1
+						&& new DAO().getBolsistaNome(list_2.getSelectedValue()) != null && new DAO().getDeficienteNome(list_1.getSelectedValue()) != null) {
 					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
 					Deficiente d = new DAO().getDeficienteNome(list_1.getSelectedValue());
 					if (!buscaCompara(b, bolsistasApoio) && !buscaCompara(b, bolsistasDain) && !buscaCompara(b, bolsistasBicen)) {
 						bolsistasApoio.add(b);
 						deficientesApoio.add(d);
-						atualizaLabel(panel_apoio, bolsistasApoio);
+						System.out.println(deficientesApoio);
+						atualizaLabel(panel_apoio, bolsistasApoio, deficientesApoio);
 					}
 					else
-						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado já está prestando serviço nesse horário!");
+						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado já está prestando serviço nesse horário ou foi excluído da base de dados!");
 				}
 			}
 		});
@@ -191,10 +193,10 @@ public class TelaHorarioAcompanhamento extends JFrame {
 					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
 					if (!buscaCompara(b, bolsistasApoio) && !buscaCompara(b, bolsistasDain) && !buscaCompara(b, bolsistasBicen)) {
 						bolsistasDain.add(b);
-						atualizaLabel(panel_dain, bolsistasDain);
+						atualizaLabel(panel_dain, bolsistasDain, null);
 					}
 					else
-						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado já está prestando serviço nesse horário!");
+						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado já está prestando serviço nesse horário ou foi excluído da base de dados!");
 				}
 			}
 		});
@@ -207,10 +209,10 @@ public class TelaHorarioAcompanhamento extends JFrame {
 					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
 					if (!buscaCompara(b, bolsistasApoio) && !buscaCompara(b, bolsistasDain) && !buscaCompara(b, bolsistasBicen)) {
 						bolsistasBicen.add(b);
-						atualizaLabel(panel_bicen, bolsistasBicen);
+						atualizaLabel(panel_bicen, bolsistasBicen, null);
 					}
 					else
-						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado já está prestando serviço nesse horário!");
+						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado já está prestando serviço nesse horário ou foi excluído da base de dados!");
 				}
 			}
 		});
@@ -221,17 +223,19 @@ public class TelaHorarioAcompanhamento extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if (list_2.getSelectedIndex() != -1) {
 					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
+					Deficiente d = new DAO().getDeficienteNome(list_2.getSelectedValue());
 					if (buscaCompara(b, bolsistasApoio)) {
 						bolsistasApoio.remove(b);
-						atualizaLabel(panel_apoio, bolsistasApoio);
+						deficientesApoio.remove(d);
+						atualizaLabel(panel_apoio, bolsistasApoio, deficientesApoio);
 					}
 					else if (buscaCompara(b, bolsistasDain)) {
 						bolsistasDain.remove(b);
-						atualizaLabel(panel_dain, bolsistasDain);
+						atualizaLabel(panel_dain, bolsistasDain, null);
 					}
 					else if (buscaCompara(b, bolsistasBicen)) {
 						bolsistasBicen.remove(b);
-						atualizaLabel(panel_bicen, bolsistasBicen);
+						atualizaLabel(panel_bicen, bolsistasBicen, null);
 					}
 					else
 						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado não está prestando serviço nesse horário!");
@@ -333,15 +337,53 @@ public class TelaHorarioAcompanhamento extends JFrame {
 
 		return list;
 	}
+	
+	private JList<String> getListaDeficientes () {
+		System.out.println("CheGAY!");
+		JList<String> list_1 = new JList<String>();
+		list_1.setBorder(new EmptyBorder(1, 1, 1, 1));
+		list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
+		ArrayList<Deficiente> listaDeficientes = new DAO().buscarDeficiente();
 
-	private void atualizaLabel (JPanel panel, ArrayList<Bolsista> list) {
+		for (int i = 0; i < listaDeficientes.size(); i++) {
+			String horarioLivre = null;
+			if (dia.equals("Segunda"))
+				horarioLivre = new DAO().buscarHorarioDeficiente(listaDeficientes.get(i).getMatricula()).getSegunda();
+			else if (dia.equals("Terça"))
+				horarioLivre = new DAO().buscarHorarioDeficiente(listaDeficientes.get(i).getMatricula()).getTerca();
+			else if (dia.equals("Quarta"))
+				horarioLivre = new DAO().buscarHorarioDeficiente(listaDeficientes.get(i).getMatricula()).getQuarta();
+			else if (dia.equals("Quinta"))
+				horarioLivre = new DAO().buscarHorarioDeficiente(listaDeficientes.get(i).getMatricula()).getQuinta();
+			else if (dia.equals("Sexta"))
+				horarioLivre = new DAO().buscarHorarioDeficiente(listaDeficientes.get(i).getMatricula()).getSexta();
+			else
+				horarioLivre = new DAO().buscarHorarioDeficiente(listaDeficientes.get(i).getMatricula()).getSabado();
+
+			if (horarioLivre.contains(hora + "|"))
+				listModel.addElement(listaDeficientes.get(i).getNome());
+		}
+		list_1.setModel(listModel);
+		
+		return list_1;
+	}
+
+	private void atualizaLabel (JPanel panel, ArrayList<Bolsista> list, ArrayList<Deficiente> list2) {
 
 		JLabel label = (JLabel) panel.getComponent(0);
 
 		String s = "<html><body>";
-		for (int i = 0; i < list.size(); i++) {
-			s += list.get(i).getNome() + "<br>";
+		if (list2 != null) {
+			for (int i = 0; i < list.size(); i++) {
+				s += list.get(i).getNome() + "<br><pre>" + list2.get(i).getNome() + "</pre><br><br>";
+			}
+		} else {
+			for (int i = 0; i < list.size(); i++) {
+				s += list.get(i).getNome() + "<br><br>";
+			}
 		}
+		
 		s += "</html></body>";
 		label.setText(s);
 	}
