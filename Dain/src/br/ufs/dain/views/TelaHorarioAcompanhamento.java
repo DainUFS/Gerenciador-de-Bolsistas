@@ -118,7 +118,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		scroll_1.getHorizontalScrollBar().setUnitIncrement(SCROLL_SPEED);
 		panel_3.add(scroll_1);
 
-		JList<String> list_2 = getLista();
+		JList<String> list_2 = getListaBolsistas();
 		JScrollPane scroll_2 = new JScrollPane(list_2);
 		scroll_2.getVerticalScrollBar().setUnitIncrement(SCROLL_SPEED);
 		scroll_2.getHorizontalScrollBar().setUnitIncrement(SCROLL_SPEED);
@@ -172,14 +172,17 @@ public class TelaHorarioAcompanhamento extends JFrame {
 						&& new DAO().getBolsistaNome(list_2.getSelectedValue()) != null && new DAO().getDeficienteNome(list_1.getSelectedValue()) != null) {
 					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
 					Deficiente d = new DAO().getDeficienteNome(list_1.getSelectedValue());
-					if (!buscaCompara(b, bolsistasApoio) && !buscaCompara(b, bolsistasDain) && !buscaCompara(b, bolsistasBicen)) {
+					if (!buscaComparaBolsista(b, bolsistasApoio) && !buscaComparaBolsista(b, bolsistasDain)
+							&& !buscaComparaBolsista(b, bolsistasBicen)	&& !buscaComparaDeficiente(d, deficientesApoio)) {
 						bolsistasApoio.add(b);
 						deficientesApoio.add(d);
 						System.out.println(deficientesApoio);
 						atualizaLabel(panel_apoio, bolsistasApoio, deficientesApoio);
+						System.out.println(bolsistasApoio);
+						System.out.println(deficientesApoio);
 					}
 					else
-						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado já está prestando serviço nesse horário ou foi excluído da base de dados!");
+						JOptionPane.showMessageDialog(contentPane, "O aluno bolsista ou assistido selecionado já está selecionado nesse horário ou foi excluído da base de dados!");
 				}
 			}
 		});
@@ -191,7 +194,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (list_2.getSelectedIndex() != -1) {
 					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
-					if (!buscaCompara(b, bolsistasApoio) && !buscaCompara(b, bolsistasDain) && !buscaCompara(b, bolsistasBicen)) {
+					if (!buscaComparaBolsista(b, bolsistasApoio) && !buscaComparaBolsista(b, bolsistasDain) && !buscaComparaBolsista(b, bolsistasBicen)) {
 						bolsistasDain.add(b);
 						atualizaLabel(panel_dain, bolsistasDain, null);
 					}
@@ -207,7 +210,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (list_2.getSelectedIndex() != -1) {
 					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
-					if (!buscaCompara(b, bolsistasApoio) && !buscaCompara(b, bolsistasDain) && !buscaCompara(b, bolsistasBicen)) {
+					if (!buscaComparaBolsista(b, bolsistasApoio) && !buscaComparaBolsista(b, bolsistasDain) && !buscaComparaBolsista(b, bolsistasBicen)) {
 						bolsistasBicen.add(b);
 						atualizaLabel(panel_bicen, bolsistasBicen, null);
 					}
@@ -221,19 +224,19 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		btnDesalocar = new JButton("Desalocar");
 		btnDesalocar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (list_2.getSelectedIndex() != -1) {
+				if (list_2.getSelectedIndex() != -1 && list_1.getSelectedIndex() != -1) {
 					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
-					Deficiente d = new DAO().getDeficienteNome(list_2.getSelectedValue());
-					if (buscaCompara(b, bolsistasApoio)) {
+					Deficiente d = new DAO().getDeficienteNome(list_1.getSelectedValue());
+					if (buscaComparaBolsista(b, bolsistasApoio) && buscaComparaDeficiente(d, deficientesApoio)) {
 						bolsistasApoio.remove(b);
 						deficientesApoio.remove(d);
 						atualizaLabel(panel_apoio, bolsistasApoio, deficientesApoio);
 					}
-					else if (buscaCompara(b, bolsistasDain)) {
+					else if (buscaComparaBolsista(b, bolsistasDain)) {
 						bolsistasDain.remove(b);
 						atualizaLabel(panel_dain, bolsistasDain, null);
 					}
-					else if (buscaCompara(b, bolsistasBicen)) {
+					else if (buscaComparaBolsista(b, bolsistasBicen)) {
 						bolsistasBicen.remove(b);
 						atualizaLabel(panel_bicen, bolsistasBicen, null);
 					}
@@ -307,7 +310,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		return tituloPanel;
 	}
 
-	private JList<String> getLista () {
+	private JList<String> getListaBolsistas () {
 
 		JList<String> list = new JList<String>();
 		list.setBorder(new EmptyBorder(1, 1, 1, 1));
@@ -337,7 +340,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 
 		return list;
 	}
-	
+
 	private JList<String> getListaDeficientes () {
 		System.out.println("CheGAY!");
 		JList<String> list_1 = new JList<String>();
@@ -365,7 +368,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 				listModel.addElement(listaDeficientes.get(i).getNome());
 		}
 		list_1.setModel(listModel);
-		
+
 		return list_1;
 	}
 
@@ -383,16 +386,27 @@ public class TelaHorarioAcompanhamento extends JFrame {
 				s += list.get(i).getNome() + "<br><br>";
 			}
 		}
-		
+
 		s += "</html></body>";
 		label.setText(s);
 	}
-	
-	private boolean buscaCompara (Bolsista b, ArrayList<Bolsista> list) {
-		
+
+	private boolean buscaComparaBolsista (Bolsista b, ArrayList<Bolsista> list) {
+
 		for (int i = 0; i < list.size(); i++) {
 			if (b.getNome().equals(list.get(i).getNome())) {
 				list.set(i, b);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean buscaComparaDeficiente (Deficiente d, ArrayList<Deficiente> list) {
+
+		for (int i = 0; i < list.size(); i++) {
+			if (d.getNome().equals(list.get(i).getNome())) {
+				list.set(i, d);
 				return true;
 			}
 		}
