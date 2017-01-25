@@ -15,9 +15,10 @@ import javax.swing.border.EmptyBorder;
 
 import br.ufs.dain.dao.DAO;
 import br.ufs.dain.gerenciador.GerenciadorLogin;
+import br.ufs.dain.modelo.Nota;
 
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -109,6 +110,15 @@ public class TelaLogin extends JFrame {
 					if(new GerenciadorLogin().validarSenha(matricula, senha)) {
 						dispose();
 						new TelaPrincipal(new DAO().buscarAdm(matricula, senha)).setVisible(true);
+						
+						ArrayList<Nota> notas = new DAO().TodasAsNota();
+						
+						if(notas.size() > 0){
+							TelaTodasNotas ttn = new TelaTodasNotas();
+							ttn.setLocationRelativeTo(null);
+							ttn.setVisible(true);
+						}
+						
 					} else {
 						JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos.");
 					}

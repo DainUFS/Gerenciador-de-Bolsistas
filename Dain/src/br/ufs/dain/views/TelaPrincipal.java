@@ -44,6 +44,8 @@ import br.ufs.dain.modelo.Administrador;
 import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Deficiente;
 import br.ufs.dain.modelo.Horario;
+import br.ufs.dain.modelo.Nota;
+
 import java.awt.Label;
 
 public class TelaPrincipal extends JFrame {
@@ -115,6 +117,24 @@ public class TelaPrincipal extends JFrame {
 		scrollPane_2.getHorizontalScrollBar().setUnitIncrement(SCROLL_SPEED);
 
 		JSplitPane splitPane_1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, scrollPane_1, scrollPane_2);
+		
+		JButton btnNewButton = new JButton("Todas as Notas");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ArrayList<Nota> notas = new DAO().TodasAsNota();
+				
+				if(notas.size() > 0){
+					TelaTodasNotas ttn = new TelaTodasNotas();
+					ttn.setLocationRelativeTo(null);
+					ttn.setVisible(true);
+				}else{
+					JOptionPane.showMessageDialog(null, "Não existe nenhuma nota cadastrada."
+							+ " Para cadastrar nota vá em Notas -> Nova Nota.");
+				}
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		scrollPane_2.setViewportView(btnNewButton);
 		splitPane_1.setEnabled(false);
 		splitPane_1.setResizeWeight(1.0);
 		splitPane_1.setContinuousLayout(true);

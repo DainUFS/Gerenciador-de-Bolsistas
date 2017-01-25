@@ -38,7 +38,7 @@ public class GerenciadorNota {
 		ResultSet rs = (ResultSet) stmt.executeQuery();
 
 		while (rs.next()) {
-			nota = new Nota(rs.getString("n_anotacao"), adm);
+			nota = new Nota(rs.getString("n_anotacao"), adm, rs.getString("n_data"));
 			listaNotas.add(nota);
 		}
 
@@ -140,7 +140,7 @@ public class GerenciadorNota {
 		ArrayList<Nota> listaNotas = new ArrayList<>();
 		GerenciadorAdministrador gAdm = new GerenciadorAdministrador();
 
-		String sql = "SELECT n_anotacao, n_fk_adm  FROM t_nota WHERE n_anotacao <> ?";
+		String sql = "SELECT n_anotacao, n_fk_adm, n_data  FROM t_nota WHERE n_anotacao <> ?";
 		
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
@@ -150,7 +150,7 @@ public class GerenciadorNota {
 
 		while (rs.next()) {
 			adm = gAdm.buscarAdmMatricula(rs.getString("n_fk_adm"));
-			nota = new Nota(rs.getString("n_anotacao"), adm);
+			nota = new Nota(rs.getString("n_anotacao"), adm, rs.getString("n_data"));
 			listaNotas.add(nota);
 		}
 
