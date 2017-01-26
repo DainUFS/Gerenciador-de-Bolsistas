@@ -1,6 +1,10 @@
 package br.ufs.dain.views;
 
 import java.awt.BorderLayout;
+import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.awt.Choice;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -16,6 +20,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -45,6 +50,7 @@ import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Deficiente;
 import br.ufs.dain.modelo.Horario;
 import br.ufs.dain.modelo.Nota;
+import br.ufs.dain.modelo.Pessoa;
 
 import java.awt.Label;
 
@@ -61,6 +67,7 @@ public class TelaPrincipal extends JFrame {
 	private ArrayList<Bolsista> bolsistas = new DAO().buscarBolsistas();
 	private ArrayList<Administrador> adms = new DAO().buscarAdm();
 	private ArrayList<Deficiente> deficientes = new DAO().buscarDeficiente();
+		
 
 	private String[] horarios = { "07:00h - 08:00h", "08:00h - 09:00h", "09:00h - 10:00h", "10:00h - 11:00h",
 			"11:00h - 12:00h", "12:00h - 13:00h", "13:00h - 14:00h", "14:00h - 15:00h", "15:00h - 16:00h",
@@ -435,8 +442,12 @@ public class TelaPrincipal extends JFrame {
 		});
 		mnNewMenu_4.add(mntmSobre);
 	}
+	
+	
 
 	private JTree getTree () {
+		
+		//Collections.sort(adms, null);
 
 		DefaultMutableTreeNode nodeAdministradores = new DefaultMutableTreeNode("Administradores (" + adms.size() + ")");
 		DefaultMutableTreeNode nodeBolsistas = new DefaultMutableTreeNode("Bolsistas (" + bolsistas.size() + ")");
@@ -447,11 +458,13 @@ public class TelaPrincipal extends JFrame {
 		tree.setBorder(new EmptyBorder(3, 2, 3, 2));
 		tree.setRootVisible(false);
 		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+		
 		DefaultTreeModel model = new DefaultTreeModel(
 				new DefaultMutableTreeNode("JTree") {
 					/**
 					 * 
 					 */
+					
 					private static final long serialVersionUID = 1L;
 					{
 						for (int i = 0; i < adms.size(); i++)

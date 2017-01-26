@@ -1,10 +1,11 @@
 package br.ufs.dain.modelo;
 
-public abstract class Pessoa {
+public abstract class Pessoa implements Comparable<Pessoa> {
 
 	private String telefone;
 	private String email;
 	private String nome;
+	protected int numero;
 	
 	public Pessoa(String telefone, String email, String nome) {
 		super();
@@ -36,4 +37,6 @@ public abstract class Pessoa {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	
 }

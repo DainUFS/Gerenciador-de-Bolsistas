@@ -81,7 +81,7 @@ public class GerenciadorAdministrador {
 		ResultSet rs = (ResultSet) stmt.executeQuery();
 
 		while (rs.next()) {
-			adm = new Administrador(rs.getString("a_telefone"), rs.getString("a_email"), rs.getString("a_nome"), matric,
+			adm = new Administrador(rs.getString("a_nome"), rs.getString("a_telefone"), rs.getString("a_email"), matric,
 					senha, rs.getInt("a_status"));
 		}
 
@@ -181,6 +181,6 @@ public class GerenciadorAdministrador {
 	
 	public static void main(String[] args) throws SQLException {
 		GerenciadorAdministrador ger = new GerenciadorAdministrador();
-		System.out.println(ger.buscarAdmMatricula("123").getNome());
+		//System.out.println(ger.buscarAdmMatricula("123").getNome());
 	}
 }

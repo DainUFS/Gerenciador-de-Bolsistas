@@ -1,13 +1,15 @@
 package br.ufs.dain.modelo;
 
-public class Administrador extends Pessoa {
+public class Administrador extends Pessoa{
 	
 	private String matricula;
 	private String senha;
 	private int statusAtivacao;
 	
-	public Administrador(String nome, String telefone, String email, String matricula, String senha, int statusAtivacao) {
-		super(nome, telefone, email);
+	private int numero;
+	
+	public Administrador(String email, String nome, String telefone, String matricula, String senha, int statusAtivacao) {
+		super(telefone, nome, email);
 		this.matricula = matricula;
 		this.senha = senha;
 		this.statusAtivacao = statusAtivacao;
@@ -38,6 +40,20 @@ public class Administrador extends Pessoa {
 
 	public void setStatusAtivacao(int statusAtivacao) {
 		this.statusAtivacao = statusAtivacao;
+	}
+
+	@Override
+	public int compareTo(Pessoa outro) {
+		
+		if (this.numero < outro.numero) {
+            return -1;
+        }
+        if (this.numero > outro.numero) {
+            return 1;
+        }
+        return 0;
 	}	
+	
+	
 	
 }

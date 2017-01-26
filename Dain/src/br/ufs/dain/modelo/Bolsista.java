@@ -41,4 +41,15 @@ public class Bolsista extends Aluno {
 	public void setStatusAtivacao(int statusAtivacao) {
 		this.statusAtivacao = statusAtivacao;
 	}
+
+	@Override
+	public int compareTo(Pessoa outro) {
+		if (this.numero < outro.numero) {
+            return -1;
+        }
+        if (this.numero > outro.numero) {
+            return 1;
+        }
+        return 0;
+	}
 }
