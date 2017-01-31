@@ -172,16 +172,19 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		btnRelacionarAssistidobolsista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (list_1.getSelectedIndex() != -1 && list_2.getSelectedIndex() != -1
-						&& new DAO().getBolsistaNome(list_2.getSelectedValue()) != null && new DAO().getDeficienteNome(list_1.getSelectedValue()) != null) {
-					Discente discente = new Discente(new DAO().getBolsistaNome(list_2.getSelectedValue()), new DAO().getDeficienteNome(list_1.getSelectedValue()));
-					if (!buscaComparaDiscentes(discente, apoio) && !buscaComparaBolsista(discente.getBolsista(), bolsistasDain)
-							&& !buscaComparaBolsista(discente.getBolsista(), bolsistasBicen)) {
+						&& new DAO().getBolsistaNome(list_2.getSelectedValue()) != null
+						&& new DAO().getDeficienteNome(list_1.getSelectedValue()) != null) {
+					
+					Discente discente = new Discente(new DAO().getBolsistaNome(list_2.getSelectedValue()), 
+							new DAO().getDeficienteNome(list_1.getSelectedValue()));
+					
+					if (false) {
 						apoio.add(discente);
-						System.out.println(deficientesApoio);
+						
 						atualizaLabel(panel_apoio, apoio);
-						System.out.println(bolsistasApoio);
-						System.out.println(deficientesApoio);
+						
 					}
+					
 					else
 						JOptionPane.showMessageDialog(contentPane, "O aluno bolsista ou assistido selecionado já está nesse horário ou foi excluído da base de dados!");
 				}
@@ -195,7 +198,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (list_2.getSelectedIndex() != -1) {
 					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
-					if (!buscaComparaBolsista(b, bolsistasApoio) && !buscaComparaBolsista(b, bolsistasDain) && !buscaComparaBolsista(b, bolsistasBicen)) {
+					if (false) {
 						bolsistasDain.add(b);
 						atualizaLabelB(panel_dain, bolsistasDain);
 					}
@@ -211,7 +214,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (list_2.getSelectedIndex() != -1) {
 					Bolsista b = new DAO().getBolsistaNome(list_2.getSelectedValue());
-					if (!buscaComparaBolsista(b, bolsistasApoio) && !buscaComparaBolsista(b, bolsistasDain) && !buscaComparaBolsista(b, bolsistasBicen)) {
+					if (false) {
 						bolsistasBicen.add(b);
 						atualizaLabel(panel_bicen, apoio);
 					}
@@ -227,20 +230,20 @@ public class TelaHorarioAcompanhamento extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if (list_2.getSelectedIndex() != -1) {
 					Discente discente = new Discente(new DAO().getBolsistaNome(list_2.getSelectedValue()), null);
-					if (buscaComparaBolsistaD(discente, apoio)) {
-						apoio.remove(discente);
-						atualizaLabel(panel_apoio, apoio);
-					}
-					else if (buscaComparaBolsista(discente.getBolsista(), bolsistasDain)) {
-						bolsistasDain.remove(discente.getBolsista());
-						atualizaLabel(panel_dain, apoio);
-					}
-					else if (buscaComparaBolsista(discente.getBolsista(), bolsistasBicen)) {
-						bolsistasBicen.remove(discente.getBolsista());
-						atualizaLabel(panel_bicen, apoio);
-					}
-					else
-						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado não está prestando serviço nesse horário!");
+//					if (buscaComparaBolsista(discente, apoio)) {
+//						apoio.remove(discente);
+//						atualizaLabel(panel_apoio, apoio);
+//					}
+//					else if (buscaComparaBolsista(discente.getBolsista(), bolsistasDain)) {
+//						bolsistasDain.remove(discente.getBolsista());
+//						atualizaLabel(panel_dain, apoio);
+//					}
+//					else if (buscaComparaBolsista(discente.getBolsista(), bolsistasBicen)) {
+//						bolsistasBicen.remove(discente.getBolsista());
+//						atualizaLabel(panel_bicen, apoio);
+//					}
+//					else
+//						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado não está prestando serviço nesse horário!");
 				}
 			}
 		});
@@ -404,36 +407,36 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		label.setText(s);
 	}
 
-	private boolean buscaComparaBolsista (Bolsista b, ArrayList<Bolsista> list) {
-
-		for (int i = 0; i < list.size(); i++) {
-			if (b.getNome().equals(list.get(i).getNome())) {
-				list.set(i, b);
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	private boolean buscaComparaBolsistaD (Discente d, ArrayList<Discente> list) {
-
-		for (int i = 0; i < list.size(); i++) {
-			if (d.getBolsista().getNome().equals(list.get(i).getBolsista().getNome())) {
-				list.set(i, d);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private boolean buscaComparaDiscentes (Discente discente, ArrayList<Discente> list) {
-
-		for (int i = 0; i < list.size(); i++) {
-			if (discente.getBolsista().equals(list.get(i).getBolsista())) {
-				list.set(i, discente);
-				return true;
-			}
-		}
-		return false;
-	}
+//	private boolean buscaComparaBolsista (Bolsista b, ArrayList<Bolsista> list) {
+//
+//		for (int i = 0; i < list.size(); i++) {
+//			if (b.getNome().equals(list.get(i).getNome())) {
+//				list.set(i, b);
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+//	
+//	private boolean buscaComparaBolsista (Discente d, ArrayList<Discente> list) {
+//
+//		for (int i = 0; i < list.size(); i++) {
+//			if (d.getBolsista().getNome().equals(list.get(i).getBolsista().getNome())) {
+//				list.set(i, d);
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+//
+//	private boolean buscaComparaDiscentes (Discente discente, ArrayList<Discente> list) {
+//
+//		for (int i = 0; i < list.size(); i++) {
+//			if (discente.getBolsista().equals(list.get(i).getBolsista())) {
+//				list.set(i, discente);
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 }
