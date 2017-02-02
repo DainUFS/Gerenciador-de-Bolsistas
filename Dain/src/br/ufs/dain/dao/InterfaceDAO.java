@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import br.ufs.dain.modelo.Administrador;
 import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Deficiente;
+import br.ufs.dain.modelo.Acompanhamento;
 import br.ufs.dain.modelo.Horario;
 import br.ufs.dain.modelo.Login;
 import br.ufs.dain.modelo.Nota;
@@ -68,6 +69,12 @@ public interface InterfaceDAO {
 	
 	//Horario
 	public int aramazenarHor(Horario hr);
+	
+	
+	//Acompanhamento
+	public void salvarAcomapanhamento(Acompanhamento acompanhamento);
+	
+//	public ArrayList<Acompanhamento> listaAcompanhamento(); 
 	
 	
 }

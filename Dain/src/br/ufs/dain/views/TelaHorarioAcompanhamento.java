@@ -30,7 +30,7 @@ import javax.swing.border.TitledBorder;
 import br.ufs.dain.dao.DAO;
 import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Deficiente;
-import br.ufs.dain.modelo.Discente;
+import br.ufs.dain.modelo.Acompanhamento;
 
 public class TelaHorarioAcompanhamento extends JFrame {
 
@@ -51,13 +51,10 @@ public class TelaHorarioAcompanhamento extends JFrame {
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
 
-	private ArrayList<Bolsista> bolsistasApoio = new ArrayList<>();
-	private ArrayList<Bolsista> bolsistasDain = new ArrayList<>();
-	private ArrayList<Bolsista> bolsistasBicen = new ArrayList<>();
+	private ArrayList<Acompanhamento> apoio = new ArrayList<>();
+	private ArrayList<Bolsista> dain = new ArrayList<>();
+	private ArrayList<Bolsista> bicen = new ArrayList<>();
 	
-	private ArrayList<Deficiente> deficientesApoio = new ArrayList<>();
-	
-	private ArrayList<Discente> apoio = new ArrayList<>();
 	
 	/**
 	 * Create the frame.
@@ -91,16 +88,16 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		panel.add(panel_1, BorderLayout.NORTH);
 		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
 
-		JLabel lblNewLabel = new JLabel(atribuiPosFixoFeira(dia));
-		panel_1.add(lblNewLabel);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel labelDia = new JLabel(atribuiPosFixoFeira(dia));
+		panel_1.add(labelDia);
+		labelDia.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		labelDia.setHorizontalAlignment(SwingConstants.LEFT);
 
-		JLabel lblNewLabel_1 = new JLabel(hora);
-		panel_1.add(lblNewLabel_1);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel labelHora = new JLabel(hora);
+		panel_1.add(labelHora);
+		labelHora.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		labelHora.setVerticalAlignment(SwingConstants.TOP);
+		labelHora.setHorizontalAlignment(SwingConstants.LEFT);
 
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2, BorderLayout.CENTER);
@@ -171,105 +168,40 @@ public class TelaHorarioAcompanhamento extends JFrame {
 
 		btnRelacionarAssistidobolsista = new JButton("Apoio");
 		btnRelacionarAssistidobolsista.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent arg0) {
+				
+				String dia = labelDia.getText().toString();
+				String hora = labelHora.getText().toString();
 				
 				Bolsista bolsista = new DAO().getBolsistaNome(list_2.getSelectedValue());
 				Deficiente deficiente = new DAO().getDeficienteNome(list_1.getSelectedValue());
+				Acompanhamento acompanhamento = new Acompanhamento(bolsista, deficiente, hora, dia);
 				
-				if (list_1.getSelectedIndex() != -1 
+				if(list_1.getSelectedIndex() != -1
 						&& list_2.getSelectedIndex() != -1
 						&& bolsista != null
-						&& deficiente != null) {
+						&& deficiente != null){
 					
-					Discente discente = new Discente(bolsista, deficiente);
-					
-					if (checarDiscente(discente, apoio) == false
-							&& checarBolsista(bolsista, bolsistasDain) == false
-							&& checarBolsista(bolsista, bolsistasBicen) == false
-							&& checarDeficiente(deficiente, deficientesApoio) == false
-							&& checarBolsista(bolsista, bolsistasApoio) == false) {
-						
-						apoio.add(discente);
-						deficientesApoio.add(deficiente);
-						bolsistasApoio.add(bolsista);
-						atualizaLabel(panel_apoio, apoio);
-						
+					if(!checarApoio(apoio, acompanhamento)
+							&& !checarBolsista(dain, bolsista)
+							&& !checarBolsista(bicen, bolsista)){
+						apoio.add(acompanhamento);
+					}else{
+						JOptionPane.showMessageDialog(null, "Aluno e/ou Acompanhado ja cadastado nesse horário");
 					}
-					else
-						JOptionPane.showMessageDialog(contentPane, 
-								"O aluno bolsista ou assistido selecionado já está nesse horário ou foi excluído da base de dados!");
-				}
+				}				
+				
 			}
 		});
 		panel_8.add(btnRelacionarAssistidobolsista);
 
 		btnAdicionarDain = new JButton("Dain");
-		btnAdicionarDain.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (list_2.getSelectedIndex() != -1) {
-					Bolsista bolsista = new DAO().getBolsistaNome(list_2.getSelectedValue());
-					
-					if (checarBolsista(bolsista, bolsistasDain) == false
-							&& checarBolsista(bolsista, bolsistasBicen) == false
-							&& checarBolsista(bolsista, bolsistasApoio) == false) {
-						
-						bolsistasDain.add(bolsista);
-						atualizaLabelB(panel_dain, bolsistasDain);
-						
-					}
-					else
-						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado já está prestando serviço nesse horário ou foi excluído da base de dados!");
-				}
-			}
-		});
 		panel_8.add(btnAdicionarDain);
 
 		btnAdicionarBicen = new JButton("Bicen");
-		btnAdicionarBicen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (list_2.getSelectedIndex() != -1) {
-					Bolsista bolsista = new DAO().getBolsistaNome(list_2.getSelectedValue());
-					
-					if (checarBolsista(bolsista, bolsistasDain) == false
-							&& checarBolsista(bolsista, bolsistasBicen) == false
-							&& checarBolsista(bolsista, bolsistasApoio) == false) {
-						bolsistasBicen.add(bolsista);
-						atualizaLabelB(panel_bicen, bolsistasBicen);
-					}
-					else
-						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado já está prestando serviço nesse horário ou foi excluído da base de dados!");
-				}
-			}
-		});
 		panel_8.add(btnAdicionarBicen);
 
 		btnDesalocar = new JButton("Desalocar");
-		btnDesalocar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (list_2.getSelectedIndex() != -1) {
-					
-					Bolsista bolsista = new DAO().getBolsistaNome(list_2.getSelectedValue());
-					//Discente discente = new Discente(new DAO().getBolsistaNome(list_2.getSelectedValue()), null);
-					if (checarBolsista(bolsista, bolsistasApoio)) {
-						//apoio.remove(discente);
-						removerDiscente(bolsista, apoio);
-						atualizaLabel(panel_apoio, apoio);
-					}
-//					else if (buscaComparaBolsista(discente.getBolsista(), bolsistasDain)) {
-//						bolsistasDain.remove(discente.getBolsista());
-//						atualizaLabel(panel_dain, apoio);
-//					}
-//					else if (buscaComparaBolsista(discente.getBolsista(), bolsistasBicen)) {
-//						bolsistasBicen.remove(discente.getBolsista());
-//						atualizaLabel(panel_bicen, apoio);
-//					}
-					else
-						JOptionPane.showMessageDialog(contentPane, "O aluno selecionado não está prestando serviço nesse horário!");
-				}
-			}
-		});
 		panel_8.add(btnDesalocar);
 
 		JPanel panel_9 = new JPanel();
@@ -397,81 +329,59 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		return list_1;
 	}
 
-	private void atualizaLabel (JPanel panel, ArrayList<Discente> list) {
+	private void atualizaLabel (JPanel panel) {
+		
+	//	ArrayList<Acompanhamento> alunos = new DAO().listaAcompanhamento();
 
 		JLabel label = (JLabel) panel.getComponent(0);
 
-		String s = "<html><body>";
-		if (list != null) {
-			for (int i = 0; i < list.size(); i++) {
-				s += list.get(i).getBolsista().getNome() + "<br><pre>" + list.get(i).getDeficiente().getNome() + "</pre><br><br>";
-			}
-		} else {
-			for (int i = 0; i < list.size(); i++) {
-				s += list.get(i).getBolsista().getNome() + "<br><br>";
-			}
-		}
+//		String s = "<html><body>";
+//		if (alunos != null) {
+//			for (int i = 0; i < alunos.size(); i++) {
+//				s += alunos.get(i).getBolsista().getNome() + "<br><pre>" + alunos.get(i).getDeficiente().getNome() + "</pre><br><br>";
+//			}
+//		} 
+		
+//		else {
+//			for (int i = 0; i < alunos.size(); i++) {
+//				s += alunos.get(i).getBolsista().getNome() + "<br><br>";
+//			}
+//		}
 
-		s += "</html></body>";
-		label.setText(s);
+//		s += "</html></body>";
+//		label.setText(s);
+//		
+		
+		
 	}
 	
-	private void atualizaLabelB (JPanel panel, ArrayList<Bolsista> list) {
-
-		JLabel label = (JLabel) panel.getComponent(0);
-
-		String s = "<html><body>";
-		if (list != null) {
-			for (int i = 0; i < list.size(); i++) {
-				s += list.get(i).getNome() + "<br><br>";
-			}
-		} 
-		s += "</html></body>";
-		label.setText(s);
-	}
-
-	private boolean checarBolsista (Bolsista bolsista, ArrayList<Bolsista> list) {
+	private boolean checarBolsista(ArrayList<Bolsista> list, Bolsista bolsista){
 		
-		for (int i = 0; i < list.size(); i++){
-			if (bolsista.getNome().equals(list.get(i).getNome())){
-				list.set(i, bolsista);
-				return true;
-			}
-		}
-
-		return false;
-	}
-	
-	private boolean checarDeficiente(Deficiente deficente, ArrayList<Deficiente> list) {
-		
-		for (int i = 0; i < list.size(); i++){
-			if (deficente.getNome().equals(list.get(i).getNome())){
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	
-	private boolean checarDiscente(Discente discente, ArrayList<Discente> list){
-		
-		for (int i = 0; i < list.size(); i++){
-			if (discente.getBolsista().getNome().equals(list.get(i).getBolsista().getNome()) && 
-					discente.getDeficiente().getNome().equals(list.get(i).getDeficiente().getNome())){
-				list.set(i, discente);
-				return true;
-			}
-		
-		}
+		for(int i = 0; i < list.size(); i++)
+			if(list.get(i).getMatricula().equals(bolsista.getMatricula())) return true;
 		
 		return false;
 	}
 	
-	private void removerDiscente(Bolsista bolsista, ArrayList<Discente> list){
-		for (int i = 0; i < list.size(); i++){
-			
-		}
+	private boolean checarApoio(ArrayList<Acompanhamento> apoio, Acompanhamento acompanhamento){
+		
+		for(int i = 0; i < apoio.size(); i++)
+			if(apoio.get(i).getBolsista().getMatricula().equals(acompanhamento.getBolsista().getMatricula())
+					&& apoio.get(i).getDeficiente().getMatricula().equals(acompanhamento.getDeficiente().getMatricula())
+					&& apoio.get(i).getDia().equals(acompanhamento.getDia())
+					&& apoio.get(i).getHora().equals(acompanhamento.getHora())
+					||
+					apoio.get(i).getDeficiente().getMatricula().equals(acompanhamento.getDeficiente().getMatricula())
+					&& apoio.get(i).getDia().equals(acompanhamento.getDia())
+					&& apoio.get(i).getHora().equals(acompanhamento.getHora())
+					||
+					apoio.get(i).getBolsista().getMatricula().equals(acompanhamento.getBolsista().getMatricula())
+					&& apoio.get(i).getDia().equals(acompanhamento.getDia())
+					&& apoio.get(i).getHora().equals(acompanhamento.getHora())) return true;
+		
+		return false;
 	}
+	
+	
 		
 }

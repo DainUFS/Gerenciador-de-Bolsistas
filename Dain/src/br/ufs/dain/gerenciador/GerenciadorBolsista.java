@@ -145,6 +145,7 @@ public class GerenciadorBolsista {
 		return gHor.buscarHorario(idHor);
 	}
 	
+	
 	public int buscarIdHr(String matric) throws SQLException {
 
 		conn = conexao.getConexaoMySQL();

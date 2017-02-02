@@ -9,9 +9,11 @@ import br.ufs.dain.gerenciador.GerenciadorDeficiente;
 import br.ufs.dain.gerenciador.GerenciadorHorario;
 import br.ufs.dain.gerenciador.GerenciadorLogin;
 import br.ufs.dain.gerenciador.GerenciadorNota;
+import br.ufs.dain.gerenciador.GerenciadorAcompanhamento;
 import br.ufs.dain.modelo.Administrador;
 import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Deficiente;
+import br.ufs.dain.modelo.Acompanhamento;
 import br.ufs.dain.modelo.Horario;
 import br.ufs.dain.modelo.Login;
 import br.ufs.dain.modelo.Nota;
@@ -24,6 +26,7 @@ public class DAO implements InterfaceDAO {
 	GerenciadorHorario gHor = new GerenciadorHorario();
 	GerenciadorLogin gLogin = new GerenciadorLogin();
 	GerenciadorNota gNota = new GerenciadorNota();
+	GerenciadorAcompanhamento gAcom = new GerenciadorAcompanhamento();
 
 	@Override
 	public boolean cadastraDeficiente(Deficiente d, String matricAdm) {
@@ -281,4 +284,17 @@ public class DAO implements InterfaceDAO {
 		
 		System.out.println(new DAO().buscarDeficiente().get(0).getNome());
 	}
+
+	@Override
+	public void salvarAcomapanhamento(Acompanhamento acompanhamento) {
+		try {
+			gAcom.aramazerAcompanhamento(acompanhamento);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
 }
