@@ -2,6 +2,7 @@ package br.ufs.dain.views;
 
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,6 +23,20 @@ import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JPasswordField;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
+
 public class TelaLogin extends JFrame {
 
 	/**
@@ -30,15 +45,14 @@ public class TelaLogin extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel contentPane;
-	
-	private JTextField textField_user;
-	private JTextField textField_pass;
 
 	private String matricula;
 	private String senha;
-	
-	private JPanel panel;
-	private JPanel panel_1;
+	private JTextField textFieldUser;
+	private JLabel label;
+	private JLabel lblX;
+	private JPasswordField passwordField;
+	private JButton btnX;
 	
 
 	/**
@@ -63,71 +77,115 @@ public class TelaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaLogin() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaLogin.class.getResource("/br/ufs/dain/resources/logoDainIcone.png")));
+		setResizable(false);
+		setUndecorated(true);
 		
 		setTitle("Entrar no Sistema");
-		setResizable(false);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 531, 350);
+		setBounds(100, 100, 527, 368);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(3, 2, 0, 0));
+		contentPane.setLayout(null);
 		
-		panel = new JPanel();
-		panel.setBorder(new EmptyBorder(0, 0, 0, 0));
-		contentPane.add(panel);
-		panel.setLayout(new GridLayout(2, 2, 0, 5));
-		
-		JLabel lblNewLabel = new JLabel("Matr\u00EDcula");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblNewLabel);
-		
-		textField_user = new JTextField();
-		panel.add(textField_user);
-		textField_user.setColumns(10);
-		
-		JLabel lblNewLabel_1 = new JLabel("Senha");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblNewLabel_1);
-		
-		textField_pass = new JTextField();
-		panel.add(textField_pass);
-		textField_pass.setColumns(10);
-		
-		panel_1 = new JPanel();
-		panel_1.setBorder(new EmptyBorder(10, 10, 10, 10));
-		contentPane.add(panel_1);
-		panel_1.setLayout(new GridLayout(3, 1, 0, 0));
-		
-		JButton btnNewButton = new JButton("Entrar");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				matricula = textField_user.getText().toString();
-				senha = textField_pass.getText().toString();
-				
-				try {
-					if(new GerenciadorLogin().validarSenha(matricula, senha)) {
-						dispose();
-						new TelaPrincipal(new DAO().buscarAdm(matricula, senha)).setVisible(true);
-						
-						ArrayList<Nota> notas = new DAO().TodasAsNota();
-						
-						if(notas.size() > 0){
-							TelaTodasNotas ttn = new TelaTodasNotas();
-							ttn.setLocationRelativeTo(null);
-							ttn.setVisible(true);
-						}
-						
-					} else {
-						JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos.");
-					}
-				} catch (SQLException e1) {
-					JOptionPane.showMessageDialog(null, "Não foi possivel a conectar ao banco de dados.");
-					e1.printStackTrace();
+		textFieldUser = new JTextField();
+		textFieldUser.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					logar();
 				}
 			}
 		});
-		panel_1.add(btnNewButton);
+		textFieldUser.setBounds(250, 132, 135, 28);
+		contentPane.add(textFieldUser);
+		textFieldUser.setColumns(10);
+		
+		passwordField = new JPasswordField();
+		passwordField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					logar();
+				}
+			}
+		});
+		passwordField.setBounds(250, 171, 135, 28);
+		contentPane.add(passwordField);
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				logar();
+			}
+		});
+        btnNewButton.setMargin(new Insets(0, 0, 0, 0));
+        btnNewButton.setContentAreaFilled(false);
+        btnNewButton.setBorderPainted(false);
+        btnNewButton.setOpaque(false);
+		btnNewButton.setBounds(224, 205, 95, 33);
+		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		contentPane.add(btnNewButton);
+		
+		btnX = new JButton("X");
+		btnX.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnX.setForeground(Color.RED);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnX.setForeground(Color.BLACK);
+			}
+		});
+		btnX.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					System.exit(0);
+			}
+		});
+		btnX.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		btnX.setMargin(new Insets(0, 0, 0, 0));
+        btnX.setContentAreaFilled(false);
+        btnX.setBorderPainted(false);
+        btnX.setOpaque(false);
+		btnX.setBounds(481, 0, 28, 19);
+		btnX.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnX.setBounds(471, 11, 46, 33);
+		contentPane.add(btnX);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setIcon(new ImageIcon(TelaLogin.class.getResource("/br/ufs/dain/resources/dainLogin.png")));
+		lblNewLabel_2.setBounds(0, 0, 527, 367);
+		contentPane.add(lblNewLabel_2);
+		contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textFieldUser, passwordField, btnNewButton, btnX}));
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textFieldUser, passwordField, btnNewButton, btnX}));
+	}
+	
+	private void logar () {
+		matricula = textFieldUser.getText().toString();
+		senha = passwordField.getText().toString();
+		
+		try {
+			if(new GerenciadorLogin().validarSenha(matricula, senha)) {
+				dispose();
+				new TelaPrincipal(new DAO().buscarAdm(matricula, senha)).setVisible(true);
+				
+				ArrayList<Nota> notas = new DAO().TodasAsNota();
+				
+				if(notas.size() > 0){
+					TelaTodasNotas ttn = new TelaTodasNotas();
+					ttn.setLocationRelativeTo(null);
+					ttn.setVisible(true);
+				}
+				
+			} else {
+				JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos.");
+			}
+		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(null, "Não foi possivel a conectar ao banco de dados.");
+			e1.printStackTrace();
+		}
 	}
 }

@@ -68,7 +68,7 @@ public class TelaNovoBolsista extends JDialog {
 		getContentPane().setBackground(new Color(204, 204, 255));
 		
 		setModal(true);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_bolsista.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaNovoBolsista.class.getResource("/br/ufs/dain/resources/add_bolsista.png")));
 		setResizable(false);
 		setTitle("Cadastrar Novo Bolsista");
 		setBounds(100, 100, 350, 470);

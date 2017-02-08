@@ -303,7 +303,7 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnItem_1);
 
 		JMenuItem mntmBolsista = new JMenuItem("Bolsista");
-		mntmBolsista.setIcon(new ImageIcon(getClass().getResource("/br/ufs/dain/resources/icone_bolsista.png")));
+		mntmBolsista.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/br/ufs/dain/resources/icone_bolsista.png")));
 		mntmBolsista.setMnemonic('B');
 		mntmBolsista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
