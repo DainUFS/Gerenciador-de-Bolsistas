@@ -25,7 +25,7 @@ public class GerenciadorBolsista {
 		conn = conexao.getConexaoMySQL();
 
 		String sql = "INSERT INTO t_bolsista (b_matricula, b_nome, b_telefone, b_email, "
-				+ "b_curso, b_sexo, b_fk_adm, b_fk_horario, b_status) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "b_curso, b_sexo, b_fk_adm, b_fk_horario, b_atividade, b_status) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
 
@@ -37,7 +37,8 @@ public class GerenciadorBolsista {
 		stmt.setString(6, b.getSexo());
 		stmt.setString(7, matricAdm);
 		stmt.setInt(8, id);
-		stmt.setInt(9, b.getStatusAtivacao());
+		stmt.setInt(9, b.getTipoAtividade());
+		stmt.setInt(10, b.getStatusAtivacao());
 		
 		stmt.execute();
 		stmt.close();
@@ -186,6 +187,22 @@ public class GerenciadorBolsista {
 		}else{
 			gHor.atualizarHorario(h, id);
 		}
+		
+	}
+	
+	public void tipoAtividade(String matric, int idAtv) throws SQLException{
+		
+		conn = conexao.getConexaoMySQL();
+		
+		String sql = "UPDATE t_bolsista SET b_atividade = ? WHERE b_matricula = ?";
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+		
+		stmt.setInt(1, idAtv);
+		stmt.setString(2, matric);
+		
+		stmt.execute();
+		conn.close();
 		
 	}
 	

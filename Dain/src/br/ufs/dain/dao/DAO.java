@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import br.ufs.dain.gerenciador.GerenciadorAdministrador;
 import br.ufs.dain.gerenciador.GerenciadorBolsista;
 import br.ufs.dain.gerenciador.GerenciadorDeficiente;
+import br.ufs.dain.gerenciador.GerenciadorHorTrabalho;
 import br.ufs.dain.gerenciador.GerenciadorHorario;
 import br.ufs.dain.gerenciador.GerenciadorLogin;
 import br.ufs.dain.gerenciador.GerenciadorNota;
@@ -27,7 +28,8 @@ public class DAO implements InterfaceDAO {
 	GerenciadorLogin gLogin = new GerenciadorLogin();
 	GerenciadorNota gNota = new GerenciadorNota();
 	GerenciadorAcompanhamento gAcom = new GerenciadorAcompanhamento();
-
+	GerenciadorHorTrabalho gHT = new GerenciadorHorTrabalho();
+	
 	@Override
 	public boolean cadastraDeficiente(Deficiente d, String matricAdm) {
 		try {
@@ -290,11 +292,37 @@ public class DAO implements InterfaceDAO {
 		try {
 			gAcom.aramazerAcompanhamento(acompanhamento);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
 
+	@Override
+	public Administrador getAdm(String nome) {
+		try {
+			return gAdm.getAdm(nome);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
+	@Override
+	public void tipoAtividade(String matric, int idAtv) {
+		try {
+			gBol.tipoAtividade(matric, idAtv);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void hrTrabalho(Horario h, String matric) {
+		try {
+			gHT.aramazenarHorario(h, matric);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

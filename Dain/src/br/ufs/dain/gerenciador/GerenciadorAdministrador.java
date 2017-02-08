@@ -163,6 +163,31 @@ public class GerenciadorAdministrador {
 		
 	}
 	
+	public Administrador getAdm (String nome) throws SQLException {
+		
+		conn = conexao.getConexaoMySQL();
+		
+		Administrador adm = null;
+		
+		String sql = "SELECT * FROM t_adm WHERE a_nome = ?";
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+		
+		stmt.setString(1, nome);
+		
+		ResultSet rs = (ResultSet) stmt.executeQuery();
+		
+		while (rs.next()) {
+			adm = new Administrador(rs.getString("a_email"), rs.getString("a_nome"), rs.getString("a_telefone"),
+					rs.getString("a_matricula"), rs.getString("a_senha"),
+					rs.getInt("a_status"));	
+		}
+				
+		conn.close();
+		
+		return adm;
+	}
+	
 	public void mudarSenha(Administrador adm, String novaSenha) throws SQLException{
 		
 		conn = conexao.getConexaoMySQL();
@@ -181,6 +206,6 @@ public class GerenciadorAdministrador {
 	
 	public static void main(String[] args) throws SQLException {
 		GerenciadorAdministrador ger = new GerenciadorAdministrador();
-		//System.out.println(ger.buscarAdmMatricula("123").getNome());
+		System.out.println(ger.getAdm("Szzana").getNome());
 	}
 }

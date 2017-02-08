@@ -30,6 +30,7 @@ import javax.swing.border.TitledBorder;
 import br.ufs.dain.dao.DAO;
 import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Deficiente;
+import br.ufs.dain.modelo.Horario;
 import br.ufs.dain.modelo.Acompanhamento;
 
 public class TelaHorarioAcompanhamento extends JFrame {
@@ -60,6 +61,8 @@ public class TelaHorarioAcompanhamento extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaHorarioAcompanhamento (String diaCorrespondente, String horaCorrespondente) {
+		
+		
 
 		setTitle(atribuiPosFixoFeira(dia) + ", " + hora);
 
@@ -278,9 +281,94 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		panel_9.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				String dia = labelDia.getText().toString();
+				String hora = labelHora.getText().toString();
+				
+				for(int i = 0; i < apoio.size(); i++) 
+					new DAO().tipoAtividade(apoio.get(i).getBolsista().getMatricula()
+							, 1);
+				
+				for(int i = 0; i < dain.size(); i++) 
+					new DAO().tipoAtividade(dain.get(i).getMatricula()
+							, 2);
+				
+				for(int i = 0; i < bicen.size(); i++) 
+					new DAO().tipoAtividade(bicen.get(i).getMatricula()
+							, 3);
+				
+				String segunda = "";
+				String terca = "";
+				String quarta = "";
+				String quinta = "";
+				String sexta = "";
+				String sabado = "";
+				
+				 switch (dia) {
+		            case "Segunda-feira":
+		                segunda = hora;
+		                break;
+		            case "Terca-feira":
+		                terca = hora;
+		                break;
+		            case "Quarta-feira":
+		                quarta = hora;
+		                break;
+		            case "Quinta-feira":
+		                quinta = hora;
+		                break;
+		            case "Sexta-feira":
+		                sexta = hora;
+		                break;
+		            default:
+		                sabado = sabado;
+		         }
+				
+				 Horario horaT = new Horario(segunda, terca, quarta, quinta, sexta, sabado);
+				
+				 	for(int i = 0; i < apoio.size(); i++) 
+					 	new DAO().hrTrabalho(horaT, apoio.get(i).getBolsista().getMatriculaAdm());
+					
+					for(int i = 0; i < dain.size(); i++) 
+						new DAO().tipoAtividade(dain.get(i).getMatricula()
+								, 2);
+					
+					for(int i = 0; i < bicen.size(); i++) 
+						new DAO().tipoAtividade(bicen.get(i).getMatricula()
+								, 3);
+				 
+				 
+				
+			}
+		});
 		panel_9.add(btnSalvar);
 
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				apoio.clear();
+				bicen.clear();
+				dain.clear();
+				
+				JLabel l_bicen = (JLabel) panel_bicen.getComponent(0);
+				l_bicen.setText("");
+				
+				JLabel l_dain = (JLabel) panel_dain.getComponent(0);
+				l_dain.setText("");
+				
+				JLabel l_apoio = (JLabel) panel_apoio.getComponent(0);
+				l_apoio.setText("");
+				
+				
+				
+				
+				
+			}
+		});
 		panel_9.add(btnLimpar);
 	}
 

@@ -4,19 +4,22 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.GridLayout;
 import javax.swing.border.TitledBorder;
-import javax.swing.BoxLayout;
+
+import br.ufs.dain.dao.DAO;
+import br.ufs.dain.modelo.Administrador;
 
 public class TelaInfoAdm extends JFrame {
 
@@ -26,10 +29,11 @@ public class TelaInfoAdm extends JFrame {
 	
 	public TelaInfoAdm (String nome) {
 		
+		Administrador adm = new DAO().getAdm(nome);
 		this.nome = nome;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 823, 544);
+		setBounds(100, 100, 671, 436);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -44,11 +48,11 @@ public class TelaInfoAdm extends JFrame {
 		panel.setBorder(new TitledBorder(null, "Informa\u00E7\u00F5es Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setLayout(new GridLayout(1, 2, 0, 5));
 		
-		JLabel lblNome = new JLabel("Nome: ");
+		JLabel lblNome = new JLabel("Nome: " + adm.getNome());
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(lblNome);
 		
-		JLabel lblMatrcula = new JLabel("Matr\u00EDcula: ");
+		JLabel lblMatrcula = new JLabel("Matr\u00EDcula: " + adm.getMatricula());
 		lblMatrcula.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(lblMatrcula);
 		
@@ -57,11 +61,11 @@ public class TelaInfoAdm extends JFrame {
 		panel_1.setBorder(new TitledBorder(null, "Contatos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JLabel lblTelefone = new JLabel("Telefone: ");
+		JLabel lblTelefone = new JLabel("Telefone: " + adm.getTelefone());
 		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_1.add(lblTelefone);
 		
-		JLabel lblEmail = new JLabel("E-mail: ");
+		JLabel lblEmail = new JLabel("E-mail: " + adm.getEmail());
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_1.add(lblEmail);
 	}

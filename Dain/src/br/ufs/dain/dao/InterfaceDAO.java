@@ -40,9 +40,15 @@ public interface InterfaceDAO {
 	
 	public Horario buscarHorarioBolsista(String matricula);
 	
+	public void tipoAtividade (String matric, int idAtv);
+	
+	public void hrTrabalho(Horario h, String matric);
+	
 	
 	//Administrador
 	public boolean cadastrarAdm(Administrador a);
+	
+	public Administrador getAdm(String nome);
 	
 	public boolean validarLogin(Login login);
 	

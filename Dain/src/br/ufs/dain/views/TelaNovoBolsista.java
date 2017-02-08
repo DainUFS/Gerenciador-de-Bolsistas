@@ -201,7 +201,7 @@ public class TelaNovoBolsista extends JDialog {
 								textField_curso.getText().toString(),
 								textField_matricula.getText().toString(),
 								sexoSelecionado,
-								hr, 1, 1);
+								hr, 0, 1);
 						
 						boolean novo = new DAO().cadastraBolsista(bolsista, adm.getMatricula());
 						if(novo){
