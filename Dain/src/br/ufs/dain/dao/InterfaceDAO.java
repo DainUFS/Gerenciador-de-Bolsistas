@@ -44,6 +44,8 @@ public interface InterfaceDAO {
 	
 	public void hrTrabalho(Horario h, String matric);
 	
+	public void criarHrTrabalho(Horario h, String matric);
+	
 	
 	//Administrador
 	public boolean cadastrarAdm(Administrador a);

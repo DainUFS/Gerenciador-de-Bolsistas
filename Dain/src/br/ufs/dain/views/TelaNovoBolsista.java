@@ -194,17 +194,20 @@ public class TelaNovoBolsista extends JDialog {
 							sexoSelecionado = "F";
 						
 						Horario hr = new Horario("", "", "", "", "", "");
-			
+						
 						Bolsista bolsista = new Bolsista (textField_telefone.getText().toString(),
 								textField_email.getText().toString(),
 								textField_nome.getText().toString(),
 								textField_curso.getText().toString(),
 								textField_matricula.getText().toString(),
-								sexoSelecionado,
-								hr, 0, 1);
+								sexoSelecionado, hr, 0, 1);
+						
+						
 						
 						boolean novo = new DAO().cadastraBolsista(bolsista, adm.getMatricula());
 						if(novo){
+							Horario hr2 = new Horario("", "", "", "", "", "");
+							new DAO().criarHrTrabalho(hr2, textField_matricula.getText().toString());
 							JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
 						}else{
 							JOptionPane.showMessageDialog(null, "Não foi possivel cadastrar novo bolsista! "

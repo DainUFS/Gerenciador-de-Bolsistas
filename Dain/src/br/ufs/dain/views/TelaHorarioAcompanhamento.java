@@ -323,21 +323,19 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		                sexta = hora;
 		                break;
 		            default:
-		                sabado = sabado;
+		                sabado = hora;
 		         }
-				
+				 
 				 Horario horaT = new Horario(segunda, terca, quarta, quinta, sexta, sabado);
 				
 				 	for(int i = 0; i < apoio.size(); i++) 
-					 	new DAO().hrTrabalho(horaT, apoio.get(i).getBolsista().getMatriculaAdm());
+					 	new DAO().hrTrabalho(horaT, apoio.get(i).getBolsista().getMatricula());
 					
 					for(int i = 0; i < dain.size(); i++) 
-						new DAO().tipoAtividade(dain.get(i).getMatricula()
-								, 2);
+						new DAO().hrTrabalho(horaT, dain.get(i).getMatricula());
 					
 					for(int i = 0; i < bicen.size(); i++) 
-						new DAO().tipoAtividade(bicen.get(i).getMatricula()
-								, 3);
+						new DAO().hrTrabalho(horaT, bicen.get(i).getMatricula());
 				 
 				 
 				

@@ -15,8 +15,39 @@ public class GerenciadorHorTrabalho {
 	Connection conn;
 	Statement stmt;
 	
-	public void aramazenarHorario(Horario h, String matric) throws SQLException {
+	public void atualizarHorario(Horario h, String matric) throws SQLException {
 
+		Horario hora = buscarHorario(matric);
+		
+		conn = conexao.getConexaoMySQL();
+		
+		String sql = "UPDATE t_horariotrabalho SET ht_segunda = ?, "
+				+ "ht_terca = ?, "
+				+ "ht_quarta = ?, "
+				+ "ht_quinta = ?, "
+				+ "ht_sexta = ?, "
+				+ "ht_sabado = ? "
+				+ "WHERE ht_fk_bolsista = ?";
+
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+
+		stmt.setString(1, h.getSegunda() + "  " + hora.getSegunda());
+		stmt.setString(2, h.getTerca() + "  " + hora.getTerca());
+		stmt.setString(3, h.getQuarta() + "  " + hora.getQuarta());
+		stmt.setString(4, h.getQuinta() + "  " + hora.getQuinta());
+		stmt.setString(5, h.getSexta() + "  " + hora.getSexta());
+		stmt.setString(6, h.getSabado() + "  " + hora.getSabado());
+		stmt.setString(7, matric);
+
+		stmt.execute();
+		stmt.close();
+
+		conn.close();
+
+	}
+	
+	public void criarHorario(Horario h, String matric) throws SQLException {
+		
 		conn = conexao.getConexaoMySQL();
 
 		String sql = "INSERT INTO t_horariotrabalho (ht_segunda, ht_terca, ht_quarta,"
@@ -36,8 +67,6 @@ public class GerenciadorHorTrabalho {
 		stmt.execute();
 		stmt.close();
 
-		System.out.println("Gravado!");
-
 		conn.close();
 
 	}
@@ -48,8 +77,8 @@ public class GerenciadorHorTrabalho {
 
 		Horario horario = null;
 
-		String sql = "SELECT hT_segunda, hT_terca, hT_quarta, " 
-		+ "hT_quinta, hT_sexta, hT_sabado FROM t_horariotrabalho "
+		String sql = "SELECT ht_segunda, ht_terca, ht_quarta, " 
+		+ "ht_quinta, ht_sexta, ht_sabado FROM t_horariotrabalho "
 				+ "WHERE ht_fk_bolsista = ?";
 
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -68,5 +97,6 @@ public class GerenciadorHorTrabalho {
 		return horario;
 
 	}
+	
 
 }

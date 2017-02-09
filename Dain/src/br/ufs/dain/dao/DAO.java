@@ -320,9 +320,19 @@ public class DAO implements InterfaceDAO {
 	@Override
 	public void hrTrabalho(Horario h, String matric) {
 		try {
-			gHT.aramazenarHorario(h, matric);
+			gHT.atualizarHorario(h, matric);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void criarHrTrabalho(Horario h, String matric) {
+		try {
+			gHT.criarHorario(h, matric);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
