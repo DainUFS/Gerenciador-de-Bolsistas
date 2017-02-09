@@ -303,7 +303,7 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnItem_1);
 
 		JMenuItem mntmBolsista = new JMenuItem("Bolsista");
-		mntmBolsista.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/br/ufs/dain/resources/icone_bolsista.png")));
+		mntmBolsista.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/br/ufs/dain/resources/icon_bol.png")));
 		mntmBolsista.setMnemonic('B');
 		mntmBolsista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -315,7 +315,7 @@ public class TelaPrincipal extends JFrame {
 		mnItem_1.add(mntmBolsista);
 
 		JMenuItem mntmDeficiente = new JMenuItem("Assistido");
-		mntmDeficiente.setIcon(new ImageIcon(getClass().getResource("/br/ufs/dain/resources/icone_deficiente.png")));
+		mntmDeficiente.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/br/ufs/dain/resources/icon_def.png")));
 		mntmDeficiente.setMnemonic('D');
 		mntmDeficiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -327,7 +327,7 @@ public class TelaPrincipal extends JFrame {
 		mnItem_1.add(mntmDeficiente);
 
 		JMenuItem mntmAdministrador = new JMenuItem("Administrador");
-		mntmAdministrador.setIcon(new ImageIcon(getClass().getResource("/br/ufs/dain/resources/icone_adm.png")));
+		mntmAdministrador.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/br/ufs/dain/resources/icon_adm.png")));
 		mntmAdministrador.setMnemonic('A');
 		mntmAdministrador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -342,9 +342,11 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnItem_2);
 
 		JMenuItem mntmHorrioDoBolsista = new JMenuItem("Bolsistas");
+		mntmHorrioDoBolsista.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/br/ufs/dain/resources/icon_hor_bol.png")));
 		mnItem_2.add(mntmHorrioDoBolsista);
 
 		JMenuItem mntmHorrios = new JMenuItem("Assistidos");
+		mntmHorrios.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/br/ufs/dain/resources/icon_hor_def.png")));
 		mnItem_2.add(mntmHorrios);
 
 		mntmHorrioDoBolsista.addActionListener(new ActionListener() {
@@ -369,6 +371,7 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnNotas);
 
 		JMenuItem mntmNova = new JMenuItem("Nova Nota");
+		mntmNova.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/br/ufs/dain/resources/icon_nova_nota.png")));
 		mntmNova.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaNovaNota telaNovaNota = new TelaNovaNota(adm.getMatricula(), null);
@@ -379,6 +382,7 @@ public class TelaPrincipal extends JFrame {
 		mnNotas.add(mntmNova);
 
 		JMenuItem mntmMinhasNotas = new JMenuItem("Minhas Notas");
+		mntmMinhasNotas.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/br/ufs/dain/resources/icon_minha_nota.png")));
 		mntmMinhasNotas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaMinhasNotas telaMinhasNotas = new TelaMinhasNotas(adm);
@@ -392,6 +396,7 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnNewMenu_3);
 
 		JMenuItem mntmDetalhes = new JMenuItem("Minha Conta");
+		mntmDetalhes.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/br/ufs/dain/resources/icon_minha_conta.png")));
 		mntmDetalhes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaMinhaConta minhaConta = new TelaMinhaConta(adm);
@@ -402,6 +407,7 @@ public class TelaPrincipal extends JFrame {
 		mnNewMenu_3.add(mntmDetalhes);
 
 		JMenuItem mntmSair = new JMenuItem("Sair");
+		mntmSair.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/br/ufs/dain/resources/icon_sair.png")));
 		mntmSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int n = JOptionPane.showConfirmDialog(contentPane, "Deseja realmente sair, " + adm.getNome() + "?", "Sair",
@@ -420,6 +426,7 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnNewMenu_4);
 
 		JMenuItem mntmExibirAjuda = new JMenuItem("Exibir Ajuda");
+		mntmExibirAjuda.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/br/ufs/dain/resources/icon_ajuda.png")));
 		mntmExibirAjuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaExibirAjuda exibirAjuda = new TelaExibirAjuda();
@@ -433,6 +440,7 @@ public class TelaPrincipal extends JFrame {
 		mnNewMenu_4.add(separator);
 
 		JMenuItem mntmSobre = new JMenuItem("Sobre o Sistema");
+		mntmSobre.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/br/ufs/dain/resources/icon_sobre.png")));
 		mntmSobre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaSobre telaSobre = new TelaSobre();

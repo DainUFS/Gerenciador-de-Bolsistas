@@ -32,6 +32,7 @@ import br.ufs.dain.dao.DAO;
 import br.ufs.dain.modelo.Deficiente;
 import br.ufs.dain.modelo.Horario;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class TelaCadastrarHorarioDeficiente extends JFrame {
 
@@ -80,6 +81,7 @@ public class TelaCadastrarHorarioDeficiente extends JFrame {
 	}
 
 	public TelaCadastrarHorarioDeficiente() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaCadastrarHorarioDeficiente.class.getResource("/br/ufs/dain/resources/icon_hor_def.png")));
 
 		setLocationRelativeTo(null);
 		setBounds(100, 100, 830, 570);

@@ -24,6 +24,7 @@ import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Choice;
+import java.awt.Toolkit;
 
 public class TelaMinhaConta extends JFrame {
 
@@ -53,6 +54,7 @@ public class TelaMinhaConta extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaMinhaConta(Administrador adm) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaMinhaConta.class.getResource("/br/ufs/dain/resources/icon_minha_conta.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 781, 378);
 		contentPane = new JPanel();

@@ -31,14 +31,15 @@ public class TelaInfoBolsista extends JFrame {
 	private String nome;
 	
 	public TelaInfoBolsista(String nome) {
+		setBackground(Color.BLUE);
 		
 		Bolsista bol = new DAO().getBolsistaNome(nome);
 		this.nome = nome;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 322);
+		setBounds(100, 100, 561, 428);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		

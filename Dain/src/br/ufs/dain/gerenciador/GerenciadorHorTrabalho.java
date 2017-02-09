@@ -21,28 +21,83 @@ public class GerenciadorHorTrabalho {
 		
 		conn = conexao.getConexaoMySQL();
 		
-		String sql = "UPDATE t_horariotrabalho SET ht_segunda = ?, "
-				+ "ht_terca = ?, "
-				+ "ht_quarta = ?, "
-				+ "ht_quinta = ?, "
-				+ "ht_sexta = ?, "
-				+ "ht_sabado = ? "
-				+ "WHERE ht_fk_bolsista = ?";
-
-		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
-
-		stmt.setString(1, h.getSegunda() + "  " + hora.getSegunda());
-		stmt.setString(2, h.getTerca() + "  " + hora.getTerca());
-		stmt.setString(3, h.getQuarta() + "  " + hora.getQuarta());
-		stmt.setString(4, h.getQuinta() + "  " + hora.getQuinta());
-		stmt.setString(5, h.getSexta() + "  " + hora.getSexta());
-		stmt.setString(6, h.getSabado() + "  " + hora.getSabado());
-		stmt.setString(7, matric);
-
-		stmt.execute();
-		stmt.close();
+		
+		
+//		String sql = "UPDATE t_horariotrabalho SET ht_segunda = ?, "
+//				+ "ht_terca = ?, "
+//				+ "ht_quarta = ?, "
+//				+ "ht_quinta = ?, "
+//				+ "ht_sexta = ?, "
+//				+ "ht_sabado = ? "
+//				+ "WHERE ht_fk_bolsista = ?";
+//
+//		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+//
+//		stmt.setString(1, h.getSegunda() + "  " + hora.getSegunda());
+//		stmt.setString(2, h.getTerca() + "  " + hora.getTerca());
+//		stmt.setString(3, h.getQuarta() + "  " + hora.getQuarta());
+//		stmt.setString(4, h.getQuinta() + "  " + hora.getQuinta());
+//		stmt.setString(5, h.getSexta() + "  " + hora.getSexta());
+//		stmt.setString(6, h.getSabado() + "  " + hora.getSabado());
+//		stmt.setString(7, matric);
+//
+//		stmt.execute();
+//		stmt.close();
 
 		conn.close();
+
+	}
+	
+	public void atualizarHorarioT(String dia, String h, String matric) throws SQLException {
+
+		Horario hora = buscarHorario(matric);
+		
+		conn = conexao.getConexaoMySQL();
+		
+		String sql;
+		
+		switch (dia) {
+        case "Segunda-feira":
+        	sql = "UPDATE t_horariotrabalho SET ht_segunda = ? WHERE ht_fk_bolsista = ?";
+            break;
+        case "Terca-feira":
+        	sql = "UPDATE t_horariotrabalho SET ht_terca = ? WHERE ht_fk_bolsista = ?";
+            break;
+        case "Quarta-feira":
+        	sql = "UPDATE t_horariotrabalho SET ht_quarta = ? WHERE ht_fk_bolsista = ?";
+            break;
+        case "Quinta-feira":
+        	sql = "UPDATE t_horariotrabalho SET ht_quinta = ? WHERE ht_fk_bolsista = ?";
+            break;
+        case "Sexta-feira":
+        	sql = "UPDATE t_horariotrabalho SET ht_sexta = ? WHERE ht_fk_bolsista = ?";
+            break;
+        default:
+        	sql = "UPDATE t_horariotrabalho SET ht_sabado = ? WHERE ht_fk_bolsista = ?";
+		}
+		
+//		String sql = "UPDATE t_horariotrabalho SET ht_segunda = ?, "
+//				+ "ht_terca = ?, "
+//				+ "ht_quarta = ?, "
+//				+ "ht_quinta = ?, "
+//				+ "ht_sexta = ?, "
+//				+ "ht_sabado = ? "
+//				+ "WHERE ht_fk_bolsista = ?";
+//
+//		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+//
+//		stmt.setString(1, h.getSegunda() + "  " + hora.getSegunda());
+//		stmt.setString(2, h.getTerca() + "  " + hora.getTerca());
+//		stmt.setString(3, h.getQuarta() + "  " + hora.getQuarta());
+//		stmt.setString(4, h.getQuinta() + "  " + hora.getQuinta());
+//		stmt.setString(5, h.getSexta() + "  " + hora.getSexta());
+//		stmt.setString(6, h.getSabado() + "  " + hora.getSabado());
+//		stmt.setString(7, matric);
+//
+//		stmt.execute();
+//		stmt.close();
+
+		//conn.close();
 
 	}
 	

@@ -32,6 +32,7 @@ import br.ufs.dain.dao.DAO;
 import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Horario;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class TelaCadastrarHorarioBolsista extends JFrame {
 
@@ -80,6 +81,7 @@ public class TelaCadastrarHorarioBolsista extends JFrame {
 	}
 
 	public TelaCadastrarHorarioBolsista() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaCadastrarHorarioBolsista.class.getResource("/br/ufs/dain/resources/icon_hor_bol.png")));
 
 		setLocationRelativeTo(null);
 		setBounds(100, 100, 830, 570);

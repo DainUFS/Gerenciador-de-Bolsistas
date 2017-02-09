@@ -27,12 +27,14 @@ import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class TelaNovaNota extends JFrame {
 
 	private JPanel contentPane;
 	
 	public TelaNovaNota(String matAdm, String nota) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaNovaNota.class.getResource("/br/ufs/dain/resources/icon_nova_nota.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

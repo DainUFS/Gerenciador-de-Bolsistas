@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 public class TelaSobre extends JDialog {
 
@@ -23,6 +24,7 @@ public class TelaSobre extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 
 	public TelaSobre() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaSobre.class.getResource("/br/ufs/dain/resources/icon_sobre.png")));
 		setResizable(false);
 
 		setModal(true);

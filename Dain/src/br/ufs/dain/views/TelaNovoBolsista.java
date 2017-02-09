@@ -65,22 +65,19 @@ public class TelaNovoBolsista extends JDialog {
 	 * Create the dialog.
 	 */
 	public TelaNovoBolsista(Administrador adm) {
-		getContentPane().setBackground(new Color(204, 204, 255));
 		
 		setModal(true);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaNovoBolsista.class.getResource("/br/ufs/dain/resources/add_bolsista.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaNovoBolsista.class.getResource("/br/ufs/dain/resources/icon_bol.png")));
 		setResizable(false);
 		setTitle("Cadastrar Novo Bolsista");
 		setBounds(100, 100, 350, 470);
 		BorderLayout borderLayout = new BorderLayout();
 		getContentPane().setLayout(borderLayout);
-		contentPanel.setBackground(new Color(204, 204, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 10, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
-			panel.setBackground(new Color(255, 255, 153));
 			panel.setBorder(new EmptyBorder(0, 0, 0, 0));
 			contentPanel.add(panel, BorderLayout.NORTH);
 			{
@@ -92,12 +89,10 @@ public class TelaNovoBolsista extends JDialog {
 			}
 		}
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(204, 204, 255));
 		contentPanel.add(panel, BorderLayout.CENTER);
 		panel.setBorder(new EmptyBorder(8, 0, 0, 0));
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		JPanel panel_1_2 = new JPanel();
-		panel_1_2.setBackground(new Color(204, 204, 255));
 		panel_1_2.setBorder(new TitledBorder(new LineBorder(new Color(130, 135, 144)), "Informa\u00E7\u00F5es pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.add(panel_1_2);
 		panel_1_2.setLayout(new GridLayout(7, 1, 0, 0));
@@ -129,7 +124,6 @@ public class TelaNovoBolsista extends JDialog {
 			panel_1_2.add(textField_curso);
 		}
 		JPanel panel_1_1 = new JPanel();
-		panel_1_1.setBackground(new Color(204, 204, 255));
 		panel_1_2.add(panel_1_1);
 		panel_1_1.setLayout(new GridLayout(0, 3, 0, 0));
 		{
@@ -140,20 +134,17 @@ public class TelaNovoBolsista extends JDialog {
 			ButtonGroup buttonGroup = new ButtonGroup();
 			{
 				rdbtnMasculino = new JRadioButton("Masculino");
-				rdbtnMasculino.setBackground(new Color(204, 204, 255));
 				panel_1_1.add(rdbtnMasculino);
 				buttonGroup.add(rdbtnMasculino);
 			}
 			{
 				rdbtnFeminino = new JRadioButton("Feminino");
-				rdbtnFeminino.setBackground(new Color(204, 204, 255));
 				panel_1_1.add(rdbtnFeminino);
 				buttonGroup.add(rdbtnFeminino);
 			}
 		}
 		{
 			JPanel panel_1 = new JPanel();
-			panel_1.setBackground(new Color(204, 204, 255));
 			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(130, 135, 144)), "Contatos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panel.add(panel_1);
 			panel_1.setLayout(new GridLayout(4, 1, 0, 1));
@@ -178,7 +169,6 @@ public class TelaNovoBolsista extends JDialog {
 		}
 		{
 			JPanel panel_1 = new JPanel();
-			panel_1.setBackground(new Color(204, 204, 255));
 			getContentPane().add(panel_1, BorderLayout.SOUTH);
 			panel_1.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			{

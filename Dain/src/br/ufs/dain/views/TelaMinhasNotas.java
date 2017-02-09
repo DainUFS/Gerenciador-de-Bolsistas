@@ -24,6 +24,7 @@ import java.awt.CardLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import java.awt.Toolkit;
 
 public class TelaMinhasNotas extends JFrame {
 
@@ -33,6 +34,7 @@ public class TelaMinhasNotas extends JFrame {
 	private final short SCROLL_SPEED = 12;
 
 	public TelaMinhasNotas(Administrador adm) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaMinhasNotas.class.getResource("/br/ufs/dain/resources/icon_minha_nota.png")));
 		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

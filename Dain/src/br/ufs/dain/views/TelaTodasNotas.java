@@ -23,6 +23,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Component;
 import java.awt.Dialog.ModalExclusionType;
+import java.awt.Toolkit;
 
 public class TelaTodasNotas extends JFrame {
 

@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 public class TelaExibirAjuda extends JFrame {
 
@@ -34,6 +35,7 @@ public class TelaExibirAjuda extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaExibirAjuda() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaExibirAjuda.class.getResource("/br/ufs/dain/resources/icon_ajuda.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

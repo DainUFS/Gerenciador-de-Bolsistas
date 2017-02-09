@@ -62,7 +62,7 @@ public class TelaNovoDeficiente extends JDialog {
 	 */
 	public TelaNovoDeficiente(Administrador adm) {
 		setModal(true);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Murilo\\Documents\\GitHub\\Gerenciador-de-Bolsistas\\Dain\\img\\icon\\icone_deficiente.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaNovoDeficiente.class.getResource("/br/ufs/dain/resources/icon_def.png")));
 		setResizable(false);
 		setTitle("Cadastrar Novo Deficiente");
 		setBounds(100, 100, 350, 500);
