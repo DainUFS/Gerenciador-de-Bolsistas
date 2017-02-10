@@ -106,29 +106,57 @@ public class TelaInfoBolsista extends JFrame {
 		panel_2.add(panel_4);
 		panel_4.setLayout(new GridLayout(6, 1, 0, 5));
 		
-		Horario h = new DAO().buscarHorarioBolsista(bol.getMatricula());
+		Horario h = new DAO().buscarHorarioBolsistaT(bol.getMatricula());
 		
-		JLabel lblNewLabel_2 = new JLabel("Segunda: " + h.getSegunda());
+		JLabel lblNewLabel_2;
+		if(!h.getSegunda().equals(""))
+			lblNewLabel_2 = new JLabel("Segunda: " + h.getSegunda());
+		else
+			lblNewLabel_2 = new JLabel("Segunda: " + "Não trabalha esse horario");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_4.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Ter\u00E7a: " + h.getTerca());
+		
+		JLabel lblNewLabel_3;
+		if(!h.getTerca().equals(""))
+			lblNewLabel_3 = new JLabel("Ter\u00E7a: " + h.getTerca());
+		else
+			lblNewLabel_3 = new JLabel("Ter\u00E7a: " + "Não trabalha esse horario");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_4.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("Quarta: " + h.getQuarta());
+		JLabel lblNewLabel_4;
+		if(!h.getQuarta().equals(""))
+			lblNewLabel_4 = new JLabel("Quarta: " + h.getQuarta());
+		else
+			lblNewLabel_4 = new JLabel("Quarta: " + "Não trabalha esse horario");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_4.add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel("Quinta: " + h.getQuinta());
+		
+		JLabel lblNewLabel_5;
+		if(!h.getQuinta().equals(""))
+			lblNewLabel_5 = new JLabel("Quinta: " + h.getQuinta());
+		else
+			lblNewLabel_5 = new JLabel("Quinta: " + "Não trabalha esse horario");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_4.add(lblNewLabel_5);
 		
-		JLabel lblNewLabel_6 = new JLabel("Sexta: " + h.getSexta());
+		
+		JLabel lblNewLabel_6;
+		if(!h.getSexta().equals(""))
+			lblNewLabel_6 = new JLabel("Sexta: " + h.getSexta());
+		else
+			lblNewLabel_6 = new JLabel("Sexta: " + "Não trabalha esse horario");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_4.add(lblNewLabel_6);
 		
-		JLabel lblNewLabel_7 = new JLabel("Sab\u00E1do: " + h.getSabado());
+		
+		JLabel lblNewLabel_7;
+		if(!h.getSabado().equals(""))
+			lblNewLabel_7 = new JLabel("Sab\u00E1do: " + h.getSabado());
+		else 
+			lblNewLabel_7 = new JLabel("Sab\u00E1do: " + "Não trabalha esse horario");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_4.add(lblNewLabel_7);
 	}

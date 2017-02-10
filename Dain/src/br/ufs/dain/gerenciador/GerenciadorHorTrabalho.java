@@ -15,40 +15,7 @@ public class GerenciadorHorTrabalho {
 	Connection conn;
 	Statement stmt;
 	
-	public void atualizarHorario(Horario h, String matric) throws SQLException {
-
-		Horario hora = buscarHorario(matric);
-		
-		conn = conexao.getConexaoMySQL();
-		
-		
-		
-//		String sql = "UPDATE t_horariotrabalho SET ht_segunda = ?, "
-//				+ "ht_terca = ?, "
-//				+ "ht_quarta = ?, "
-//				+ "ht_quinta = ?, "
-//				+ "ht_sexta = ?, "
-//				+ "ht_sabado = ? "
-//				+ "WHERE ht_fk_bolsista = ?";
-//
-//		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
-//
-//		stmt.setString(1, h.getSegunda() + "  " + hora.getSegunda());
-//		stmt.setString(2, h.getTerca() + "  " + hora.getTerca());
-//		stmt.setString(3, h.getQuarta() + "  " + hora.getQuarta());
-//		stmt.setString(4, h.getQuinta() + "  " + hora.getQuinta());
-//		stmt.setString(5, h.getSexta() + "  " + hora.getSexta());
-//		stmt.setString(6, h.getSabado() + "  " + hora.getSabado());
-//		stmt.setString(7, matric);
-//
-//		stmt.execute();
-//		stmt.close();
-
-		conn.close();
-
-	}
-	
-	public void atualizarHorarioT(String dia, String h, String matric) throws SQLException {
+	public void atualizarHorario(String dia, String h, String matric) throws SQLException {
 
 		Horario hora = buscarHorario(matric);
 		
@@ -60,7 +27,7 @@ public class GerenciadorHorTrabalho {
         case "Segunda-feira":
         	sql = "UPDATE t_horariotrabalho SET ht_segunda = ? WHERE ht_fk_bolsista = ?";
             break;
-        case "Terca-feira":
+        case "Terça-feira":
         	sql = "UPDATE t_horariotrabalho SET ht_terca = ? WHERE ht_fk_bolsista = ?";
             break;
         case "Quarta-feira":
@@ -76,29 +43,33 @@ public class GerenciadorHorTrabalho {
         	sql = "UPDATE t_horariotrabalho SET ht_sabado = ? WHERE ht_fk_bolsista = ?";
 		}
 		
-//		String sql = "UPDATE t_horariotrabalho SET ht_segunda = ?, "
-//				+ "ht_terca = ?, "
-//				+ "ht_quarta = ?, "
-//				+ "ht_quinta = ?, "
-//				+ "ht_sexta = ?, "
-//				+ "ht_sabado = ? "
-//				+ "WHERE ht_fk_bolsista = ?";
-//
-//		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
-//
-//		stmt.setString(1, h.getSegunda() + "  " + hora.getSegunda());
-//		stmt.setString(2, h.getTerca() + "  " + hora.getTerca());
-//		stmt.setString(3, h.getQuarta() + "  " + hora.getQuarta());
-//		stmt.setString(4, h.getQuinta() + "  " + hora.getQuinta());
-//		stmt.setString(5, h.getSexta() + "  " + hora.getSexta());
-//		stmt.setString(6, h.getSabado() + "  " + hora.getSabado());
-//		stmt.setString(7, matric);
-//
-//		stmt.execute();
-//		stmt.close();
-
-		//conn.close();
-
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+		
+		switch (dia) {
+        case "Segunda-feira":
+        	stmt.setString(1, hora.getSegunda() + " | " + h);
+            break;
+        case "Terça-feira":
+        	stmt.setString(1, hora.getTerca() + " | " + h);
+            break;
+        case "Quarta-feira":
+        	stmt.setString(1, hora.getQuarta() + " | " + h);
+            break;
+        case "Quinta-feira":
+        	stmt.setString(1, hora.getQuinta() + " | " + h);
+            break;
+        case "Sexta-feira":
+        	stmt.setString(1, hora.getSexta() + " | " + h);
+            break;
+        default:
+        	stmt.setString(1, hora.getSabado() + " | " + h);
+		}
+	
+		stmt.setString(2, matric);
+		
+		stmt.execute();
+		conn.close();
+		
 	}
 	
 	public void criarHorario(Horario h, String matric) throws SQLException {
@@ -150,8 +121,9 @@ public class GerenciadorHorTrabalho {
 		conn.close(); 
 		
 		return horario;
-
 	}
+	
+	
 	
 
 }

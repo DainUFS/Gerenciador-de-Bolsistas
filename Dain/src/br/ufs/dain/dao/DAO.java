@@ -318,9 +318,9 @@ public class DAO implements InterfaceDAO {
 	}
 
 	@Override
-	public void hrTrabalho(Horario h, String matric) {
+	public void hrTrabalho(String dia, String hora, String matric) {
 		try {
-			gHT.atualizarHorario(h, matric);
+			gHT.atualizarHorario(dia, hora, matric);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -334,5 +334,16 @@ public class DAO implements InterfaceDAO {
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public Horario buscarHorarioBolsistaT(String matricula) {
+		try {
+			return gHT.buscarHorario(matricula);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

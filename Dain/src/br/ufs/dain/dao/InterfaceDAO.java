@@ -42,9 +42,11 @@ public interface InterfaceDAO {
 	
 	public void tipoAtividade (String matric, int idAtv);
 	
-	public void hrTrabalho(Horario h, String matric);
+	public void hrTrabalho(String dia, String hora, String matric);
 	
 	public void criarHrTrabalho(Horario h, String matric);
+	
+	public Horario buscarHorarioBolsistaT(String matricula);
 	
 	
 	//Administrador

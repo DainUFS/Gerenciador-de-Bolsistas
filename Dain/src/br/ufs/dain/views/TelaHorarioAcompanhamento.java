@@ -310,7 +310,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		            case "Segunda-feira":
 		                segunda = hora;
 		                break;
-		            case "Terca-feira":
+		            case "Tera-feira":
 		                terca = hora;
 		                break;
 		            case "Quarta-feira":
@@ -325,17 +325,15 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		            default:
 		                sabado = hora;
 		         }
-				 
-				 Horario horaT = new Horario(segunda, terca, quarta, quinta, sexta, sabado);
 				
 				 	for(int i = 0; i < apoio.size(); i++) 
-					 	new DAO().hrTrabalho(horaT, apoio.get(i).getBolsista().getMatricula());
+					 	new DAO().hrTrabalho(dia, hora, apoio.get(i).getBolsista().getMatricula());
 					
 					for(int i = 0; i < dain.size(); i++) 
-						new DAO().hrTrabalho(horaT, dain.get(i).getMatricula());
+						new DAO().hrTrabalho(dia, hora, dain.get(i).getMatricula());
 					
 					for(int i = 0; i < bicen.size(); i++) 
-						new DAO().hrTrabalho(horaT, bicen.get(i).getMatricula());
+						new DAO().hrTrabalho(dia, hora, bicen.get(i).getMatricula());
 				 
 				 
 				
