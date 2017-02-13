@@ -53,6 +53,7 @@ import br.ufs.dain.modelo.Nota;
 import br.ufs.dain.modelo.Pessoa;
 
 import java.awt.Label;
+import java.awt.FlowLayout;
 
 public class TelaPrincipal extends JFrame {
 
@@ -67,8 +68,7 @@ public class TelaPrincipal extends JFrame {
 	private ArrayList<Bolsista> bolsistas = new DAO().buscarBolsistas();
 	private ArrayList<Administrador> adms = new DAO().buscarAdm();
 	private ArrayList<Deficiente> deficientes = new DAO().buscarDeficiente();
-		
-
+	
 	private String[] horarios = { "07:00h - 08:00h", "08:00h - 09:00h", "09:00h - 10:00h", "10:00h - 11:00h",
 			"11:00h - 12:00h", "12:00h - 13:00h", "13:00h - 14:00h", "14:00h - 15:00h", "15:00h - 16:00h",
 			"16:00h - 17:00h", "17:00h - 18:00h", "18:00h - 19:00h", "19:00h - 20:00h", "20:00h - 21:00h",
@@ -155,11 +155,21 @@ public class TelaPrincipal extends JFrame {
 		contentPane.add(splitPane, BorderLayout.CENTER);
 
 		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new EmptyBorder(3, 5, 3, 5));
 		panel_2.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
 		contentPane.add(panel_2, BorderLayout.SOUTH);
+		panel_2.setLayout(new BorderLayout(0, 0));
+		
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				refreshNames();
+			}
+		});
+		panel_2.add(btnAtualizar, BorderLayout.WEST);
 
 		JLabel label_Nomeadm = new JLabel(adm.getNome());
-		panel_2.add(label_Nomeadm);
+		panel_2.add(label_Nomeadm, BorderLayout.EAST);
 	
 
 		organizaTabela(panelCentro);
@@ -225,7 +235,7 @@ public class TelaPrincipal extends JFrame {
 
 					int contador = 0;
 
-					Horario horario = new DAO().buscarHorarioBolsista(bolsistas.get(i).getMatricula());
+					Horario horario = new DAO().buscarHorarioBolsistaT(bolsistas.get(i).getMatricula());
 					String segunda = horario.getSegunda();
 					String terca = horario.getTerca();
 					String quarta = horario.getQuarta();
@@ -236,37 +246,37 @@ public class TelaPrincipal extends JFrame {
 					for (int j = 0; j < arrayButton.length; j++) {
 
 						if (j % 6 == 0)
-							if (segunda.contains(horarios[contador] + "|"))
+							if (segunda.contains(" | " + horarios[contador]))
 								inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
 							else
 								arrayButton[j].setSelected(false);
 
 						else if (j % 6 == 1)
-							if (terca.contains(horarios[contador] + "|"))
+							if (terca.contains(" | " + horarios[contador]))
 								inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
 							else
 								arrayButton[j].setSelected(false);
 
 						else if (j % 6 == 2)
-							if (quarta.contains(horarios[contador] + "|"))
+							if (quarta.contains(" | " + horarios[contador]))
 								inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
 							else
 								arrayButton[j].setSelected(false);
 
 						else if (j % 6 == 3)
-							if (quinta.contains(horarios[contador] + "|"))
+							if (quinta.contains(" | " + horarios[contador]))
 								inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
 							else
 								arrayButton[j].setSelected(false);
 
 						else if (j % 6 == 4)
-							if (sexta.contains(horarios[contador] + "|"))
+							if (sexta.contains(" | " + horarios[contador]))
 								inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
 							else
 								arrayButton[j].setSelected(false);
 
 						else {
-							if (sabado.contains(horarios[contador] + "|"))
+							if (sabado.contains(" | " + horarios[contador]))
 								inserirNomeTabela(bolsistas.get(i).getMatricula(), j);
 							else
 								arrayButton[j].setSelected(false);
@@ -276,6 +286,11 @@ public class TelaPrincipal extends JFrame {
 				}
 			}
 		}).start();
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void inserirNomeTabela (String matricula, int indice) {
@@ -556,5 +571,12 @@ public class TelaPrincipal extends JFrame {
 		if(tree.getRowCount() != rowCount) {
 			expandAllNodes(tree, rowCount, tree.getRowCount());
 		}
+	}
+	
+	private void refreshNames () {
+		
+		for (int i = 0; i < arrayButton.length; i++)
+			arrayButton[i].setText("");
+		distribuiNomes();
 	}
 }

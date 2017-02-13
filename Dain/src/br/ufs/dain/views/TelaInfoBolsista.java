@@ -39,7 +39,7 @@ public class TelaInfoBolsista extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 561, 428);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
@@ -112,7 +112,7 @@ public class TelaInfoBolsista extends JFrame {
 		if(!h.getSegunda().equals(""))
 			lblNewLabel_2 = new JLabel("Segunda: " + h.getSegunda());
 		else
-			lblNewLabel_2 = new JLabel("Segunda: " + "Não trabalha esse horario");
+			lblNewLabel_2 = new JLabel("Segunda: " + "Não trabalha nesse dia");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_4.add(lblNewLabel_2);
 		
@@ -121,7 +121,7 @@ public class TelaInfoBolsista extends JFrame {
 		if(!h.getTerca().equals(""))
 			lblNewLabel_3 = new JLabel("Ter\u00E7a: " + h.getTerca());
 		else
-			lblNewLabel_3 = new JLabel("Ter\u00E7a: " + "Não trabalha esse horario");
+			lblNewLabel_3 = new JLabel("Ter\u00E7a: " + "Não trabalha nesse dia");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_4.add(lblNewLabel_3);
 		
@@ -129,7 +129,7 @@ public class TelaInfoBolsista extends JFrame {
 		if(!h.getQuarta().equals(""))
 			lblNewLabel_4 = new JLabel("Quarta: " + h.getQuarta());
 		else
-			lblNewLabel_4 = new JLabel("Quarta: " + "Não trabalha esse horario");
+			lblNewLabel_4 = new JLabel("Quarta: " + "Não trabalha nesse dia");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_4.add(lblNewLabel_4);
 		
@@ -138,7 +138,7 @@ public class TelaInfoBolsista extends JFrame {
 		if(!h.getQuinta().equals(""))
 			lblNewLabel_5 = new JLabel("Quinta: " + h.getQuinta());
 		else
-			lblNewLabel_5 = new JLabel("Quinta: " + "Não trabalha esse horario");
+			lblNewLabel_5 = new JLabel("Quinta: " + "Não trabalha nesse dia");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_4.add(lblNewLabel_5);
 		
@@ -147,7 +147,7 @@ public class TelaInfoBolsista extends JFrame {
 		if(!h.getSexta().equals(""))
 			lblNewLabel_6 = new JLabel("Sexta: " + h.getSexta());
 		else
-			lblNewLabel_6 = new JLabel("Sexta: " + "Não trabalha esse horario");
+			lblNewLabel_6 = new JLabel("Sexta: " + "Não trabalha nesse dia");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_4.add(lblNewLabel_6);
 		
@@ -156,7 +156,7 @@ public class TelaInfoBolsista extends JFrame {
 		if(!h.getSabado().equals(""))
 			lblNewLabel_7 = new JLabel("Sab\u00E1do: " + h.getSabado());
 		else 
-			lblNewLabel_7 = new JLabel("Sab\u00E1do: " + "Não trabalha esse horario");
+			lblNewLabel_7 = new JLabel("Sab\u00E1do: " + "Não trabalha nesse dia");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_4.add(lblNewLabel_7);
 	}

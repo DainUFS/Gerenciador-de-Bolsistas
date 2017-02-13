@@ -30,7 +30,6 @@ import javax.swing.border.TitledBorder;
 import br.ufs.dain.dao.DAO;
 import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Deficiente;
-import br.ufs.dain.modelo.Horario;
 import br.ufs.dain.modelo.Acompanhamento;
 
 public class TelaHorarioAcompanhamento extends JFrame {
@@ -56,13 +55,10 @@ public class TelaHorarioAcompanhamento extends JFrame {
 	private ArrayList<Bolsista> dain = new ArrayList<>();
 	private ArrayList<Bolsista> bicen = new ArrayList<>();
 	
-	
 	/**
 	 * Create the frame.
 	 */
 	public TelaHorarioAcompanhamento (String diaCorrespondente, String horaCorrespondente) {
-		
-		
 
 		setTitle(atribuiPosFixoFeira(dia) + ", " + hora);
 
@@ -334,9 +330,6 @@ public class TelaHorarioAcompanhamento extends JFrame {
 					
 					for(int i = 0; i < bicen.size(); i++) 
 						new DAO().hrTrabalho(dia, hora, bicen.get(i).getMatricula());
-				 
-				 
-				
 			}
 		});
 		panel_9.add(btnSalvar);
@@ -344,8 +337,6 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		JButton btnLimpar = new JButton("Limpar");
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
 				apoio.clear();
 				bicen.clear();
 				dain.clear();
@@ -357,17 +348,19 @@ public class TelaHorarioAcompanhamento extends JFrame {
 				l_dain.setText("");
 				
 				JLabel l_apoio = (JLabel) panel_apoio.getComponent(0);
-				l_apoio.setText("");
-				
-				
-				
-				
-				
+				l_apoio.setText("");				
 			}
 		});
 		panel_9.add(btnLimpar);
+		
+		distribuiNomes();
 	}
-
+	
+	private void distribuiNomes () {
+		
+		
+	}
+	
 	private String atribuiPosFixoFeira (String dia) {
 
 		if (dia != "Sábado")
