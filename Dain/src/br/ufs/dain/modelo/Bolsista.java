@@ -6,14 +6,16 @@ public class Bolsista extends Aluno {
 	private String matriculaAdm;
 	private int statusAtivacao;
 
-	public Bolsista(String telefone, String email, String nome, String curso, String matricula, String sexo,
+	public Bolsista(String telefone, String email, String nome, String curso, 
+			String matricula, String sexo,
 			Horario horario, int tipoAtividade, int statusAtivacao) {
 		super(telefone, email, nome, curso, matricula, sexo, horario);
 		this.tipoAtividade = tipoAtividade;
 		this.statusAtivacao = statusAtivacao;
 	}
 	
-	public Bolsista(String telefone, String email, String nome, String curso, String matricula, String sexo,
+	public Bolsista(String telefone, String email, String nome, 
+			String curso, String matricula, String sexo,
 			Horario horario) {
 		super(telefone, email, nome, curso, matricula, sexo, horario);
 	}
