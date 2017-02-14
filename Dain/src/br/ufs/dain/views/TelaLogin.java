@@ -1,41 +1,38 @@
 package br.ufs.dain.views;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.EventQueue;
-import java.awt.GridLayout;
+import java.awt.Font;
 import java.awt.Insets;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+
 import br.ufs.dain.dao.DAO;
 import br.ufs.dain.gerenciador.GerenciadorLogin;
+import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Nota;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.AbstractButton;
-import javax.swing.ImageIcon;
-import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JPasswordField;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Toolkit;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-import java.awt.Component;
 
 public class TelaLogin extends JFrame {
 
@@ -154,6 +151,34 @@ public class TelaLogin extends JFrame {
 		btnX.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnX.setBounds(471, 11, 46, 33);
 		contentPane.add(btnX);
+		
+		JButton btnNewButton_1 = new JButton("Entrar como bolsista");
+		btnNewButton_1.setForeground(new Color(0, 0, 255));
+		btnNewButton_1.setMargin(new Insets(0, 0, 0, 0));
+        btnNewButton_1.setContentAreaFilled(false);
+        btnNewButton_1.setBorderPainted(false);
+        btnNewButton_1.setOpaque(false);
+		btnNewButton_1.setBounds(205, 242, 135, 23);
+		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String matricula = JOptionPane.showInputDialog("Digite sua matrícula:");
+				if (matricula != null) {
+					Bolsista viadin = new DAO().getBolsistaMatricula(matricula);
+					if (viadin != null) {
+						TelaCadastrarHorarioUnico tchu = new TelaCadastrarHorarioUnico(viadin);
+						tchu.setLocationRelativeTo(null);
+						tchu.setVisible(true);
+					} else {
+						JOptionPane.showMessageDialog(getContentPane(), "Matrícula errada!");
+					}
+				} else {
+					JOptionPane.showMessageDialog(getContentPane(), "Matrícula inexistente!");
+				}
+			}
+		});
+		btnNewButton_1.setBounds(184, 246, 135, 23);
+		contentPane.add(btnNewButton_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
 		lblNewLabel_2.setIcon(new ImageIcon(TelaLogin.class.getResource("/br/ufs/dain/resources/dainLogin.png")));

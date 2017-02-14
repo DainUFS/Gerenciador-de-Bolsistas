@@ -164,6 +164,8 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		lblNewLabel_4 = new JLabel("");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_bicen.add(lblNewLabel_4);
+		
+		
 
 		btnRelacionarAssistidobolsista = new JButton("Apoio");
 		btnRelacionarAssistidobolsista.addActionListener(new ActionListener() {

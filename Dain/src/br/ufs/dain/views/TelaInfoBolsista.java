@@ -31,7 +31,7 @@ public class TelaInfoBolsista extends JFrame {
 	private String nome;
 	
 	public TelaInfoBolsista(String nome) {
-		setBackground(Color.BLUE);
+		setAutoRequestFocus(false);
 		
 		Bolsista bol = new DAO().getBolsistaNome(nome);
 		this.nome = nome;
