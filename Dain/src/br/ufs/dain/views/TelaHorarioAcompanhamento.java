@@ -384,7 +384,6 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		tabbedPane.add(contentPane);
 		tabbedPane.setTabComponentAt(tabbedPane.indexOfComponent(contentPane),
 				getTitlePanel(tabbedPane, contentPane, atribuiPosFixoFeira(dia) + ", " + hora));
-
 	}
 
 	private static JPanel getTitlePanel(final JTabbedPane tabbedPane, final JPanel panel, String titulo) {
@@ -562,14 +561,14 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		
 	}
 	
-	private void buscarHorarios(){
+	private void buscarHorarios () {
 		DAO dao = new DAO();
 		
 		ArrayList<Bolsista> bDain = new ArrayList<>();
 		ArrayList<Bolsista> bBicen = new ArrayList<>();
 		
 		bDain = dao.buscarBolsistasDain();
-		bBicen = dao.buscarBolsistasBicen(); 
+		bBicen = dao.buscarBolsistasBicen();
 		
 		for (int i = 0; i < bDain.size(); i++) {
 			dainH.get(i).setBolsista(bDain.get(i));
@@ -581,8 +580,6 @@ public class TelaHorarioAcompanhamento extends JFrame {
 			bicenH.get(i).setHorario(new DAO().buscarHorarioBolsista(bBicen.get(i).getMatricula()));
 		}
 		
-		apoioH = new DAO().buscarBolsistasApoio();
-	
+		apoioH = new DAO().buscarBolsistasApoio();	
 	}
-	
 }

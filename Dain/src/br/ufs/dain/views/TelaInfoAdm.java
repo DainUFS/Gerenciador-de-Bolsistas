@@ -35,12 +35,11 @@ public class TelaInfoAdm extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 671, 436);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_2 = new JPanel();
-		contentPane.add(panel_2, BorderLayout.NORTH);
+		contentPane.add(panel_2);
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
 		
 		JPanel panel = new JPanel();
@@ -49,10 +48,12 @@ public class TelaInfoAdm extends JFrame {
 		panel.setLayout(new GridLayout(1, 2, 0, 5));
 		
 		JLabel lblNome = new JLabel("Nome: " + adm.getNome());
+		lblNome.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(lblNome);
 		
 		JLabel lblMatrcula = new JLabel("Matr\u00EDcula: " + adm.getMatricula());
+		lblMatrcula.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMatrcula.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(lblMatrcula);
 		
@@ -62,10 +63,12 @@ public class TelaInfoAdm extends JFrame {
 		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel lblTelefone = new JLabel("Telefone: " + adm.getTelefone());
+		lblTelefone.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_1.add(lblTelefone);
 		
 		JLabel lblEmail = new JLabel("E-mail: " + adm.getEmail());
+		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_1.add(lblEmail);
 	}
