@@ -10,11 +10,13 @@ import java.util.ArrayList;
 import br.ufs.dain.conexao.Conexao;
 import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Horario;
+import br.ufs.dain.modelo.HorariosApoio;
 
 public class GerenciadorBolsista {
 	
 	Conexao conexao = new Conexao();
 	GerenciadorHorario gHor = new GerenciadorHorario();
+	GerenciadorDeficiente gDE = new GerenciadorDeficiente();
 	Connection conn;
 	Statement stmt;
 	
@@ -204,6 +206,84 @@ public class GerenciadorBolsista {
 		stmt.execute();
 		conn.close();
 		
+	}
+	
+	public ArrayList<Bolsista> bolsistasDain() throws SQLException {
+
+		conn = conexao.getConexaoMySQL();
+		
+		ArrayList<Bolsista> listaBolsistas = new ArrayList<>();
+		Bolsista bolsista;
+		
+		String sql = "SELECT * FROM t_bolsista WHERE b_atividade = 2";
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+
+		ResultSet rs = (ResultSet) stmt.executeQuery();
+		
+		while (rs.next()) {
+			bolsista = new Bolsista(rs.getString("b_telefone"), rs.getString("b_email"), rs.getString("b_nome"),
+					rs.getString("b_curso"), rs.getString("b_matricula"), rs.getString("b_sexo"), 
+					gHor.buscarHorario(rs.getInt("b_fk_horario")),
+					rs.getInt("b_atividade"), rs.getInt("b_status"));
+			listaBolsistas.add(bolsista);
+		}
+				
+		conn.close();
+
+		return listaBolsistas;
+	}
+	
+	public ArrayList<Bolsista> bolsistasBicen() throws SQLException {
+
+		conn = conexao.getConexaoMySQL();
+		
+		ArrayList<Bolsista> listaBolsistas = new ArrayList<>();
+		Bolsista bolsista;
+		
+		String sql = "SELECT * FROM t_bolsista WHERE b_atividade = 3";
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+
+		ResultSet rs = (ResultSet) stmt.executeQuery();
+		
+		while (rs.next()) {
+			bolsista = new Bolsista(rs.getString("b_telefone"), rs.getString("b_email"), rs.getString("b_nome"),
+					rs.getString("b_curso"), rs.getString("b_matricula"), rs.getString("b_sexo"), 
+					gHor.buscarHorario(rs.getInt("b_fk_horario")),
+					rs.getInt("b_atividade"), rs.getInt("b_status"));
+			listaBolsistas.add(bolsista);
+		}
+				
+		conn.close();
+
+		return listaBolsistas;
+	}
+	
+	public ArrayList<HorariosApoio> bolsistasApoio() throws SQLException {
+
+		conn = conexao.getConexaoMySQL();
+		
+		ArrayList<HorariosApoio> listaBolsistas = new ArrayList<>();
+		HorariosApoio hBolsista;
+		
+		String sql = "SELECT * FROM t_acompanhamento";
+		
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+
+		ResultSet rs = (ResultSet) stmt.executeQuery();
+		
+		while (rs.next()) {
+			hBolsista = new HorariosApoio(buscarBolsistaMatricula(rs.getString("a_b_matricula")), 
+					gDE.buscarDeficienteMatricula(rs.getString("a_d_matricula")), 
+					rs.getString("a_dia"), rs.getString("a_hora"));
+			
+			listaBolsistas.add(hBolsista);
+		}
+				
+		conn.close();
+
+		return listaBolsistas;
 	}
 	
 	public static void main(String[] args) throws SQLException {

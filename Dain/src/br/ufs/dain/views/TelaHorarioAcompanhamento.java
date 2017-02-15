@@ -30,6 +30,10 @@ import javax.swing.border.TitledBorder;
 import br.ufs.dain.dao.DAO;
 import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Deficiente;
+import br.ufs.dain.modelo.Horario;
+import br.ufs.dain.modelo.HorariosApoio;
+import br.ufs.dain.modelo.HorariosBicen;
+import br.ufs.dain.modelo.HorariosDain;
 import br.ufs.dain.modelo.Acompanhamento;
 
 public class TelaHorarioAcompanhamento extends JFrame {
@@ -54,6 +58,10 @@ public class TelaHorarioAcompanhamento extends JFrame {
 	private ArrayList<Acompanhamento> apoio = new ArrayList<>();
 	private ArrayList<Bolsista> dain = new ArrayList<>();
 	private ArrayList<Bolsista> bicen = new ArrayList<>();
+	
+	public ArrayList<HorariosApoio> apoioH = new ArrayList<>();
+	public ArrayList<HorariosBicen> dainH = new ArrayList<>();
+	public ArrayList<HorariosDain> bicenH = new ArrayList<>();
 	
 	/**
 	 * Create the frame.
@@ -552,6 +560,29 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		for(int i = 0; i < list.size(); i++)
 			if(list.get(i).getMatricula().equals(bolsista.getMatricula())) list.remove(list.get(i)); 
 		
+	}
+	
+	private void buscarHorarios(){
+		DAO dao = new DAO();
+		
+		ArrayList<Bolsista> bDain = new ArrayList<>();
+		ArrayList<Bolsista> bBicen = new ArrayList<>();
+		
+		bDain = dao.buscarBolsistasDain();
+		bBicen = dao.buscarBolsistasBicen(); 
+		
+		for (int i = 0; i < bDain.size(); i++) {
+			dainH.get(i).setBolsista(bDain.get(i));
+			dainH.get(i).setHorario(new DAO().buscarHorarioBolsista(bDain.get(i).getMatricula()));
+		}
+		
+		for (int i = 0; i < bBicen.size(); i++) {
+			bicenH.get(i).setBolsista(bBicen.get(i));
+			bicenH.get(i).setHorario(new DAO().buscarHorarioBolsista(bBicen.get(i).getMatricula()));
+		}
+		
+		apoioH = new DAO().buscarBolsistasApoio();
+	
 	}
 	
 }

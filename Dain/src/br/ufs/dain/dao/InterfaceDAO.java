@@ -7,6 +7,7 @@ import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Deficiente;
 import br.ufs.dain.modelo.Acompanhamento;
 import br.ufs.dain.modelo.Horario;
+import br.ufs.dain.modelo.HorariosApoio;
 import br.ufs.dain.modelo.Login;
 import br.ufs.dain.modelo.Nota;
 
@@ -47,6 +48,12 @@ public interface InterfaceDAO {
 	public void criarHrTrabalho(Horario h, String matric);
 	
 	public Horario buscarHorarioBolsistaT(String matricula);
+	
+	public ArrayList<HorariosApoio> buscarBolsistasApoio();
+	
+	public ArrayList<Bolsista> buscarBolsistasDain();
+	
+	public ArrayList<Bolsista> buscarBolsistasBicen();
 	
 	
 	//Administrador

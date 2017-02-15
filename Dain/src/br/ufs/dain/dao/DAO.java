@@ -16,6 +16,7 @@ import br.ufs.dain.modelo.Bolsista;
 import br.ufs.dain.modelo.Deficiente;
 import br.ufs.dain.modelo.Acompanhamento;
 import br.ufs.dain.modelo.Horario;
+import br.ufs.dain.modelo.HorariosApoio;
 import br.ufs.dain.modelo.Login;
 import br.ufs.dain.modelo.Nota;
 
@@ -341,7 +342,36 @@ public class DAO implements InterfaceDAO {
 		try {
 			return gHT.buscarHorario(matricula);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public ArrayList<HorariosApoio> buscarBolsistasApoio() {
+		try {
+			return gBol.bolsistasApoio();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public ArrayList<Bolsista> buscarBolsistasDain() {
+		try {
+			return gBol.bolsistasDain();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public ArrayList<Bolsista> buscarBolsistasBicen() {
+		try {
+			return gBol.bolsistasBicen();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
