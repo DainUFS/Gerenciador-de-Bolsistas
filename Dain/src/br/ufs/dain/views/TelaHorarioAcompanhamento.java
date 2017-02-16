@@ -63,6 +63,8 @@ public class TelaHorarioAcompanhamento extends JFrame {
 	public ArrayList<HorariosBicen> bicenH = new ArrayList<>();
 	public ArrayList<HorariosDain> dainH = new ArrayList<>();
 	
+	JLabel labelDia;
+	JLabel labelHora;
 	/**
 	 * Create the frame.
 	 */
@@ -95,12 +97,12 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		panel.add(panel_1, BorderLayout.NORTH);
 		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
 
-		JLabel labelDia = new JLabel(atribuiPosFixoFeira(dia));
+		labelDia = new JLabel(atribuiPosFixoFeira(dia));
 		panel_1.add(labelDia);
 		labelDia.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		labelDia.setHorizontalAlignment(SwingConstants.LEFT);
 
-		JLabel labelHora = new JLabel(hora);
+		labelHora = new JLabel(hora);
 		panel_1.add(labelHora);
 		labelHora.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		labelHora.setVerticalAlignment(SwingConstants.TOP);
@@ -175,32 +177,7 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		
 		buscarHorarios();
 		
-		Acompanhamento apoioAux;
-		
-		System.out.println(labelDia.getText());
-		System.out.println(labelHora.getText());
-		
-		System.out.println(labelDia.getText());
-		System.out.println(labelHora.getText());
-		
-		for(int i = 0; i < apoioH.size(); i++){
-			
-			System.out.println(apoioH.get(i).getDia());
-			System.out.println(apoioH.get(i).getHora());
-			
-			if(labelDia.getText().equals(apoioH.get(i).getDia()) &&
-					labelDia.getText().equals(apoioH.get(i).getHora())){
-				
-				apoioAux = new Acompanhamento(apoioH.get(i).getBolsista(), 
-						apoioH.get(i).getDeficiente(), 
-						apoioH.get(i).getHora(), 
-						apoioH.get(i).getDia());
-				
-				apoio.add(apoioAux);
-			}
-		}
-		
-		atualizaLabelApoio(panel_apoio, apoio);
+		distribuiNomes(panel_dain);
 		
 
 		btnRelacionarAssistidobolsista = new JButton("Apoio");
@@ -244,7 +221,8 @@ public class TelaHorarioAcompanhamento extends JFrame {
 					
 					if(!checarBolsistaApoio(apoio, bolsista)
 							&& !checarBolsista(dain, bolsista)
-							&& !checarBolsista(bicen, bolsista)){
+							&& !checarBolsista(bicen, bolsista)
+							&& !checarBolsistaDain(dainH, bolsista)){
 						dain.add(bolsista);
 						atualizaLabel(panel_dain, dain);
 					}else{
@@ -393,13 +371,56 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		//System.out.println(dainH.get(0).getHorario().getSegunda());
 		
 		panel_9.add(btnLimpar);
-		
-		distribuiNomes();
+	
 	}
 	
-	private void distribuiNomes () {
+	private void distribuiNomes (JPanel panel) {
 		
-		
+		JLabel label = (JLabel) panel.getComponent(0);
+
+		String s = "<html><body>";
+		if (dainH != null) {
+			
+			for (int i = 0; i < dainH.size(); i++) {
+				
+				
+				
+				switch (dia) {
+	            case "Sábado":
+	                if(dainH.get(i).getHorario().getSabado().contains(hora)){
+	                	s += dainH.get(i).getBolsista().getNome() + "<br><br>";
+	                }
+	                break;
+	            case "Segunda-feira":
+	            	if(dainH.get(i).getHorario().getSegunda().contains(hora)){
+	                	s += dainH.get(i).getBolsista().getNome() + "<br><br>";
+	                }
+	                break;
+	            case "Terça-feira":
+	            	if(dainH.get(i).getHorario().getTerca().contains(hora)){
+	                	s += dainH.get(i).getBolsista().getNome() + "<br><br>";
+	                }
+	                break;
+	            case "Quarta-feira":
+	            	if(dainH.get(i).getHorario().getQuarta().contains(hora)){
+	                	s += dainH.get(i).getBolsista().getNome() + "<br><br>";
+	                }
+	                break;
+	            case "Quinta-feira":
+	            	if(dainH.get(i).getHorario().getQuinta().contains(hora)){
+	                	s += dainH.get(i).getBolsista().getNome() + "<br><br>";
+	                }
+	                break;
+	            default:
+	            	if(dainH.get(i).getHorario().getSexta().contains(hora)){
+	                	s += dainH.get(i).getBolsista().getNome() + "<br><br>";
+	                }
+	         }
+			}
+			s += "</html></body>";
+			label.setText(s);
+			
+		} 
 	}
 	
 	private String atribuiPosFixoFeira (String dia) {
@@ -519,6 +540,30 @@ public class TelaHorarioAcompanhamento extends JFrame {
 
 		String s = "<html><body>";
 		if (list != null) {
+			
+			for (int i = 0; i < dainH.size(); i++) {
+				s += dainH.get(i).getBolsista().getNome() + "<br><br>";
+			}
+			
+			for (int i = 0; i < list.size(); i++) {
+				s += list.get(i).getNome() + "<br><br>";
+			}
+			s += "</html></body>";
+			label.setText(s);
+		} 
+	}
+	
+	private void atualizaLabelBicen (JPanel panel, ArrayList<Bolsista> list) {
+		
+		JLabel label = (JLabel) panel.getComponent(0);
+
+		String s = "<html><body>";
+		if (list != null) {
+			
+			for (int i = 0; i < bicenH.size(); i++) {
+				s += bicenH.get(i).getBolsista().getNome() + "<br><br>";
+			}
+			
 			for (int i = 0; i < list.size(); i++) {
 				s += list.get(i).getNome() + "<br><br>";
 			}
@@ -545,6 +590,14 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		
 		for(int i = 0; i < list.size(); i++)
 			if(list.get(i).getMatricula().equals(bolsista.getMatricula())) return true;
+		
+		return false;
+	}
+	
+	private boolean checarBolsistaDain(ArrayList<HorariosDain> list, Bolsista bolsista){
+		
+		for(int i = 0; i < list.size(); i++)
+			if(list.get(i).getBolsista().getMatricula().equals(bolsista.getMatricula())) return true;
 		
 		return false;
 	}
@@ -606,13 +659,13 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		
 		for (int i = 0; i < bDain.size(); i++) {
 			da = new HorariosDain(bDain.get(i), 
-					new DAO().buscarHorarioBolsista(bDain.get(i).getMatricula()));
+					new DAO().buscarHorarioBolsistaT(bDain.get(i).getMatricula()));
 			dainH.add(da);
 		}
 		
 		for (int i = 0; i < bBicen.size(); i++) {
 			bc = new HorariosBicen(bBicen.get(i), 
-					new DAO().buscarHorarioBolsista(bBicen.get(i).getMatricula()));
+					new DAO().buscarHorarioBolsistaT(bBicen.get(i).getMatricula()));
 			System.out.println();
 			bicenH.add(bc);
 		}
