@@ -60,8 +60,8 @@ public class TelaHorarioAcompanhamento extends JFrame {
 	private ArrayList<Bolsista> bicen = new ArrayList<>();
 	
 	public ArrayList<HorariosApoio> apoioH = new ArrayList<>();
-	public ArrayList<HorariosBicen> dainH = new ArrayList<>();
-	public ArrayList<HorariosDain> bicenH = new ArrayList<>();
+	public ArrayList<HorariosBicen> bicenH = new ArrayList<>();
+	public ArrayList<HorariosDain> dainH = new ArrayList<>();
 	
 	/**
 	 * Create the frame.
@@ -173,6 +173,34 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_bicen.add(lblNewLabel_4);
 		
+		buscarHorarios();
+		
+		Acompanhamento apoioAux;
+		
+		System.out.println(labelDia.getText());
+		System.out.println(labelHora.getText());
+		
+		System.out.println(labelDia.getText());
+		System.out.println(labelHora.getText());
+		
+		for(int i = 0; i < apoioH.size(); i++){
+			
+			System.out.println(apoioH.get(i).getDia());
+			System.out.println(apoioH.get(i).getHora());
+			
+			if(labelDia.getText().equals(apoioH.get(i).getDia()) &&
+					labelDia.getText().equals(apoioH.get(i).getHora())){
+				
+				apoioAux = new Acompanhamento(apoioH.get(i).getBolsista(), 
+						apoioH.get(i).getDeficiente(), 
+						apoioH.get(i).getHora(), 
+						apoioH.get(i).getDia());
+				
+				apoio.add(apoioAux);
+			}
+		}
+		
+		atualizaLabelApoio(panel_apoio, apoio);
 		
 
 		btnRelacionarAssistidobolsista = new JButton("Apoio");
@@ -361,6 +389,9 @@ public class TelaHorarioAcompanhamento extends JFrame {
 				l_apoio.setText("");				
 			}
 		});
+		//buscarHorarios();
+		//System.out.println(dainH.get(0).getHorario().getSegunda());
+		
 		panel_9.add(btnLimpar);
 		
 		distribuiNomes();
@@ -561,23 +592,29 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		
 	}
 	
-	private void buscarHorarios () {
+	private void buscarHorarios() {
 		DAO dao = new DAO();
 		
 		ArrayList<Bolsista> bDain = new ArrayList<>();
 		ArrayList<Bolsista> bBicen = new ArrayList<>();
 		
+		HorariosDain da;
+		HorariosBicen bc;
+		
 		bDain = dao.buscarBolsistasDain();
 		bBicen = dao.buscarBolsistasBicen();
 		
 		for (int i = 0; i < bDain.size(); i++) {
-			dainH.get(i).setBolsista(bDain.get(i));
-			dainH.get(i).setHorario(new DAO().buscarHorarioBolsista(bDain.get(i).getMatricula()));
+			da = new HorariosDain(bDain.get(i), 
+					new DAO().buscarHorarioBolsista(bDain.get(i).getMatricula()));
+			dainH.add(da);
 		}
 		
 		for (int i = 0; i < bBicen.size(); i++) {
-			bicenH.get(i).setBolsista(bBicen.get(i));
-			bicenH.get(i).setHorario(new DAO().buscarHorarioBolsista(bBicen.get(i).getMatricula()));
+			bc = new HorariosBicen(bBicen.get(i), 
+					new DAO().buscarHorarioBolsista(bBicen.get(i).getMatricula()));
+			System.out.println();
+			bicenH.add(bc);
 		}
 		
 		apoioH = new DAO().buscarBolsistasApoio();	

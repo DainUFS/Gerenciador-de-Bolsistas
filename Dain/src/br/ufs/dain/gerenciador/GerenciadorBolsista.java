@@ -287,8 +287,13 @@ public class GerenciadorBolsista {
 	}
 	
 	public static void main(String[] args) throws SQLException {
-		//System.out.println(new GerenciadorBolsista().buscarIdHr("5823"));
-		System.out.println(new GerenciadorBolsista().buscarBolsistaNome("312").getMatricula());
+		
+//		ArrayList<HorariosApoio> apoio = new GerenciadorBolsista().bolsistasApoio();
+//		
+//		for(int i = 0; i < apoio.size(); i++){
+//			System.out.println(apoio.get(i).getDia());
+//			System.out.println(apoio.get(i).getHora());
+//		}
 	}
 
 }
