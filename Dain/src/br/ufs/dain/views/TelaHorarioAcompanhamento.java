@@ -176,8 +176,10 @@ public class TelaHorarioAcompanhamento extends JFrame {
 		panel_bicen.add(lblNewLabel_4);
 		
 		buscarHorarios();
+		System.out.println(dainH.toString());
 		
 		distribuiNomes(panel_dain);
+		distribuiNomes(panel_bicen);
 		
 
 		btnRelacionarAssistidobolsista = new JButton("Apoio");

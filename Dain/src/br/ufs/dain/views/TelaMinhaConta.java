@@ -1,33 +1,30 @@
 package br.ufs.dain.views;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Dialog.ModalExclusionType;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import br.ufs.dain.dao.DAO;
 import br.ufs.dain.modelo.Administrador;
 
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.BoxLayout;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JRadioButton;
-import javax.swing.JSeparator;
-import javax.swing.JButton;
-import java.awt.Button;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Choice;
-import java.awt.Toolkit;
-
 public class TelaMinhaConta extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textFieldNome;
 	private JTextField textFieldEmail;
@@ -35,25 +32,12 @@ public class TelaMinhaConta extends JFrame {
 	private JTextField textFieldTelefone;
 
 	/**
-	 * Launch the application.
-	 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaMinhaConta frame = new TelaMinhaConta();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
 	 * Create the frame.
 	 */
 	public TelaMinhaConta(Administrador adm) {
+		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
+		setResizable(false);
+		setTitle("Minha Conta");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaMinhaConta.class.getResource("/br/ufs/dain/resources/icon_minha_conta.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 781, 378);
@@ -135,7 +119,7 @@ public class TelaMinhaConta extends JFrame {
 				mudarSenha.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(206, 281, 138, 23);
+		btnNewButton.setBounds(396, 281, 138, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnEditarDados = new JButton("Salvar Dados");
@@ -143,10 +127,10 @@ public class TelaMinhaConta extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DAO dao = new DAO();
 				dao.atualizarDados(
-						new Administrador(textFieldTelefone.getText().toString(), 
-								textFieldEmail.getText().toString(), 
-								textFieldNome.getText().toString(), 
-								textFieldMatricula.getText().toString(), 
+						new Administrador(textFieldNome.getText().toString(),
+								textFieldEmail.getText().toString(),
+								textFieldTelefone.getText().toString(),
+								textFieldMatricula.getText().toString(),
 								adm.getSenha(), adm.getStatusAtivacao()), adm.getMatricula());
 				
 				JOptionPane.showMessageDialog(null, "Salvo com Sucesso!");
@@ -158,7 +142,7 @@ public class TelaMinhaConta extends JFrame {
 		textFieldTelefone.setText(adm.getTelefone().toString());
 		textFieldNome.setText(adm.getNome().toString());
 		textFieldMatricula.setText(adm.getMatricula().toString());
-		btnEditarDados.setBounds(443, 281, 138, 23);
+		btnEditarDados.setBounds(246, 281, 138, 23);
 		contentPane.add(btnEditarDados);
 	}
 }
